@@ -1,7 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager; // provide all necessary methods
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class ProjectPart2 {
 
@@ -33,7 +32,7 @@ public class ProjectPart2 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		Scanner scnr = new Scanner(System.in);
 
 		while (true) {
