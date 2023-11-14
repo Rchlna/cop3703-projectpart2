@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager; // provide all necessary methods
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class ProjectPart2 {
 
