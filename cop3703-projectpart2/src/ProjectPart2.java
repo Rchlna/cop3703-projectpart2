@@ -26,7 +26,7 @@ public class ProjectPart2 {
 
 			if (reachable) {
 
-				System.out.println("Sucess");
+				System.out.println("Successfully connected to Oracle Server\n");
 				conn.close(); // closing connection
 			}
 		} catch (SQLException e) {
@@ -39,7 +39,7 @@ public class ProjectPart2 {
 		while (true) {
 			System.out.println("Hospital Database Menu:");
 			System.out
-					.println("1. Add a patient, department, procedures, doctors, medication, and interaction records.");
+					.println("1. Add a new patient, department, procedures, doctors, medication, or interaction records.");
 			System.out.println("2. Add information about a procedure done on a patient.");
 			System.out.println("3. Add medication/s prescribed to a patient.");
 			System.out.println("4. Given a patient ID, generate their complete health record.");
@@ -52,7 +52,46 @@ public class ProjectPart2 {
 			scnr.nextLine(); // Consume the newline character
 			switch (choice) {
 			case 1:
-				// Insert stuff here for option 1
+				System.out.println("\n1. Add patient");
+				System.out.println("2. Add department");
+				System.out.println("3. Add procedures");
+				System.out.println("4. Add doctors");
+				System.out.println("5. Add medications");
+				System.out.println("6. Add interaction records");
+
+				System.out.println("Enter your choice (0-6):");
+				int newChoice = scnr.nextInt();
+				scnr.nextLine();
+				
+				switch(newChoice) {
+				case 1:
+					// Patient
+					
+					break;
+				case 2:
+					// Department
+					
+					break;
+				case 3:
+					// Procedures
+					
+					break;
+				case 4:
+					// Doctors
+					
+					break;
+				case 5:
+					// Medications
+					
+					break;
+				case 6:
+					// Interactions
+					
+					break;
+				default:
+					System.out.println("Invalid choice. Please enter a number between 0 and 6.");
+				
+				} // end of nested switch	
 				break;
 			case 2:
 				// Insert stuff here for option 2
