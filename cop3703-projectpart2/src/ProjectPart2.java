@@ -65,28 +65,28 @@ public class ProjectPart2 {
 				
 				switch(newChoice) {
 				case 1:
-					// Patient
+					System.out.println("\nEnter patient's name (First Name, Middle Initial, Last Name):");
+					String firstName = scnr.nextLine();
+					String middleInitial = scnr.nextLine();
+					String lastName = scnr.nextLine();
 					
+					System.out.printf("Patient name entered: %s %s %s\n", firstName, middleInitial, lastName);
+
 					break;
 				case 2:
 					// Department
-					
 					break;
 				case 3:
 					// Procedures
-					
 					break;
 				case 4:
 					// Doctors
-					
 					break;
 				case 5:
 					// Medications
-					
 					break;
 				case 6:
 					// Interactions
-					
 					break;
 				default:
 					System.out.println("Invalid choice. Please enter a number between 0 and 6.");
