@@ -59,18 +59,29 @@ public class ProjectPart2 {
 				System.out.println("5. Add medications");
 				System.out.println("6. Add interaction records");
 
-				System.out.println("Enter your choice (0-6):");
+				System.out.print("Enter your choice (0-6): ");
 				int newChoice = scnr.nextInt();
 				scnr.nextLine();
 				
 				switch(newChoice) {
 				case 1:
-					System.out.println("\nEnter patient's name (First Name, Middle Initial, Last Name):");
+					System.out.println("\nEnter patient first name:");
 					String firstName = scnr.nextLine();
-					String middleInitial = scnr.nextLine();
+					
+					System.out.println("\nEnter patient middle initial:");
+					char middleInitial = scnr.next().charAt(0);
+					scnr.nextLine();
+					
+					System.out.println("\nEnter patient last name:");
 					String lastName = scnr.nextLine();
 					
-					System.out.printf("Patient name entered: %s %s %s\n", firstName, middleInitial, lastName);
+					// On GUI, we could make this a dropdown selection with a user-enter option
+					System.out.println("\nEnter patient sex:");
+					char sex = scnr.next().charAt(0);
+					scnr.nextLine();
+					
+					System.out.printf("\nPatient information entered: %s %c %s, %c\n", firstName, middleInitial, lastName, sex);
+
 
 					break;
 				case 2:
