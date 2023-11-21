@@ -85,15 +85,15 @@ public class ProjectPart2 {
 					}
 
 					System.out.println("\nEnter patient SSN (###-##-####):");
-					String patientSsn = scnr.nextLine();
+					String patientSSN = scnr.nextLine();
 
 					// On GUI, we could make this a dropdown selection with a user-enter option
 					System.out.println("\nEnter patient sex:");
 					char sex = scnr.next().charAt(0);
 					scnr.nextLine();
 
-					System.out.printf("\nPatient information entered: %s %c %s, %c\n", firstName, middleInitial,
-							lastName, sex);
+					System.out.printf("\nPatient information entered: %s %c %s, %s, %s, %c\n", firstName, middleInitial,
+							lastName, patientID, patientSSN, sex);
 
 					break;
 				case 2:
