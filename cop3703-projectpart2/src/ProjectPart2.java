@@ -33,13 +33,13 @@ public class ProjectPart2 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		Scanner scnr = new Scanner(System.in);
 
 		while (true) {
 			System.out.println("Hospital Database Menu:");
-			System.out
-					.println("1. Add a new patient, department, procedures, doctors, medication, or interaction records.");
+			System.out.println(
+					"1. Add a new patient, department, procedures, doctors, medication, or interaction records.");
 			System.out.println("2. Add information about a procedure done on a patient.");
 			System.out.println("3. Add medication/s prescribed to a patient.");
 			System.out.println("4. Given a patient ID, generate their complete health record.");
@@ -60,28 +60,40 @@ public class ProjectPart2 {
 				System.out.println("6. Add interaction records");
 
 				System.out.print("Enter your choice (0-6): ");
-				int newChoice = scnr.nextInt();
+				int option1Choice = scnr.nextInt();
 				scnr.nextLine();
-				
-				switch(newChoice) {
+
+				switch (option1Choice) {
 				case 1:
 					System.out.println("\nEnter patient first name:");
 					String firstName = scnr.nextLine();
-					
+
 					System.out.println("\nEnter patient middle initial:");
 					char middleInitial = scnr.next().charAt(0);
 					scnr.nextLine();
-					
+
 					System.out.println("\nEnter patient last name:");
 					String lastName = scnr.nextLine();
-					
+
+					System.out.println("\nEnter patient ID (P########):");
+					String patientID = scnr.nextLine();
+
+					if (patientID.charAt(0) != 'P' || patientID.length() != 9) {
+						System.out.println("Invalid patient ID - format should start with 'P' followed by 8 digits. "
+								+ "Please try again.");
+						break;
+					}
+
+					System.out.println("\nEnter patient SSN (###-##-####):");
+					String patientSsn = scnr.nextLine();
+
 					// On GUI, we could make this a dropdown selection with a user-enter option
 					System.out.println("\nEnter patient sex:");
 					char sex = scnr.next().charAt(0);
 					scnr.nextLine();
-					
-					System.out.printf("\nPatient information entered: %s %c %s, %c\n", firstName, middleInitial, lastName, sex);
 
+					System.out.printf("\nPatient information entered: %s %c %s, %c\n", firstName, middleInitial,
+							lastName, sex);
 
 					break;
 				case 2:
@@ -101,8 +113,8 @@ public class ProjectPart2 {
 					break;
 				default:
 					System.out.println("Invalid choice. Please enter a number between 0 and 6.");
-				
-				} // end of nested switch	
+
+				} // end of nested switch
 				break;
 			case 2:
 				// Insert stuff here for option 2
