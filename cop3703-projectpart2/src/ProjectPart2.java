@@ -63,6 +63,7 @@ public class ProjectPart2 {
 				int option1Choice = scnr.nextInt();
 				scnr.nextLine();
 
+				// Might need to change to a loop.....
 				switch (option1Choice) {
 				case 1:
 					System.out.println("\nEnter patient first name:");
@@ -96,7 +97,7 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient permanent street address:");
 					String patientPermStAddr = scnr.nextLine();
 					
-					System.out.println("\nEnter patient permanent city, state, zip:");
+					System.out.println("\nEnter patient permanent city, state, zip (Separate by comma):");
 					String patientPermCityStZip = scnr.nextLine();
 										
 					System.out.println("\nEnter patient permanent phone:");
