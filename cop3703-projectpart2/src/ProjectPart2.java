@@ -86,15 +86,47 @@ public class ProjectPart2 {
 
 					System.out.println("\nEnter patient SSN (###-##-####):");
 					String patientSSN = scnr.nextLine();
-
+					
+					System.out.println("\nEnter patient current address:");
+					String patientCurrentAddr = scnr.nextLine();
+					
+					System.out.println("\nEnter patient current phone:");
+					String patientCurrentPhone = scnr.nextLine();
+					
+					System.out.println("\nEnter patient permanent address:");
+					String patientPermAddr = scnr.nextLine();
+					
+					// Parse out City, State and Zip here
+					
+					System.out.println("\nEnter patient permanent phone:");
+					String patientPermPhone = scnr.nextLine();
+					
+					System.out.println("\nEnter patient date of birth:");
+					String patientDOB = scnr.nextLine();
+					
 					// On GUI, we could make this a dropdown selection with a user-enter option
 					System.out.println("\nEnter patient sex:");
 					char sex = scnr.next().charAt(0);
 					scnr.nextLine();
+					
+					// On GUI, could make the following field some sort of selection (dropdown, checkboxes, radio buttons)
+					System.out.println("\nEnter patient condition:");
+					String patientCondition = scnr.nextLine();
+					
+					System.out.println("\nEnter patient primary doctor:");
+					String patientPrimaryDocID = scnr.nextLine();
+					
+					System.out.println("\nEnter patient secondary doctor (if any):");
+					String patientSecondaryDocID = scnr.nextLine();
+					
+					// Not sure if this is necessary since we have an options to enter procedures (?)
+					System.out.println("\nEnter prodecures patient has undergone:");
+					String patientProcedures = scnr.nextLine();
 
 					System.out.printf("\nPatient information entered: %s %c %s, %s, %s, %c\n", firstName, middleInitial,
 							lastName, patientID, patientSSN, sex);
-
+					
+					// Will need to add functionality for a 'Submit' button
 					break;
 				case 2:
 					// Department
