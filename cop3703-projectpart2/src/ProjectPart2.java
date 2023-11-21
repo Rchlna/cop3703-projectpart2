@@ -36,6 +36,8 @@ public class ProjectPart2 {
 
 		Scanner scnr = new Scanner(System.in);
 
+		System.out.println("Mr Potato Head");
+		
 		while (true) {
 			System.out.println("Hospital Database Menu:");
 			System.out.println(
