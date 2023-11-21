@@ -93,11 +93,12 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient current phone:");
 					String patientCurrentPhone = scnr.nextLine();
 					
-					System.out.println("\nEnter patient permanent address:");
-					String patientPermAddr = scnr.nextLine();
+					System.out.println("\nEnter patient permanent street address:");
+					String patientPermStAddr = scnr.nextLine();
 					
-					// Parse out City, State and Zip here
-					
+					System.out.println("\nEnter patient permanent city, state, zip:");
+					String patientPermCityStZip = scnr.nextLine();
+										
 					System.out.println("\nEnter patient permanent phone:");
 					String patientPermPhone = scnr.nextLine();
 					
