@@ -69,66 +69,68 @@ public class ProjectPart2 {
 				switch (option1Choice) {
 				case 1:
 					System.out.println("\nEnter patient first name:");
-					String firstName = scnr.nextLine();
+					String ptFirstName = scnr.nextLine();
 
 					System.out.println("\nEnter patient middle initial:");
-					char middleInitial = scnr.next().charAt(0);
+					char ptMiddleInitial = scnr.next().charAt(0);
 					scnr.nextLine();
 
 					System.out.println("\nEnter patient last name:");
-					String lastName = scnr.nextLine();
+					String ptLastName = scnr.nextLine();
 
 					System.out.println("\nEnter patient ID (P########):");
-					String patientID = scnr.nextLine();
+					String ptID = scnr.nextLine();
 
-					if (patientID.charAt(0) != 'P' || patientID.length() != 9) {
+					if (ptID.charAt(0) != 'P' || ptID.length() != 9) {
 						System.out.println("Invalid patient ID - format should start with 'P' followed by 8 digits. "
 								+ "Please try again.");
 						break;
 					}
 
 					System.out.println("\nEnter patient SSN (###-##-####):");
-					String patientSSN = scnr.nextLine();
+					String ptSSN = scnr.nextLine();
 					
 					System.out.println("\nEnter patient current address:");
-					String patientCurrentAddr = scnr.nextLine();
+					String ptCurrAddr = scnr.nextLine();
 					
 					System.out.println("\nEnter patient current phone:");
-					String patientCurrentPhone = scnr.nextLine();
+					String ptCurrPhone = scnr.nextLine();
 					
 					System.out.println("\nEnter patient permanent street address:");
-					String patientPermStAddr = scnr.nextLine();
+					String ptPermStreetAddr = scnr.nextLine();
 					
 					System.out.println("\nEnter patient permanent city, state, zip (Separate by comma):");
-					String patientPermCityStZip = scnr.nextLine();
+					String ptPermCityStZip = scnr.nextLine();
 										
 					System.out.println("\nEnter patient permanent phone:");
-					String patientPermPhone = scnr.nextLine();
+					String ptPermPhone = scnr.nextLine();
 					
 					System.out.println("\nEnter patient date of birth:");
-					String patientDOB = scnr.nextLine();
+					String ptDOB = scnr.nextLine();
 					
 					// On GUI, we could make this a dropdown selection with a user-enter option
 					System.out.println("\nEnter patient sex:");
-					char sex = scnr.next().charAt(0);
+					char ptSex = scnr.next().charAt(0);
 					scnr.nextLine();
 					
 					// On GUI, could make the following field some sort of selection (dropdown, checkboxes, radio buttons)
 					System.out.println("\nEnter patient condition:");
-					String patientCondition = scnr.nextLine();
+					String ptCondition = scnr.nextLine();
 					
-					System.out.println("\nEnter patient primary doctor:");
-					String patientPrimaryDocID = scnr.nextLine();
+//					System.out.println("\nEnter patient primary doctor:");
+//					String patientPrimaryDocID = scnr.nextLine();
+//					
+//					System.out.println("\nEnter patient secondary doctor (if any):");
+//					String patientSecondaryDocID = scnr.nextLine();
 					
-					System.out.println("\nEnter patient secondary doctor (if any):");
-					String patientSecondaryDocID = scnr.nextLine();
-					
-					// Not sure if this is necessary since we have an options to enter procedures (?)
-					System.out.println("\nEnter prodecures patient has undergone:");
-					String patientProcedures = scnr.nextLine();
-
-					System.out.printf("\nPatient information entered: %s %c %s, %s, %s, %c\n", firstName, middleInitial,
-							lastName, patientID, patientSSN, sex);
+					System.out.println("Information Entered");
+					System.out.printf("Name: %s %c %s\n", ptFirstName, ptMiddleInitial, ptLastName);
+					System.out.printf("Paitent ID: %s\n", ptID);
+					System.out.printf("SSN: %s\n", ptSSN);
+					System.out.printf("Date of Birth: %s\nSex: %c\n", ptDOB, ptSex);
+					System.out.printf("Current Address: %s\nCurrent Phone: %s\n", ptCurrAddr, ptCurrPhone);
+					System.out.printf("Permanent Address ID: %s, %s\nPermanent Phone: %s\n", ptPermStreetAddr, ptPermCityStZip, ptPermPhone);
+					System.out.printf("Condition: %s\n", ptCondition);
 					
 					// Will need to add functionality for a 'Submit' button
 					break;
