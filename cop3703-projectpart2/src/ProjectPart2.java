@@ -51,9 +51,10 @@ public class ProjectPart2 {
 
 			System.out.print("Enter your choice (0-6): ");
 			int choice = scnr.nextInt();
-			scnr.nextLine(); // Consume the newline character
+			scnr.nextLine(); 
+
 			switch (choice) {
-			case 1:
+			case 1: // Patient
 				System.out.println("\n1. Add patient");
 				System.out.println("2. Add department");
 				System.out.println("3. Add procedures");
@@ -81,11 +82,11 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient ID (P########):");
 					String ptID = scnr.nextLine();
 
-					if (ptID.charAt(0) != 'P' || ptID.length() != 9) {
-						System.out.println("Invalid patient ID - format should start with 'P' followed by 8 digits. "
-								+ "Please try again.");
-						break;
-					}
+//					if (ptID.charAt(0) != 'P' || ptID.length() != 9) {
+//						System.out.println("Invalid patient ID - format should start with 'P' followed by 8 digits. "
+//								+ "Please try again.");
+//						break;
+//					}
 
 					System.out.println("\nEnter patient SSN (###-##-####):");
 					String ptSSN = scnr.nextLine();
@@ -123,22 +124,57 @@ public class ProjectPart2 {
 //					System.out.println("\nEnter patient secondary doctor (if any):");
 //					String patientSecondaryDocID = scnr.nextLine();
 					
-					System.out.println("Information Entered");
+					System.out.println("Patient Information Entered");
 					System.out.printf("Name: %s %c %s\n", ptFirstName, ptMiddleInitial, ptLastName);
-					System.out.printf("Paitent ID: %s\n", ptID);
+					System.out.printf("ID: %s\n", ptID);
 					System.out.printf("SSN: %s\n", ptSSN);
-					System.out.printf("Date of Birth: %s\nSex: %c\n", ptDOB, ptSex);
+					System.out.printf("Date of Birth: %s	Sex: %c\n", ptDOB, ptSex);
 					System.out.printf("Current Address: %s\nCurrent Phone: %s\n", ptCurrAddr, ptCurrPhone);
 					System.out.printf("Permanent Address ID: %s, %s\nPermanent Phone: %s\n", ptPermStreetAddr, ptPermCityStZip, ptPermPhone);
-					System.out.printf("Condition: %s\n", ptCondition);
+					System.out.printf("Condition: %s\n\n", ptCondition);
 					
 					// Will need to add functionality for a 'Submit' button
 					break;
-				case 2:
-					// Department
+				case 2:	// Department
+					System.out.println("Enter department name: ");
+					String deptName = scnr.nextLine();
+					
+					System.out.println("Enter department code:");
+					String deptCode = scnr.nextLine();
+
+					System.out.println("Enter department office number:");
+					int deptOfficeNumber = scnr.nextInt();
+					scnr.nextLine();
+					
+					System.out.println("Enter department phone number:");
+					String deptOfficePhone = scnr.nextLine();
+
+					System.out.println("Department Information Entered");
+					System.out.printf("Name: %s\n", deptName);
+					System.out.printf("Code: %s\n", deptCode);
+					System.out.printf("Office Number: %d", deptOfficeNumber);
+					System.out.printf("Office Phone: %s\n\n", deptOfficePhone);
+
 					break;
-				case 3:
-					// Procedures
+				case 3: // Procedures
+					System.out.println("Enter procedure name: ");
+					String procName = scnr.nextLine();
+					
+					System.out.println("Enter procedure number: ");
+					String procNumber = scnr.nextLine();
+
+					System.out.println("Enter procedure duration: ");
+					String procDuration = scnr.nextLine();
+					
+					System.out.println("Enter procedure description: ");
+					String procDesc = scnr.nextLine();
+					
+					System.out.println("Procedure Information Enetered");
+					System.out.printf("Name: %s\n", procName);
+					System.out.printf("Number: %s\n", procNumber);
+					System.out.printf("Duration: %s\n", procDuration);
+					System.out.printf("Description: %s\n\n", procDesc);
+
 					break;
 				case 4:
 					// Doctors
