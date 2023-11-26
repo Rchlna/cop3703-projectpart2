@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class ProjectPart2 {
+	
+	public static Scanner scnr = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		try {
@@ -34,7 +36,6 @@ public class ProjectPart2 {
 			e.printStackTrace();
 		}
 
-		Scanner scnr = new Scanner(System.in);
 
 		System.out.println("Mr Potato Head");
 		
@@ -69,24 +70,7 @@ public class ProjectPart2 {
 				// Might need to change to a loop.....
 				switch (option1Choice) {
 				case 1:
-					System.out.println("\nEnter patient first name:");
-					String ptFirstName = scnr.nextLine();
-
-					System.out.println("\nEnter patient middle initial:");
-					char ptMiddleInitial = scnr.next().charAt(0);
-					scnr.nextLine();
-
-					System.out.println("\nEnter patient last name:");
-					String ptLastName = scnr.nextLine();
-
-					System.out.println("\nEnter patient ID (P########):");
-					String ptID = scnr.nextLine();
-
-//					if (ptID.charAt(0) != 'P' || ptID.length() != 9) {
-//						System.out.println("Invalid patient ID - format should start with 'P' followed by 8 digits. "
-//								+ "Please try again.");
-//						break;
-//					}
+					personInput();
 
 					System.out.println("\nEnter patient SSN (###-##-####):");
 					String ptSSN = scnr.nextLine();
@@ -106,9 +90,6 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient permanent phone:");
 					String ptPermPhone = scnr.nextLine();
 					
-					System.out.println("\nEnter patient date of birth:");
-					String ptDOB = scnr.nextLine();
-					
 					// On GUI, we could make this a dropdown selection with a user-enter option
 					System.out.println("\nEnter patient sex:");
 					char ptSex = scnr.next().charAt(0);
@@ -124,7 +105,7 @@ public class ProjectPart2 {
 //					System.out.println("\nEnter patient secondary doctor (if any):");
 //					String patientSecondaryDocID = scnr.nextLine();
 					
-					System.out.println("Patient Information Entered");
+					System.out.println("\nPatient Information Entered");
 					System.out.printf("Name: %s %c %s\n", ptFirstName, ptMiddleInitial, ptLastName);
 					System.out.printf("ID: %s\n", ptID);
 					System.out.printf("SSN: %s\n", ptSSN);
@@ -149,10 +130,10 @@ public class ProjectPart2 {
 					System.out.println("Enter department phone number:");
 					String deptOfficePhone = scnr.nextLine();
 
-					System.out.println("Department Information Entered");
+					System.out.println("\nDepartment Information Entered");
 					System.out.printf("Name: %s\n", deptName);
 					System.out.printf("Code: %s\n", deptCode);
-					System.out.printf("Office Number: %d", deptOfficeNumber);
+					System.out.printf("Office Number: %d\n", deptOfficeNumber);
 					System.out.printf("Office Phone: %s\n\n", deptOfficePhone);
 
 					break;
@@ -169,21 +150,23 @@ public class ProjectPart2 {
 					System.out.println("Enter procedure description: ");
 					String procDesc = scnr.nextLine();
 					
-					System.out.println("Procedure Information Enetered");
+					System.out.println("\nProcedure Information Entered");
 					System.out.printf("Name: %s\n", procName);
 					System.out.printf("Number: %s\n", procNumber);
 					System.out.printf("Duration: %s\n", procDuration);
 					System.out.printf("Description: %s\n\n", procDesc);
 
 					break;
-				case 4:
-					// Doctors
+				case 4: // Doctors
+					personInput();
+
+					
 					break;
-				case 5:
-					// Medications
+				case 5: // Medications
+					
 					break;
-				case 6:
-					// Interactions
+				case 6: // Interactions
+					
 					break;
 				default:
 					System.out.println("Invalid choice. Please enter a number between 0 and 6.");
@@ -213,5 +196,25 @@ public class ProjectPart2 {
 			}
 			scnr.close();
 		}
+	} // end of main
+	
+	public static void personInput() {
+		System.out.println("Enter first name: ");
+		String personFirstName = scnr.nextLine();
+		
+		System.out.println("Enter middle initial: ");
+		char personMiddleInitial = scnr.next().charAt(0);
+		scnr.nextLine();
+		
+		System.out.println("Enter last name: ");
+		String personLastName = scnr.nextLine();
+		
+		System.out.println("Enter date of birth: ");
+		String personDOB = scnr.nextLine();
+		
+		System.out.println("Enter SSN: ");
+		String personSSN = scnr.nextLine();
+		
+		// Create insert SQL statement for Person table & execute SQL statement
 	}
-}
+} // end of project part 2
