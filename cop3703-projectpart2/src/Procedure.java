@@ -1,3 +1,4 @@
+import java.util.*;
 
 public class Procedure {
 	
@@ -6,6 +7,8 @@ public class Procedure {
 	public String number;
 	public double duration;
 	public Department offeringDept;
+	public Patient patient;
+	public ArrayList<Doctor> doctors;
 
 	public Procedure(String name, String description, String number, double duration, Department offeringDept) {
 		this.name = name;
@@ -13,6 +16,7 @@ public class Procedure {
 		this.number = number;
 		this.duration = duration;
 		this.offeringDept = offeringDept;
+		this.doctors = new ArrayList<Doctor>();
 	}
 
 }

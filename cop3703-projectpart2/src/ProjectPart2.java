@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class ProjectPart2 {
-	
+
 	public static Scanner scnr = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -36,9 +36,8 @@ public class ProjectPart2 {
 			e.printStackTrace();
 		}
 
-
 		System.out.println("Mr Potato Head");
-		
+
 		while (true) {
 			System.out.println("Hospital Database Menu:");
 			System.out.println(
@@ -52,7 +51,7 @@ public class ProjectPart2 {
 
 			System.out.print("Enter your choice (0-6): ");
 			int choice = scnr.nextInt();
-			scnr.nextLine(); 
+			scnr.nextLine();
 
 			switch (choice) {
 			case 1: // Patient
@@ -70,63 +69,66 @@ public class ProjectPart2 {
 				// Might need to change to a loop.....
 				switch (option1Choice) {
 				case 1:
-					personInput();
+					Person pt = personInput();
 
-					System.out.println("\nEnter patient SSN (###-##-####):");
-					String ptSSN = scnr.nextLine();
-					
-					System.out.println("\nEnter patient current address:");
-					String ptCurrAddr = scnr.nextLine();
-					
-					System.out.println("\nEnter patient current phone:");
-					String ptCurrPhone = scnr.nextLine();
-					
-					System.out.println("\nEnter patient permanent street address:");
-					String ptPermStreetAddr = scnr.nextLine();
-					
-					System.out.println("\nEnter patient permanent city, state, zip (Separate by comma):");
-					String ptPermCityStZip = scnr.nextLine();
-										
-					System.out.println("\nEnter patient permanent phone:");
-					String ptPermPhone = scnr.nextLine();
-					
+
 					// On GUI, we could make this a dropdown selection with a user-enter option
 					System.out.println("\nEnter patient sex:");
 					char ptSex = scnr.next().charAt(0);
 					scnr.nextLine();
+
+					System.out.println("Enter patient ID: ");
+					String ptId = scnr.nextLine();
 					
-					// On GUI, could make the following field some sort of selection (dropdown, checkboxes, radio buttons)
+					System.out.println("\nEnter patient current address:");
+					String ptCurrAddr = scnr.nextLine();
+
+					System.out.println("\nEnter patient current phone:");
+					String ptCurrPhone = scnr.nextLine();
+
+					System.out.println("\nEnter patient permanent street address:");
+					String ptPermStreetAddr = scnr.nextLine();
+
+					System.out.println("\nEnter patient permanent city, state, zip (Separate by comma):");
+					String ptPermCityStZip = scnr.nextLine();
+
+					System.out.println("\nEnter patient permanent phone:");
+					String ptPermPhone = scnr.nextLine();
+
+					// On GUI, could make the following field some sort of selection (dropdown,
+					// checkboxes, radio buttons)
 					System.out.println("\nEnter patient condition:");
 					String ptCondition = scnr.nextLine();
-					
+
 //					System.out.println("\nEnter patient primary doctor:");
 //					String patientPrimaryDocID = scnr.nextLine();
 //					
 //					System.out.println("\nEnter patient secondary doctor (if any):");
 //					String patientSecondaryDocID = scnr.nextLine();
-					
+
 					System.out.println("\nPatient Information Entered");
-//					System.out.printf("Name: %s %c %s\n", ptFirstName, ptMiddleInitial, ptLastName);
-//					System.out.printf("ID: %s\n", ptID);
-//					System.out.printf("SSN: %s\n", ptSSN);
-//					System.out.printf("Date of Birth: %s	Sex: %c\n", ptDOB, ptSex);
+					System.out.printf("Name: %s \n", pt.fullName);
+					System.out.printf("ID: %s\n", ptId);
+					System.out.printf("SSN: %s\n", pt.socialSecurity);
+					System.out.printf("Date of Birth: %s	Sex: %c\n", pt.dateOfBirth, ptSex);
 					System.out.printf("Current Address: %s\nCurrent Phone: %s\n", ptCurrAddr, ptCurrPhone);
-					System.out.printf("Permanent Address ID: %s, %s\nPermanent Phone: %s\n", ptPermStreetAddr, ptPermCityStZip, ptPermPhone);
+					System.out.printf("Permanent Address ID: %s, %s\nPermanent Phone: %s\n", ptPermStreetAddr,
+							ptPermCityStZip, ptPermPhone);
 					System.out.printf("Condition: %s\n\n", ptCondition);
-					
+
 					// Will need to add functionality for a 'Submit' button
 					break;
-				case 2:	// Department
+				case 2: // Department
 					System.out.println("Enter department name: ");
 					String deptName = scnr.nextLine();
-					
+
 					System.out.println("Enter department code:");
 					String deptCode = scnr.nextLine();
 
 					System.out.println("Enter department office number:");
 					int deptOfficeNumber = scnr.nextInt();
 					scnr.nextLine();
-					
+
 					System.out.println("Enter department phone number:");
 					String deptOfficePhone = scnr.nextLine();
 
@@ -140,16 +142,16 @@ public class ProjectPart2 {
 				case 3: // Procedures
 					System.out.println("Enter procedure name: ");
 					String procName = scnr.nextLine();
-					
+
 					System.out.println("Enter procedure number: ");
 					String procNumber = scnr.nextLine();
 
 					System.out.println("Enter procedure duration: ");
 					String procDuration = scnr.nextLine();
-					
+
 					System.out.println("Enter procedure description: ");
 					String procDesc = scnr.nextLine();
-					
+
 					System.out.println("\nProcedure Information Entered");
 					System.out.printf("Name: %s\n", procName);
 					System.out.printf("Number: %s\n", procNumber);
@@ -162,25 +164,24 @@ public class ProjectPart2 {
 
 					System.out.println("Enter doctor ID: ");
 					String docID = scnr.nextLine();
-					
+
 					System.out.println("Enter address: ");
 					String docAddr = scnr.nextLine();
 
 					System.out.println("Enter phone number: ");
 					String docPhone = scnr.nextLine();
-					
+
 					System.out.println("Enter contact number: ");
 					String docContact = scnr.nextLine();
 
 					System.out.println("\nDoctor Information Entered");
 
-					
 					break;
 				case 5: // Medications
-					
+
 					break;
 				case 6: // Interactions
-					
+
 					break;
 				default:
 					System.out.println("Invalid choice. Please enter a number between 0 and 6.");
@@ -211,26 +212,27 @@ public class ProjectPart2 {
 			scnr.close();
 		}
 	} // end of main
-	
-	public static void personInput() {
+
+	public static Person personInput() {
 		System.out.println("Enter first name: ");
 		String personFirstName = scnr.nextLine();
-		
+
 		System.out.println("Enter middle initial: ");
 		char personMiddleInitial = scnr.next().charAt(0);
 		scnr.nextLine();
-		
+
 		System.out.println("Enter last name: ");
 		String personLastName = scnr.nextLine();
-		
+
 		System.out.println("Enter date of birth: ");
 		String personDOB = scnr.nextLine();
-		
+
 		System.out.println("Enter SSN: ");
 		String personSSN = scnr.nextLine();
-		
+
 		Person person = new Person(personFirstName, personMiddleInitial, personLastName, personDOB, personSSN);
-		
-		// Create insert SQL statement for Person table & execute SQL statement
+
+		return person;
+
 	}
 } // end of project part 2
