@@ -106,10 +106,10 @@ public class ProjectPart2 {
 //					String patientSecondaryDocID = scnr.nextLine();
 					
 					System.out.println("\nPatient Information Entered");
-					System.out.printf("Name: %s %c %s\n", ptFirstName, ptMiddleInitial, ptLastName);
-					System.out.printf("ID: %s\n", ptID);
-					System.out.printf("SSN: %s\n", ptSSN);
-					System.out.printf("Date of Birth: %s	Sex: %c\n", ptDOB, ptSex);
+//					System.out.printf("Name: %s %c %s\n", ptFirstName, ptMiddleInitial, ptLastName);
+//					System.out.printf("ID: %s\n", ptID);
+//					System.out.printf("SSN: %s\n", ptSSN);
+//					System.out.printf("Date of Birth: %s	Sex: %c\n", ptDOB, ptSex);
 					System.out.printf("Current Address: %s\nCurrent Phone: %s\n", ptCurrAddr, ptCurrPhone);
 					System.out.printf("Permanent Address ID: %s, %s\nPermanent Phone: %s\n", ptPermStreetAddr, ptPermCityStZip, ptPermPhone);
 					System.out.printf("Condition: %s\n\n", ptCondition);
@@ -159,6 +159,20 @@ public class ProjectPart2 {
 					break;
 				case 4: // Doctors
 					personInput();
+
+					System.out.println("Enter doctor ID: ");
+					String docID = scnr.nextLine();
+					
+					System.out.println("Enter address: ");
+					String docAddr = scnr.nextLine();
+
+					System.out.println("Enter phone number: ");
+					String docPhone = scnr.nextLine();
+					
+					System.out.println("Enter contact number: ");
+					String docContact = scnr.nextLine();
+
+					System.out.println("\nDoctor Information Entered");
 
 					
 					break;
