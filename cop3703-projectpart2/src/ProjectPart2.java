@@ -229,6 +229,8 @@ public class ProjectPart2 {
 		System.out.println("Enter SSN: ");
 		String personSSN = scnr.nextLine();
 		
+		Person person = new Person(personFirstName, personMiddleInitial, personLastName, personDOB, personSSN);
+		
 		// Create insert SQL statement for Person table & execute SQL statement
 	}
 } // end of project part 2
