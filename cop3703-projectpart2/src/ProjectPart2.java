@@ -128,16 +128,12 @@ public class ProjectPart2 {
 
 					System.out.println("Enter procedure description: ");
 					String procDesc = scnr.nextLine();
-
-					System.out.println("\nProcedure Information Entered");
-					System.out.printf("Name: %s\n", procName);
-					System.out.printf("Number: %s\n", procNumber);
-					System.out.printf("Duration: %s\n", procDuration);
-					System.out.printf("Description: %s\n\n", procDesc);
+					
+					Procedure proc = new Procedure();
 
 					break;
 				case 4: // Doctors
-					Person doc = personInput();
+					Person personInfo = personInput();
 
 					System.out.println("Enter doctor ID: ");
 					String docID = scnr.nextLine();
@@ -151,7 +147,7 @@ public class ProjectPart2 {
 					System.out.println("Enter contact number: ");
 					String docContact = scnr.nextLine();
 
-					System.out.println("\nDoctor Information Entered");
+					Doctor doc = new Doctor(personInfo, docID, docAddr, docPhone, docContact);
 
 					break;
 				case 5: // Medications

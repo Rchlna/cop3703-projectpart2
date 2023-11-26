@@ -15,4 +15,44 @@ public class Department {
 		this.deptHead = deptHead;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public int getOfficeNumber() {
+		return officeNumber;
+	}
+
+	public void setOfficeNumber(int officeNumber) {
+		this.officeNumber = officeNumber;
+	}
+
+	public String getOfficePhone() {
+		return officePhone;
+	}
+
+	public void setOfficePhone(String officePhone) {
+		this.officePhone = officePhone;
+	}
+
+	public Doctor getDeptHead() {
+		return deptHead;
+	}
+
+	public void setDeptHead(Doctor deptHead) {
+		this.deptHead = deptHead;
+	}
+
 }

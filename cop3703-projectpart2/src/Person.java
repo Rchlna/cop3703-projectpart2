@@ -16,5 +16,53 @@ public class Person {
 		this.dateOfBirth = dateOfBirth;
 		this.socialSecurity = socialSecurity;
 	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public char getMiddleInitial() {
+		return middleInitial;
+	}
+
+	public void setMiddleInitial(char middleInitial) {
+		this.middleInitial = middleInitial;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getSocialSecurity() {
+		return socialSecurity;
+	}
+
+	public void setSocialSecurity(String socialSecurity) {
+		this.socialSecurity = socialSecurity;
+	}
 	
 }

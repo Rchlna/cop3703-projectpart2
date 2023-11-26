@@ -16,6 +16,134 @@ public class Patient {
 	public int permanentZipcode;
 	public String condition;
 	public Doctor primary;
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public String getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public char getSex() {
+		return sex;
+	}
+
+	public void setSex(char sex) {
+		this.sex = sex;
+	}
+
+	public String getCurrentPhone() {
+		return currentPhone;
+	}
+
+	public void setCurrentPhone(String currentPhone) {
+		this.currentPhone = currentPhone;
+	}
+
+	public String getCurrentAddress() {
+		return currentAddress;
+	}
+
+	public void setCurrentAddress(String currentAddress) {
+		this.currentAddress = currentAddress;
+	}
+
+	public String getPermanentPhone() {
+		return permanentPhone;
+	}
+
+	public void setPermanentPhone(String permanentPhone) {
+		this.permanentPhone = permanentPhone;
+	}
+
+	public String getPermanentAddress() {
+		return permanentAddress;
+	}
+
+	public void setPermanentAddress(String permanentAddress) {
+		this.permanentAddress = permanentAddress;
+	}
+
+	public String getPermanentStreet() {
+		return permanentStreet;
+	}
+
+	public void setPermanentStreet(String permanentStreet) {
+		this.permanentStreet = permanentStreet;
+	}
+
+	public String getPermanentCity() {
+		return permanentCity;
+	}
+
+	public void setPermanentCity(String permanentCity) {
+		this.permanentCity = permanentCity;
+	}
+
+	public String getPermanentState() {
+		return permanentState;
+	}
+
+	public void setPermanentState(String permanentState) {
+		this.permanentState = permanentState;
+	}
+
+	public int getPermanentZipcode() {
+		return permanentZipcode;
+	}
+
+	public void setPermanentZipcode(int permanentZipcode) {
+		this.permanentZipcode = permanentZipcode;
+	}
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
+	public Doctor getPrimary() {
+		return primary;
+	}
+
+	public void setPrimary(Doctor primary) {
+		this.primary = primary;
+	}
+
+	public Doctor getSecondary() {
+		return secondary;
+	}
+
+	public void setSecondary(Doctor secondary) {
+		this.secondary = secondary;
+	}
+
+	public ArrayList<Procedure> getProcedures() {
+		return procedures;
+	}
+
+	public void setProcedures(ArrayList<Procedure> procedures) {
+		this.procedures = procedures;
+	}
+
 	public Doctor secondary;
 	public ArrayList<Procedure> procedures;
 	
