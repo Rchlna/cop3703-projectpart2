@@ -16,6 +16,24 @@ public class Patient {
 	public int permanentZipcode;
 	public String condition;
 	public Doctor primary;
+	public Doctor secondary;
+	public ArrayList<Procedure> procedures;
+	
+	public Patient(Person person, String id, char sex, String currentPhone, String currentAddress, String permanentPhone, 
+			String permanentStreet, String permanentCity, String permanentState, int permanentZipcode){
+		this.ssn = person.socialSecurity;
+		this.id = id;
+		this.sex = sex;
+		this.currentPhone = currentPhone;
+		this.currentAddress = currentAddress;
+		this.permanentPhone = permanentPhone;
+		this.permanentAddress = permanentStreet + ", " + permanentCity + ", " + permanentState + ", " + permanentZipcode;
+		this.permanentStreet = permanentStreet;
+		this.permanentCity = permanentCity;
+		this.permanentState = permanentStreet;
+		this.permanentZipcode = permanentZipcode;	
+	}
+	
 	public Person getPerson() {
 		return person;
 	}
@@ -144,22 +162,6 @@ public class Patient {
 		this.procedures = procedures;
 	}
 
-	public Doctor secondary;
-	public ArrayList<Procedure> procedures;
 	
-	public Patient(Person person, String id, char sex, String currentPhone, String currentAddress, String permanentPhone, 
-			String permanentStreet, String permanentCity, String permanentState, int permanentZipcode){
-		this.ssn = person.socialSecurity;
-		this.id = id;
-		this.sex = sex;
-		this.currentPhone = currentPhone;
-		this.currentAddress = currentAddress;
-		this.permanentPhone = permanentPhone;
-		this.permanentAddress = permanentStreet + ", " + permanentCity + ", " + permanentState + ", " + permanentZipcode;
-		this.permanentStreet = permanentStreet;
-		this.permanentCity = permanentCity;
-		this.permanentState = permanentStreet;
-		this.permanentZipcode = permanentZipcode;	
-	}
 
 }

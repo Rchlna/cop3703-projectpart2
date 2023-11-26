@@ -14,8 +14,7 @@ public class ProjectPart2 {
 	public static String password = "r9Qi0oVD";
 
 	public static void main(String[] args) {
-		
-		
+
 		while (true) {
 			System.out.println("Hospital Database Menu:");
 			System.out.println(
@@ -47,7 +46,7 @@ public class ProjectPart2 {
 				// Might need to change to a loop.....
 				switch (option1Choice) {
 				case 1:
-					Person pt = personInput();
+					Person pPersonInfo = personInput();
 
 					// On GUI, we could make this a dropdown selection with a user-enter option
 					System.out.println("\nEnter patient sex:");
@@ -56,7 +55,7 @@ public class ProjectPart2 {
 
 					System.out.println("Enter patient ID: ");
 					String ptId = scnr.nextLine();
-					
+
 					System.out.println("\nEnter patient current address:");
 					String ptCurrAddr = scnr.nextLine();
 
@@ -66,8 +65,15 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient permanent street address:");
 					String ptPermStreetAddr = scnr.nextLine();
 
-					System.out.println("\nEnter patient permanent city, state, zip (Separate by comma):");
-					String ptPermCityStZip = scnr.nextLine();
+					System.out.println("\nEnter patient permanent city: ");
+					String ptPermCity = scnr.nextLine();
+
+					System.out.println("\nEnter patient permanent state:");
+					String ptPermState = scnr.nextLine();
+
+					System.out.println("\nEnter patient permanent zipcode:");
+					int ptPermZip = scnr.nextInt();
+					scnr.nextLine();
 
 					System.out.println("\nEnter patient permanent phone:");
 					String ptPermPhone = scnr.nextLine();
@@ -83,15 +89,8 @@ public class ProjectPart2 {
 //					System.out.println("\nEnter patient secondary doctor (if any):");
 //					String patientSecondaryDocID = scnr.nextLine();
 
-					System.out.println("\nPatient Information Entered");
-					System.out.printf("Name: %s \n", pt.fullName);
-					System.out.printf("ID: %s\n", ptId);
-					System.out.printf("SSN: %s\n", pt.socialSecurity);
-					System.out.printf("Date of Birth: %s	Sex: %c\n", pt.dateOfBirth, ptSex);
-					System.out.printf("Current Address: %s\nCurrent Phone: %s\n", ptCurrAddr, ptCurrPhone);
-					System.out.printf("Permanent Address ID: %s, %s\nPermanent Phone: %s\n", ptPermStreetAddr,
-							ptPermCityStZip, ptPermPhone);
-					System.out.printf("Condition: %s\n\n", ptCondition);
+					Patient patient = new Patient(pPersonInfo, ptId, ptSex, ptCurrPhone, ptPermPhone, ptCurrAddr,
+							ptPermStreetAddr, ptPermCity, ptPermState, ptPermZip);
 
 					// Will need to add functionality for a 'Submit' button
 					break;
@@ -124,16 +123,17 @@ public class ProjectPart2 {
 					String procNumber = scnr.nextLine();
 
 					System.out.println("Enter procedure duration: ");
-					String procDuration = scnr.nextLine();
+					double procDuration = scnr.nextDouble();
+					scnr.nextLine();
 
 					System.out.println("Enter procedure description: ");
 					String procDesc = scnr.nextLine();
-					
-					Procedure proc = new Procedure();
+
+					Procedure proc = new Procedure(procName, procDesc, procNumber, procDuration);
 
 					break;
 				case 4: // Doctors
-					Person personInfo = personInput();
+					Person dPersonInfo = personInput();
 
 					System.out.println("Enter doctor ID: ");
 					String docID = scnr.nextLine();
@@ -147,13 +147,33 @@ public class ProjectPart2 {
 					System.out.println("Enter contact number: ");
 					String docContact = scnr.nextLine();
 
-					Doctor doc = new Doctor(personInfo, docID, docAddr, docPhone, docContact);
+					Doctor doc = new Doctor(dPersonInfo, docID, docAddr, docPhone, docContact);
 
 					break;
 				case 5: // Medications
+					System.out.println("Enter patient ID:");
+					// Query patient with given input from database
+
+					System.out.println("Enter prescribing doctor: ");
+					// Query doctor with given input from database
+
+					System.out.println("Enter prescription date: ");
+					String rxDate = scnr.nextLine();
+
+					System.out.println("Enter medication name: ");
+					String rxName = scnr.nextLine();
+
+					System.out.println("Enter medication manufacturer: ");
+					String rxManufacturer = scnr.nextLine();
+
+					System.out.println("Enter medication description: ");
+					String rxDesc = scnr.nextLine();
+
+					Medication medication = new Medication();
 
 					break;
 				case 6: // Interactions
+					// Generate interactions ?
 
 					break;
 				default:
@@ -185,11 +205,14 @@ public class ProjectPart2 {
 			scnr.close();
 		}
 	} // end of main
-	
+
+	// Creates a connection to Oracle Server
 	public Connection connect() throws SQLException {
 		return DriverManager.getConnection(url, username, password);
 	}
 
+	// Prompts user for Person information as input
+	// Returns Person object
 	public static Person personInput() {
 		System.out.println("Enter first name: ");
 		String personFirstName = scnr.nextLine();
