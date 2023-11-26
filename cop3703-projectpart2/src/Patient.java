@@ -17,6 +17,7 @@ public class Patient {
 	public String condition;
 	public Doctor primary;
 	public Doctor secondary;
+	public ArrayList<Procedure> procedures;
 	
 	public Patient(Person person, String id, char sex, String currentPhone, String currentAddress, String permanentPhone, 
 			String permanentStreet, String permanentCity, String permanentState, int permanentZipcode){

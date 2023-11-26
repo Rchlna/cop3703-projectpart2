@@ -6,38 +6,16 @@ import java.util.Scanner;
 public class ProjectPart2 {
 
 	public static Scanner scnr = new Scanner(System.in);
+	public static String serverName = "cisvm-oracle.unfcsd.unf.edu";
+	public static String portNumber = "1521";
+	public static String sid = "orcl";
+	public static String url = "jdbc:oracle:thin:@cisvm-oracle.unfcsd.unf.edu:1521:orcl";
+	public static String username = "G01";
+	public static String password = "r9Qi0oVD";
 
 	public static void main(String[] args) {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver"); // loading database driver
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String serverName = "cisvm-oracle.unfcsd.unf.edu";
-		String portNumber = "1521";
-		String sid = "orcl";
-		String url = "jdbc:oracle:thin:@cisvm-oracle.unfcsd.unf.edu:1521:orcl";
-		String username = "G01";
-		String password = "r9Qi0oVD";
-
-		try {
-			Connection conn = DriverManager.getConnection(url, username, password); // creating a connection to db
-
-			boolean reachable = conn.isValid(10); // 10 sec - checking if connection is valid
-
-			if (reachable) {
-
-				System.out.println("Successfully connected to Oracle Server\n");
-				conn.close(); // closing connection
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		System.out.println("Mr Potato Head");
-
+		
+		
 		while (true) {
 			System.out.println("Hospital Database Menu:");
 			System.out.println(
@@ -70,7 +48,6 @@ public class ProjectPart2 {
 				switch (option1Choice) {
 				case 1:
 					Person pt = personInput();
-
 
 					// On GUI, we could make this a dropdown selection with a user-enter option
 					System.out.println("\nEnter patient sex:");
@@ -160,7 +137,7 @@ public class ProjectPart2 {
 
 					break;
 				case 4: // Doctors
-					personInput();
+					Person doc = personInput();
 
 					System.out.println("Enter doctor ID: ");
 					String docID = scnr.nextLine();
@@ -212,6 +189,10 @@ public class ProjectPart2 {
 			scnr.close();
 		}
 	} // end of main
+	
+	public Connection connect() throws SQLException {
+		return DriverManager.getConnection(url, username, password);
+	}
 
 	public static Person personInput() {
 		System.out.println("Enter first name: ");
