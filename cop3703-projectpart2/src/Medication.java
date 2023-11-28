@@ -8,9 +8,9 @@ public class Medication {
 	public String manufacturer;
 	public String description;
 
-	public Medication(Patient patient, Doctor prescriber, String prescriptionDate, String name, String manufacturer, String description) {
-		this.patient = patient;
-		this.prescriber = prescriber;
+	public Medication(String prescriptionDate, String name, String manufacturer, String description) {
+//		this.patient = patient;
+//		this.prescriber = prescriber;
 		this.prescriptionDate = prescriptionDate;
 		this.name = name;
 		this.manufacturer = manufacturer;

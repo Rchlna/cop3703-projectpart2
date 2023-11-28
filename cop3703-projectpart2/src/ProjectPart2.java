@@ -19,11 +19,11 @@ public class ProjectPart2 {
 			System.out.println("Hospital Database Menu:");
 			System.out.println(
 					"1. Add a new patient, department, procedures, doctors, medication, or interaction records.");
-			System.out.println("2. Add information about a procedure done on a patient.");
-			System.out.println("3. Add medication/s prescribed to a patient.");
-			System.out.println("4. Given a patient ID, generate their complete health record.");
-			System.out.println("5. Given a department name or code find the procedures offered.");
-			System.out.println("6. Given a doctor's ID list all the procedures they have done.");
+//			System.out.println("2. Add information about a procedure done on a patient.");
+//			System.out.println("2. Add medication/s prescribed to a patient.");
+			System.out.println("2. Given a patient ID, generate their complete health record.");
+			System.out.println("3. Given a department name or code find the procedures offered.");
+			System.out.println("4. Given a doctor's ID list all the procedures they have done.");
 			System.out.println("0. Exit");
 
 			System.out.print("Enter your choice (0-6): ");
@@ -34,9 +34,9 @@ public class ProjectPart2 {
 			case 1: // Patient
 				System.out.println("\n1. Add patient");
 				System.out.println("2. Add department");
-				System.out.println("3. Add procedures");
-				System.out.println("4. Add doctors");
-				System.out.println("5. Add medications");
+				System.out.println("3. Add procedure");
+				System.out.println("4. Add doctor");
+				System.out.println("5. Add medication");
 				System.out.println("6. Add interaction records");
 
 				System.out.print("Enter your choice (0-6): ");
@@ -152,10 +152,12 @@ public class ProjectPart2 {
 					break;
 				case 5: // Medications
 					System.out.println("Enter patient ID:");
-					// Query patient with given input from database
-
+					String rxPatient = scnr.nextLine();
+					// figure out how to link to patient table
+					
 					System.out.println("Enter prescribing doctor: ");
-					// Query doctor with given input from database
+					String rxDoctor = scnr.nextLine();
+					// figure out how to link to the doctor table
 
 					System.out.println("Enter prescription date: ");
 					String rxDate = scnr.nextLine();
@@ -169,20 +171,22 @@ public class ProjectPart2 {
 					System.out.println("Enter medication description: ");
 					String rxDesc = scnr.nextLine();
 
-					Medication medication = new Medication();
+					Medication medication = new Medication(rxDate, rxName, rxManufacturer, rxDesc);
 
 					break;
 				case 6: // Interactions
-					// Generate interactions ?
+					
 
 					break;
 				default:
 					System.out.println("Invalid choice. Please enter a number between 0 and 6.");
 
-				} // end of nested switch
+				} // end of nested switch 
 				break;
 			case 2:
-				// Insert stuff here for option 2
+				
+				
+				
 				break;
 			case 3:
 				// Insert stuff here for option 3
@@ -190,12 +194,12 @@ public class ProjectPart2 {
 			case 4:
 				// Insert stuff here for option 4
 				break;
-			case 5:
-				// Insert stuff here for option 5
-				break;
-			case 6:
-				// Insert stuff here for option 6
-				break;
+//			case 5:
+//				// Insert stuff here for option 5
+//				break;
+//			case 6:
+//				// Insert stuff here for option 6
+//				break;
 			case 0:
 				System.out.println("Exiting the program. Goodbye!");
 				System.exit(0);
