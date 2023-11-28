@@ -15,8 +15,8 @@ public class Patient {
 	public String permanentState;
 	public int permanentZipcode;
 	public String condition;
-	public Doctor primary;
-	public Doctor secondary;
+	public String primary;
+	public String secondary;
 	public ArrayList<Procedure> procedures;
 	
 	public Patient(Person person, String id, char sex, String currentPhone, String currentAddress, String permanentPhone, 
@@ -138,19 +138,19 @@ public class Patient {
 		this.condition = condition;
 	}
 
-	public Doctor getPrimary() {
+	public String getPrimary() {
 		return primary;
 	}
 
-	public void setPrimary(Doctor primary) {
+	public void setPrimary(String primary) {
 		this.primary = primary;
 	}
 
-	public Doctor getSecondary() {
+	public String getSecondary() {
 		return secondary;
 	}
 
-	public void setSecondary(Doctor secondary) {
+	public void setSecondary(String secondary) {
 		this.secondary = secondary;
 	}
 

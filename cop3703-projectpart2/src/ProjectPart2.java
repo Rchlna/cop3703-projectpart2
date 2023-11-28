@@ -83,14 +83,20 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient condition:");
 					String ptCondition = scnr.nextLine();
 
-//					System.out.println("\nEnter patient primary doctor:");
-//					String patientPrimaryDocID = scnr.nextLine();
-//					
-//					System.out.println("\nEnter patient secondary doctor (if any):");
-//					String patientSecondaryDocID = scnr.nextLine();
+					System.out.println("\nEnter patient primary doctor:");
+					String patientPrimaryDocID = scnr.nextLine();
+					
+					System.out.println("\nEnter patient secondary doctor (if any):");
+					String patientSecondaryDocID = scnr.nextLine();
 
 					Patient patient = new Patient(pPersonInfo, ptId, ptSex, ptCurrPhone, ptPermPhone, ptCurrAddr,
 							ptPermStreetAddr, ptPermCity, ptPermState, ptPermZip);
+					
+					patient.setPrimary(patientPrimaryDocID);
+					
+					if (patientSecondaryDocID != null) {
+						patient.setSecondary(patientSecondaryDocID);
+					}
 
 					// Will need to add functionality for a 'Submit' button
 					break;
@@ -107,7 +113,14 @@ public class ProjectPart2 {
 
 					System.out.println("Enter department phone number:");
 					String deptOfficePhone = scnr.nextLine();
+					
+					System.out.println("\nEnter department head:");
+					String deptHead = scnr.nextLine();
 
+					Department dept = new Department(deptName, deptCode, deptOfficeNumber, deptOfficePhone);
+					
+					dept.setDeptHead(deptHead);		
+							
 					System.out.println("\nDepartment Information Entered");
 					System.out.printf("Name: %s\n", deptName);
 					System.out.printf("Code: %s\n", deptCode);
@@ -175,7 +188,6 @@ public class ProjectPart2 {
 
 					break;
 				case 6: // Interactions
-					
 
 					break;
 				default:
@@ -183,23 +195,21 @@ public class ProjectPart2 {
 
 				} // end of nested switch 
 				break;
-			case 2:
+			case 2: // Query patient health record
 				
 				
 				
 				break;
-			case 3:
-				// Insert stuff here for option 3
+			case 3: // Query procedures offered by department
+
+				
+				
 				break;
-			case 4:
-				// Insert stuff here for option 4
+			case 4: // Query doctor procedure history
+
+				
 				break;
-//			case 5:
-//				// Insert stuff here for option 5
-//				break;
-//			case 6:
-//				// Insert stuff here for option 6
-//				break;
+
 			case 0:
 				System.out.println("Exiting the program. Goodbye!");
 				System.exit(0);

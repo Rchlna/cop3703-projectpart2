@@ -5,14 +5,14 @@ public class Department {
 	public String code;
 	public int officeNumber;
 	public String officePhone;
-	public Doctor deptHead;
+	public String deptHead;
 	
-	public Department(String name, String code, int officeNumber, String officePhone, Doctor deptHead) {
+	public Department(String name, String code, int officeNumber, String officePhone) {
 		this.name = name;
 		this.code = code;
 		this.officeNumber = officeNumber;
 		this.officePhone = officePhone;
-		this.deptHead = deptHead;
+//		this.deptHead = deptHead;
 	}
 
 	public String getName() {
@@ -47,11 +47,11 @@ public class Department {
 		this.officePhone = officePhone;
 	}
 
-	public Doctor getDeptHead() {
+	public String getDeptHead() {
 		return deptHead;
 	}
 
-	public void setDeptHead(Doctor deptHead) {
+	public void setDeptHead(String deptHead) {
 		this.deptHead = deptHead;
 	}
 
