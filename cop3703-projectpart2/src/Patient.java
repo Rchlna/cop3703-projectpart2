@@ -20,7 +20,7 @@ public class Patient {
 	public ArrayList<Procedure> procedures;
 	
 	public Patient(Person person, String id, char sex, String currentPhone, String currentAddress, String permanentPhone, 
-			String permanentStreet, String permanentCity, String permanentState, int permanentZipcode){
+			String permanentStreet, String permanentCity, String permanentState, int permanentZipcode, String condition, String primary){
 		this.ssn = person.socialSecurity;
 		this.id = id;
 		this.sex = sex;
@@ -31,7 +31,9 @@ public class Patient {
 		this.permanentStreet = permanentStreet;
 		this.permanentCity = permanentCity;
 		this.permanentState = permanentStreet;
-		this.permanentZipcode = permanentZipcode;	
+		this.permanentZipcode = permanentZipcode;
+		this.condition = condition;
+		this.primary = primary;
 	}
 	
 	public Person getPerson() {

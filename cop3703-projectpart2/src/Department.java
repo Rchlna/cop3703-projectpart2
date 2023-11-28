@@ -7,12 +7,12 @@ public class Department {
 	public String officePhone;
 	public String deptHead;
 	
-	public Department(String name, String code, int officeNumber, String officePhone) {
+	public Department(String name, String code, int officeNumber, String officePhone, String deptHead) {
 		this.name = name;
 		this.code = code;
 		this.officeNumber = officeNumber;
 		this.officePhone = officePhone;
-//		this.deptHead = deptHead;
+		this.deptHead = deptHead;
 	}
 
 	public String getName() {
