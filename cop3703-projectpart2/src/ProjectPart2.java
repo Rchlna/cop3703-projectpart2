@@ -475,21 +475,62 @@ public class ProjectPart2 {
 				String searchPtId = scnr.nextLine();
 
 				Statement statement = connection.createStatement();
+
+				// Patient Information
+				ResultSet patientRs = statement
+						.executeQuery("select FIRST NAME, MIDDLE INITIAL, LAST NAME, SSN, BIRTH DATE, "
+								+ "PATIENT ID, SEX, CURR PHONE, CURR ADDRESS, PERM PHONE, PERM CITY, PERM STATE, PERM ZIP, CONDITION, PRIM DOCTOR ID, SEC DOCTOR ID, SSN"
+								+ "from PATIENT" + "where PATIENT ID = '" + searchPtId + "'");
+
+				while (patientRs.next()) {
+					String patientId = patientRs.getString("PATIENT ID");
+					String firstName = patientRs.getString("FIRST NAME");
+					char midInitial = patientRs.getString("MIDDLE INITIAL").charAt(0);
+					String lastName = patientRs.getString("LAST NAME");
+					String currPhone = patientRs.getString("CURR PHONE");
+					String currAddr = patientRs.getString("CURR ADDRESS");
+					String primDoc = patientRs.getString("PRIM DOCTOR ID");
+
+					System.out.printf("Patient ID: %s\n", patientId);
+					System.out.printf("Name: %s %s %s\n", firstName, midInitial, lastName);
+					System.out.printf("Current Phone: %s\n", currPhone);
+					System.out.printf("Current Address: %s\n", currAddr);
+					System.out.printf("Primary Doctor: %s\n", primDoc);
+				}
+
+				// Procedures
+				ResultSet procRs = statement
+						.executeQuery("select NAME from PROCEDURE where PATIENT ID = '" + searchPtId + "'");
+
+				System.out.println("\nProcedures Underwent: ");
+				while (patientRs.next()) {
+					String procName = procRs.getString("NAME");
+					System.out.println(procName);
+				}
+
+				// Interation Records
+				ResultSet intRs = statement
+						.executeQuery("select (convert(TIMESTAMP, TIME)), DESCRIPTION from INT_RECORD where PATIENT ID = '" + searchPtId + "'");
+
+				System.out.println("\nInteraction Records");
+				while (intRs.next()) {
+					String time = intRs.getString("TIME");
+					String desc = intRs.getString("DESCRIPTION");
+
+					System.out.printf("%s		%s\n", desc, time);
+				}
 				
-				ResultSet resultSet = statement.executeQuery("select FIRST NAME, MIDDLE INITIAL, LAST NAME, SSN, BIRTH DATE, "
-						+ "PATIENT ID, SEX, CURR PHONE, CURR ADDRESS, PERM PHONE, PERM CITY, PERM STATE, PERM ZIP, CONDITION, PRIM DOCTOR ID, SEC DOCTOR ID, SSN"
-						+ "from PATIENT"
-						+ "where PATIENT ID = '" + searchPtId + "'");
-				
-				while (resultSet.next()) {
-					String patientId = resultSet.getString("PATIENT ID");
-					String firstName = resultSet.getString("FIRST NAME");
-					char midInitial = resultSet.getString("MIDDLE INITIAL").charAt(0);
-					String lastName = resultSet.getString("LAST NAME");
-					int currPhone = resultSet.getInt("CURR PHONE");
-					String currAddr = resultSet.getString("CURR ADDRESS");
-					String primDoc = resultSet.getString("PRIM DOCTOR ID");					
-					
+				// Medications
+				ResultSet medRs = statement
+						.executeQuery("select NAME, DESCRIPTION, DATE from INT_RECORD where PATIENT ID = '" + searchPtId + "'");
+
+				System.out.println("\nPrescribed Medications:");
+				while (medRs.next()) {
+					String name = medRs.getString("NAME");
+					String desc = medRs.getString("DESCRIPTION");
+					Date medDate = medRs.getDate("DATE");
+
+					System.out.printf("%s		%s		%s\n", name, desc, medDate);
 				}
 
 				break;
