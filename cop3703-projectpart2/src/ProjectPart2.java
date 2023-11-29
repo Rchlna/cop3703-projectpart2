@@ -54,7 +54,26 @@ public class ProjectPart2 {
 					System.out.println("\nPatient Information");
 					System.out.println("------------------------------");
 
-					Person pPersonInfo = personInput();
+					System.out.println("Enter first name: ");
+					String personFirstName = scnr.nextLine();
+
+					System.out.println("Enter middle initial: ");
+					char personMiddleInitial = scnr.next().charAt(0);
+					scnr.nextLine();
+
+					System.out.println("Enter last name: ");
+					String personLastName = scnr.nextLine();
+
+					System.out.println("Enter date of birth: ");
+					String personDOB = scnr.nextLine();
+
+					System.out.println("Enter SSN: ");
+					String personSSN = scnr.nextLine();
+					
+					System.out.println("Enter Patient Number: ");
+					String patientSSN = scnr.nextLine();
+					
+					//Person pPersonInfo = personInput();
 
 					// On GUI, we could make this a dropdown selection with a user-enter option
 					System.out.println("\nEnter patient sex:");
@@ -63,6 +82,21 @@ public class ProjectPart2 {
 
 					System.out.println("Enter patient ID: ");
 					String ptId = scnr.nextLine();
+					
+					while (ptId.charAt(0) != 'P' || ptId.length() != 9) {
+						System.out.println("Enter patient ID: ");
+						boolean isNumeric = true;
+						for (int i = 1; i < ptId.length(); i++) {
+							isNumeric = Character.isDigit(ptId.charAt(i));
+							if (!isNumeric) {
+								break;
+							}
+						}
+						if (!isNumeric) {
+							continue;
+						}
+						ptId = scnr.nextLine();
+					}
 
 					System.out.println("\nEnter patient current address:");
 					String ptCurrAddr = scnr.nextLine();
@@ -97,14 +131,16 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient secondary doctor ID (if any):");
 					String patientSecondaryDocID = scnr.nextLine();
 
-					Patient patient = new Patient(pPersonInfo, ptId, ptSex, ptCurrPhone, ptPermPhone, ptCurrAddr,
+					/*Patient patient = new Patient(pPersonI ptId, ptSex, ptCurrPhone, ptPermPhone, ptCurrAddr,
 							ptPermStreetAddr, ptPermCity, ptPermState, ptPermZip, ptCondition, patientPrimaryDocID);
 
 					patient.setPrimary(patientPrimaryDocID);
+					
 
 					if (patientSecondaryDocID != null) {
 						patient.setSecondary(patientSecondaryDocID);
 					}
+					*/
 
 					// Will need to add functionality for a 'Submit' button
 					break;
