@@ -1,6 +1,5 @@
-import java.sql.Connection;
-import java.sql.DriverManager; // provide all necessary methods
-import java.sql.SQLException;
+import java.sql.*;
+import java.io.*;
 import java.util.Scanner;
 
 public class ProjectPart2 {
@@ -13,8 +12,9 @@ public class ProjectPart2 {
 	public static String username = "G01";
 	public static String password = "r9Qi0oVD";
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws SQLException{
+		Connection connection = connect(); // Establishing database connection
+	
 		while (true) {
 			System.out.println("Hospital Database");
 			System.out.println("------------------------------");
@@ -235,7 +235,7 @@ public class ProjectPart2 {
 					System.out.println("Enter medication description: ");
 					String rxDesc = scnr.nextLine();
 
-					Medication medication = new Medication(rxDate, rxName, rxManufacturer, rxDesc);
+//					Medication medication = new Medication(rxDate, rxName, rxManufacturer, rxDesc);
 
 					break;
 				case 6: // Interactions
@@ -247,6 +247,29 @@ public class ProjectPart2 {
 				} // end of nested switch
 				break;
 			case 2: // Query patient health record
+				System.out.println("Patient Health Record Search");
+				System.out.println("------------------------------");
+
+				System.out.println("Patient ID:");
+				String searchPtId = scnr.nextLine();
+
+				Statement statement = connection.createStatement();
+				
+				ResultSet resultSet = statement.executeQuery("select FIRST NAME, MIDDLE INITIAL, LAST NAME, SSN, BIRTH DATE, "
+						+ "PATIENT ID, SEX, CURR PHONE, CURR ADDRESS, PERM PHONE, PERM CITY, PERM STATE, PERM ZIP, CONDITION, PRIM DOCTOR ID, SEC DOCTOR ID, SSN"
+						+ "from PATIENT"
+						+ "where PATIENT ID = '" + searchPtId + "'");
+				
+				while (resultSet.next()) {
+					String patientId = resultSet.getString("PATIENT ID");
+					String firstName = resultSet.getString("FIRST NAME");
+					char midInitial = resultSet.getString("MIDDLE INITIAL").charAt(0);
+					String lastName = resultSet.getString("LAST NAME");
+					int currPhone = resultSet.getInt("CURR PHONE");
+					String currAddr = resultSet.getString("CURR ADDRESS");
+					String primDoc = resultSet.getString("PRIM DOCTOR ID");					
+					
+				}
 
 				break;
 			case 3: // Query procedures offered by department
@@ -261,14 +284,14 @@ public class ProjectPart2 {
 				System.exit(0);
 
 			default:
-				System.out.println("Invalid choice. Please enter a number between 0 and 6.");
+				System.out.println("Invalid choice. Please enter a number between 0 and 4.");
 			}
 			scnr.close();
 		}
 	} // end of main
 
 	// Creates a connection to Oracle Server
-	public Connection connect() throws SQLException {
+	public static Connection connect() throws SQLException {
 		return DriverManager.getConnection(url, username, password);
 	}
 
