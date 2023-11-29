@@ -95,7 +95,7 @@ public class ProjectPart2 {
 						if (!isNumeric) {
 							continue;
 						}
-						ptId = scnr.nextLine();
+						ptId = scnr.nextLine(); 
 					}
 
 					System.out.println("\nEnter patient current address:");
