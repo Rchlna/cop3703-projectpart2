@@ -236,6 +236,26 @@ public class ProjectPart2 {
 					// checkboxes, radio buttons)
 					System.out.println("\nEnter patient condition:");
 					String ptCondition = scnr.nextLine();
+						while(true) {
+							if (ptCondition.equalsIgnoreCase("Critical")) {
+								break;
+							}
+							else if (ptCondition.equalsIgnoreCase("Stable")) {
+								break;
+							}
+							else if (ptCondition.equalsIgnoreCase("Fair")) {
+								break;
+							}
+							else {
+								System.out.println("\nEnter conditon Critical, Stable, or Fair:");
+								System.out.println("\nEnter patient condition:");
+								ptCondition = scnr.nextLine();
+							}
+						}
+						
+						//Critical, Stable or Fair
+						
+							
 
 					System.out.println("\nEnter patient primary doctor ID:");
 					String patientPrimaryDocID = scnr.nextLine();
@@ -272,6 +292,44 @@ public class ProjectPart2 {
 
 					System.out.println("Enter department phone number:");
 					String deptOfficePhone = scnr.nextLine();
+					
+					phoneValid = true;
+					for (int i = 0; i < deptOfficePhone.length(); i++) {
+						if (deptOfficePhone.charAt(i) == 3 || deptOfficePhone.charAt(i) == 7) {
+							if (deptOfficePhone.charAt(i) != '-') {
+								phoneValid = false;
+								break;
+							}
+							phoneValid = true;
+						}
+						phoneValid = Character.isDigit(deptOfficePhone.charAt(i));
+						if (!phoneValid) {
+							phoneValid = false;
+							break;
+						}
+						phoneValid = true;
+					}
+				while (!phoneValid) {
+					System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
+					System.out.println("Enter department phone number:");
+					deptOfficePhone = scnr.nextLine();
+					
+					for (int i = 0; i < deptOfficePhone.length(); i++) {
+						if (deptOfficePhone.charAt(i) == 3 || deptOfficePhone.charAt(i) == 6) {
+							if (deptOfficePhone.charAt(i) != '-') {
+								phoneValid = false;
+								break;
+							}
+							phoneValid = true;
+						}
+						phoneValid = Character.isDigit(deptOfficePhone.charAt(i));
+						if (!phoneValid) {
+							phoneValid = false;
+							break;
+						}
+						phoneValid = true;
+					}
+				}
 
 					System.out.println("\nEnter department head:");
 					String deptHead = scnr.nextLine();
@@ -283,8 +341,34 @@ public class ProjectPart2 {
 					System.out.println("\nProcedure Information");
 					System.out.println("------------------------------");
 
-					System.out.println("Enter procedure name: ");
-					String procName = scnr.nextLine();
+					boolean whileContinue;
+						while(true) {
+							System.out.println("Enter procedure name: ");
+							String procName = scnr.nextLine();
+							for(int i = 0; i < procName.length(); i++) {
+								if(i >= 0 && i <= 2) {
+									if(Character.isDigit(procName.charAt(i))) {
+										System.out.println("Enter procedure name with three letters followed by three digits");
+										whileContinue = true;
+										break;
+									}
+								}
+								else {
+									if(!Character.isDigit(procName.charAt(i))) {
+										System.out.println("Enter procedure name with three letters followed by three digits");
+										whileContinue = true;
+										break;
+									}
+								}
+								whileContinue = false;
+							}
+							if (whileContinue) {
+								continue;
+							}
+							else {
+								break;
+							}
+						}
 
 					System.out.println("Enter procedure number: ");
 					String procNumber = scnr.nextLine();
@@ -327,13 +411,13 @@ public class ProjectPart2 {
 							dSsnIsNumeric = true;
 						}
 						dSsnIsNumeric = Character.isDigit(docSSN.charAt(i));
-						if (!SsnIsNumeric) {
+						if (!dSsnIsNumeric) {
 							dSsnIsNumeric = false;
 							break;
 						}
 						SsnIsNumeric = true;
 					}
-				while (!SsnIsNumeric) {
+				while (!dSsnIsNumeric) {
 					System.out.println("Please enter SSN with thte following format: AAA-GG-SSSS");
 					System.out.println("Enter Patient SSN: ");
 					docSSN = scnr.nextLine();
@@ -347,7 +431,7 @@ public class ProjectPart2 {
 							dSsnIsNumeric = true;
 						}
 						dSsnIsNumeric = Character.isDigit(docSSN.charAt(i));
-						if (!SsnIsNumeric) {
+						if (!dSsnIsNumeric) {
 							SsnIsNumeric = false;
 							break;
 						}
