@@ -19,8 +19,7 @@ public class ProjectPart2 {
 			System.out.println("Hospital Database");
 			System.out.println("------------------------------");
 
-			System.out.println(
-					"1. Add a new patient, department, procedures, doctors, medication, or interaction records.");
+			System.out.println("1. Add a new patient, department, procedures, doctors, medication, or interaction records.");
 			System.out.println("2. Given a patient ID, generate their complete health record.");
 			System.out.println("3. Given a department name or code find the procedures offered.");
 			System.out.println("4. Given a doctor's ID list all the procedures they have done.");
@@ -32,7 +31,7 @@ public class ProjectPart2 {
 
 			switch (choice) {
 			case 1: // Patient
-				System.out.println("\nNew Information");
+				System.out.println("\nEnter New Hospital Information");
 				System.out.println("------------------------------");
 				System.out.println("1. Add patient");
 				System.out.println("2. Add department");
