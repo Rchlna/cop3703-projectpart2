@@ -435,11 +435,9 @@ public class ProjectPart2 {
 
 					System.out.println("Enter patient ID:");
 					String rxPatient = scnr.nextLine();
-					// figure out how to link to patient table
 
 					System.out.println("Enter prescribing doctor: ");
 					String rxDoctor = scnr.nextLine();
-					// figure out how to link to the doctor table
 
 					System.out.println("Enter prescription date: ");
 					String rxDate = scnr.nextLine();
@@ -459,7 +457,14 @@ public class ProjectPart2 {
 //					Medication medication = new Medication(rxDate, rxName, rxManufacturer, rxDesc);
 
 					break;
-				case 6: // Interactions
+				case 6: // Interaction Records
+					System.out.println("\nInteraction Records");
+					System.out.println("------------------------------");
+					
+					System.out.println("Enter patient ID:");
+					String intPatient = scnr.nextLine();
+	
+					
 
 					break;
 				default:
