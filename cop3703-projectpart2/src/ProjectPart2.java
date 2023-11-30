@@ -21,8 +21,6 @@ public class ProjectPart2 {
 
 			System.out.println(
 					"1. Add a new patient, department, procedures, doctors, medication, or interaction records.");
-//			System.out.println("2. Add information about a procedure done on a patient.");
-//			System.out.println("2. Add medication/s prescribed to a patient.");
 			System.out.println("2. Given a patient ID, generate their complete health record.");
 			System.out.println("3. Given a department name or code find the procedures offered.");
 			System.out.println("4. Given a doctor's ID list all the procedures they have done.");
@@ -253,7 +251,6 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient secondary doctor ID (if any):");
 					String patientSecondaryDocID = scnr.nextLine();
 
-
 					break;
 				case 2: // Department
 					System.out.println("\nDepartment Information");
@@ -313,8 +310,6 @@ public class ProjectPart2 {
 					System.out.println("\nEnter department head:");
 					String deptHead = scnr.nextLine();
 
-					Department dept = new Department(deptName, deptCode, deptOfficeNumber, deptOfficePhone, deptHead);
-
 					break;
 				case 3: // Procedures
 					System.out.println("\nProcedure Information");
@@ -359,8 +354,6 @@ public class ProjectPart2 {
 
 					System.out.println("Enter procedure description: ");
 					String procDesc = scnr.nextLine();
-
-					Procedure proc = new Procedure(procName, procDesc, procNumber, procDuration);
 
 					break;
 				case 4: // Doctors
@@ -617,20 +610,21 @@ public class ProjectPart2 {
 				Statement statementB = connection.createStatement();
 
 				ResultSet procDocRs = null;
-				if (procDocInput.charAt(0) == 'D' && procDocInput.length() == 9) { 
-																					
-					char[] charArr = procDocInput.toCharArray(); 
+				if (procDocInput.charAt(0) == 'D' && procDocInput.length() == 9) {
 
-					for (int i = 1; i < charArr.length; i++) { 
-						if (!Character.isDigit(charArr[i])) { 
-							isDocId = false; 
-							break; 
-						} else { 
-							procDocRs = statementB 
-									.executeQuery(
-											"select NAME from PROCEDURE where DOCTOR ID = '" + procDocInput + "'");
+					char[] charArr = procDocInput.toCharArray();
+
+					for (int i = 1; i < charArr.length; i++) {
+						if (!Character.isDigit(charArr[i])) {
+							isDocId = false;
+							break;
 						}
 					}
+				}
+
+				if (!isDocId) {
+					procDocRs = statementB
+							.executeQuery("select NAME from PROCEDURE where DOCTOR ID = '" + procDocInput + "'");
 				} else {
 					procDocRs = statementB.executeQuery(
 							"select PROCEDURE.NAME from PROCEDURE join DOCTOR on DEPARTMENT.DOCTOR ID = PROCEDURE.DOCTOR ID where DOCTOR.NAME = '"
@@ -652,7 +646,6 @@ public class ProjectPart2 {
 
 				Statement statementC = connection.createStatement();
 
-				// Patient Information
 				ResultSet doctorRs = statementC
 						.executeQuery("select NAME from PROCEDURE where DOCTOR ID = '" + searchDocId + "'");
 
@@ -681,26 +674,26 @@ public class ProjectPart2 {
 
 	// Prompts user for Person information as input
 	// Returns Person object
-	public static Person personInput() {
-		System.out.println("Enter first name: ");
-		String personFirstName = scnr.nextLine();
-
-		System.out.println("Enter middle initial: ");
-		char personMiddleInitial = scnr.next().charAt(0);
-		scnr.nextLine();
-
-		System.out.println("Enter last name: ");
-		String personLastName = scnr.nextLine();
-
-		System.out.println("Enter date of birth: ");
-		String personDOB = scnr.nextLine();
-
-		System.out.println("Enter SSN: ");
-		String personSSN = scnr.nextLine();
-
-		Person person = new Person(personFirstName, personMiddleInitial, personLastName, personDOB, personSSN);
-
-		return person;
-
-	}
+//	public static Person personInput() {
+//		System.out.println("Enter first name: ");
+//		String personFirstName = scnr.nextLine();
+//
+//		System.out.println("Enter middle initial: ");
+//		char personMiddleInitial = scnr.next().charAt(0);
+//		scnr.nextLine();
+//
+//		System.out.println("Enter last name: ");
+//		String personLastName = scnr.nextLine();
+//
+//		System.out.println("Enter date of birth: ");
+//		String personDOB = scnr.nextLine();
+//
+//		System.out.println("Enter SSN: ");
+//		String personSSN = scnr.nextLine();
+//
+//		Person person = new Person(personFirstName, personMiddleInitial, personLastName, personDOB, personSSN);
+//
+//		return person;
+//
+//	}
 } // end of project part 2
