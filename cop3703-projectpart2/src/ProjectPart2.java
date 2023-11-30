@@ -12,9 +12,9 @@ public class ProjectPart2 {
 	public static String username = "G01";
 	public static String password = "r9Qi0oVD";
 
-	public static void main(String[] args) throws SQLException{
+	public static void main(String[] args) throws SQLException {
 		Connection connection = connect(); // Establishing database connection
-	
+
 		while (true) {
 			System.out.println("Hospital Database");
 			System.out.println("------------------------------");
@@ -69,28 +69,28 @@ public class ProjectPart2 {
 
 					System.out.println("Enter SSN: ");
 					String patientSSN = scnr.nextLine();
-					
+
 					boolean SsnIsNumeric = true;
-						for (int i = 0; i < patientSSN.length(); i++) {
-							if (patientSSN.charAt(i) == 3 || patientSSN.charAt(i) == 6) {
-								if (patientSSN.charAt(i) != '-') {
-									SsnIsNumeric = false;
-									break;
-								}
-								SsnIsNumeric = true;
-							}
-							SsnIsNumeric = Character.isDigit(patientSSN.charAt(i));
-							if (!SsnIsNumeric) {
+					for (int i = 0; i < patientSSN.length(); i++) {
+						if (patientSSN.charAt(i) == 3 || patientSSN.charAt(i) == 6) {
+							if (patientSSN.charAt(i) != '-') {
 								SsnIsNumeric = false;
 								break;
 							}
 							SsnIsNumeric = true;
 						}
+						SsnIsNumeric = Character.isDigit(patientSSN.charAt(i));
+						if (!SsnIsNumeric) {
+							SsnIsNumeric = false;
+							break;
+						}
+						SsnIsNumeric = true;
+					}
 					while (!SsnIsNumeric) {
 						System.out.println("Please enter SSN with thte following format: AAA-GG-SSSS");
 						System.out.println("Enter Patient SSN: ");
 						patientSSN = scnr.nextLine();
-						
+
 						for (int i = 0; i < patientSSN.length(); i++) {
 							if (patientSSN.charAt(i) == 3 || patientSSN.charAt(i) == 6) {
 								if (patientSSN.charAt(i) != '-') {
@@ -107,17 +107,14 @@ public class ProjectPart2 {
 							SsnIsNumeric = true;
 						}
 					}
-					
-					//Person pPersonInfo = personInput();
 
-					// On GUI, we could make this a dropdown selection with a user-enter option
 					System.out.println("\nEnter patient sex:");
 					char ptSex = scnr.next().charAt(0);
 					scnr.nextLine();
 
 					System.out.println("Enter patient ID: ");
 					String ptId = scnr.nextLine();
-					
+
 					while (ptId.charAt(0) != 'P' || ptId.length() != 9) {
 						System.out.println("Incorrect input, please provide the letter P followed by 8 numbers");
 						System.out.println("Enter patient ID: ");
@@ -131,7 +128,7 @@ public class ProjectPart2 {
 						if (!isNumeric) {
 							continue;
 						}
-						ptId = scnr.nextLine(); 
+						ptId = scnr.nextLine();
 					}
 
 					System.out.println("\nEnter patient current address:");
@@ -139,7 +136,7 @@ public class ProjectPart2 {
 
 					System.out.println("\nEnter patient current phone:");
 					String ptCurrPhone = scnr.nextLine();
-					
+
 					boolean phoneValid = true;
 					for (int i = 0; i < ptCurrPhone.length(); i++) {
 						if (ptCurrPhone.charAt(i) == 3 || ptCurrPhone.charAt(i) == 7) {
@@ -156,27 +153,27 @@ public class ProjectPart2 {
 						}
 						phoneValid = true;
 					}
-				while (!phoneValid) {
-					System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
-					System.out.println("Enter patient current phone:");
-					ptCurrPhone = scnr.nextLine();
-					
-					for (int i = 0; i < ptCurrPhone.length(); i++) {
-						if (ptCurrPhone.charAt(i) == 3 || ptCurrPhone.charAt(i) == 6) {
-							if (ptCurrPhone.charAt(i) != '-') {
+					while (!phoneValid) {
+						System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
+						System.out.println("Enter patient current phone:");
+						ptCurrPhone = scnr.nextLine();
+
+						for (int i = 0; i < ptCurrPhone.length(); i++) {
+							if (ptCurrPhone.charAt(i) == 3 || ptCurrPhone.charAt(i) == 6) {
+								if (ptCurrPhone.charAt(i) != '-') {
+									phoneValid = false;
+									break;
+								}
+								phoneValid = true;
+							}
+							phoneValid = Character.isDigit(ptCurrPhone.charAt(i));
+							if (!phoneValid) {
 								phoneValid = false;
 								break;
 							}
 							phoneValid = true;
 						}
-						phoneValid = Character.isDigit(ptCurrPhone.charAt(i));
-						if (!phoneValid) {
-							phoneValid = false;
-							break;
-						}
-						phoneValid = true;
 					}
-				}
 
 					System.out.println("\nEnter patient permanent street address:");
 					String ptPermStreetAddr = scnr.nextLine();
@@ -193,7 +190,7 @@ public class ProjectPart2 {
 
 					System.out.println("\nEnter patient permanent phone:");
 					String ptPermPhone = scnr.nextLine();
-					
+
 					phoneValid = true;
 					for (int i = 0; i < ptPermPhone.length(); i++) {
 						if (ptCurrPhone.charAt(i) == 3 || ptPermPhone.charAt(i) == 7) {
@@ -210,52 +207,45 @@ public class ProjectPart2 {
 						}
 						phoneValid = true;
 					}
-				while (!phoneValid) {
-					System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
-					System.out.println("Enter patient current phone:");
-					ptPermPhone = scnr.nextLine();
-					
-					for (int i = 0; i < ptPermPhone.length(); i++) {
-						if (ptPermPhone.charAt(i) == 3 || ptPermPhone.charAt(i) == 6) {
-							if (ptPermPhone.charAt(i) != '-') {
+					while (!phoneValid) {
+						System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
+						System.out.println("Enter patient current phone:");
+						ptPermPhone = scnr.nextLine();
+
+						for (int i = 0; i < ptPermPhone.length(); i++) {
+							if (ptPermPhone.charAt(i) == 3 || ptPermPhone.charAt(i) == 6) {
+								if (ptPermPhone.charAt(i) != '-') {
+									phoneValid = false;
+									break;
+								}
+								phoneValid = true;
+							}
+							phoneValid = Character.isDigit(ptPermPhone.charAt(i));
+							if (!phoneValid) {
 								phoneValid = false;
 								break;
 							}
 							phoneValid = true;
 						}
-						phoneValid = Character.isDigit(ptPermPhone.charAt(i));
-						if (!phoneValid) {
-							phoneValid = false;
-							break;
-						}
-						phoneValid = true;
 					}
-				}
 
-					// On GUI, could make the following field some sort of selection (dropdown,
-					// checkboxes, radio buttons)
 					System.out.println("\nEnter patient condition:");
 					String ptCondition = scnr.nextLine();
-						while(true) {
-							if (ptCondition.equalsIgnoreCase("Critical")) {
-								break;
-							}
-							else if (ptCondition.equalsIgnoreCase("Stable")) {
-								break;
-							}
-							else if (ptCondition.equalsIgnoreCase("Fair")) {
-								break;
-							}
-							else {
-								System.out.println("\nEnter conditon Critical, Stable, or Fair:");
-								System.out.println("\nEnter patient condition:");
-								ptCondition = scnr.nextLine();
-							}
+					while (true) {
+						if (ptCondition.equalsIgnoreCase("Critical")) {
+							break;
+						} else if (ptCondition.equalsIgnoreCase("Stable")) {
+							break;
+						} else if (ptCondition.equalsIgnoreCase("Fair")) {
+							break;
+						} else {
+							System.out.println("\nEnter conditon Critical, Stable, or Fair:");
+							System.out.println("\nEnter patient condition:");
+							ptCondition = scnr.nextLine();
 						}
-						
-						//Critical, Stable or Fair
-						
-							
+					}
+
+					// Critical, Stable or Fair
 
 					System.out.println("\nEnter patient primary doctor ID:");
 					String patientPrimaryDocID = scnr.nextLine();
@@ -263,18 +253,7 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient secondary doctor ID (if any):");
 					String patientSecondaryDocID = scnr.nextLine();
 
-					/*Patient patient = new Patient(pPersonI ptId, ptSex, ptCurrPhone, ptPermPhone, ptCurrAddr,
-							ptPermStreetAddr, ptPermCity, ptPermState, ptPermZip, ptCondition, patientPrimaryDocID);
 
-					patient.setPrimary(patientPrimaryDocID);
-					
-
-					if (patientSecondaryDocID != null) {
-						patient.setSecondary(patientSecondaryDocID);
-					}
-					*/
-
-					// Will need to add functionality for a 'Submit' button
 					break;
 				case 2: // Department
 					System.out.println("\nDepartment Information");
@@ -292,7 +271,7 @@ public class ProjectPart2 {
 
 					System.out.println("Enter department phone number:");
 					String deptOfficePhone = scnr.nextLine();
-					
+
 					phoneValid = true;
 					for (int i = 0; i < deptOfficePhone.length(); i++) {
 						if (deptOfficePhone.charAt(i) == 3 || deptOfficePhone.charAt(i) == 7) {
@@ -309,27 +288,27 @@ public class ProjectPart2 {
 						}
 						phoneValid = true;
 					}
-				while (!phoneValid) {
-					System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
-					System.out.println("Enter department phone number:");
-					deptOfficePhone = scnr.nextLine();
-					
-					for (int i = 0; i < deptOfficePhone.length(); i++) {
-						if (deptOfficePhone.charAt(i) == 3 || deptOfficePhone.charAt(i) == 6) {
-							if (deptOfficePhone.charAt(i) != '-') {
+					while (!phoneValid) {
+						System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
+						System.out.println("Enter department phone number:");
+						deptOfficePhone = scnr.nextLine();
+
+						for (int i = 0; i < deptOfficePhone.length(); i++) {
+							if (deptOfficePhone.charAt(i) == 3 || deptOfficePhone.charAt(i) == 6) {
+								if (deptOfficePhone.charAt(i) != '-') {
+									phoneValid = false;
+									break;
+								}
+								phoneValid = true;
+							}
+							phoneValid = Character.isDigit(deptOfficePhone.charAt(i));
+							if (!phoneValid) {
 								phoneValid = false;
 								break;
 							}
 							phoneValid = true;
 						}
-						phoneValid = Character.isDigit(deptOfficePhone.charAt(i));
-						if (!phoneValid) {
-							phoneValid = false;
-							break;
-						}
-						phoneValid = true;
 					}
-				}
 
 					System.out.println("\nEnter department head:");
 					String deptHead = scnr.nextLine();
@@ -342,33 +321,33 @@ public class ProjectPart2 {
 					System.out.println("------------------------------");
 
 					boolean whileContinue;
-						while(true) {
-							System.out.println("Enter procedure name: ");
-							String procName = scnr.nextLine();
-							for(int i = 0; i < procName.length(); i++) {
-								if(i >= 0 && i <= 2) {
-									if(Character.isDigit(procName.charAt(i))) {
-										System.out.println("Enter procedure name with three letters followed by three digits");
-										whileContinue = true;
-										break;
-									}
+					while (true) {
+						System.out.println("Enter procedure name: ");
+						String procName = scnr.nextLine();
+						for (int i = 0; i < procName.length(); i++) {
+							if (i >= 0 && i <= 2) {
+								if (Character.isDigit(procName.charAt(i))) {
+									System.out.println(
+											"Enter procedure name with three letters followed by three digits");
+									whileContinue = true;
+									break;
 								}
-								else {
-									if(!Character.isDigit(procName.charAt(i))) {
-										System.out.println("Enter procedure name with three letters followed by three digits");
-										whileContinue = true;
-										break;
-									}
+							} else {
+								if (!Character.isDigit(procName.charAt(i))) {
+									System.out.println(
+											"Enter procedure name with three letters followed by three digits");
+									whileContinue = true;
+									break;
 								}
-								whileContinue = false;
 							}
-							if (whileContinue) {
-								continue;
-							}
-							else {
-								break;
-							}
+							whileContinue = false;
 						}
+						if (whileContinue) {
+							continue;
+						} else {
+							break;
+						}
+					}
 
 					System.out.println("Enter procedure number: ");
 					String procNumber = scnr.nextLine();
@@ -384,7 +363,7 @@ public class ProjectPart2 {
 
 					break;
 				case 4: // Doctors
-					
+
 					System.out.println("Enter first name: ");
 					String docFirstName = scnr.nextLine();
 
@@ -400,7 +379,7 @@ public class ProjectPart2 {
 
 					System.out.println("Enter SSN: ");
 					String docSSN = scnr.nextLine();
-					
+
 					boolean dSsnIsNumeric = true;
 					for (int i = 0; i < docSSN.length(); i++) {
 						if (docSSN.charAt(i) == 3 || docSSN.charAt(i) == 6) {
@@ -417,36 +396,34 @@ public class ProjectPart2 {
 						}
 						SsnIsNumeric = true;
 					}
-				while (!dSsnIsNumeric) {
-					System.out.println("Please enter SSN with thte following format: AAA-GG-SSSS");
-					System.out.println("Enter Patient SSN: ");
-					docSSN = scnr.nextLine();
-					
-					for (int i = 0; i < docSSN.length(); i++) {
-						if (docSSN.charAt(i) == 3 || docSSN.charAt(i) == 6) {
-							if (docSSN.charAt(i) != '-') {
-								dSsnIsNumeric = false;
+					while (!dSsnIsNumeric) {
+						System.out.println("Please enter SSN with thte following format: AAA-GG-SSSS");
+						System.out.println("Enter Patient SSN: ");
+						docSSN = scnr.nextLine();
+
+						for (int i = 0; i < docSSN.length(); i++) {
+							if (docSSN.charAt(i) == 3 || docSSN.charAt(i) == 6) {
+								if (docSSN.charAt(i) != '-') {
+									dSsnIsNumeric = false;
+									break;
+								}
+								dSsnIsNumeric = true;
+							}
+							dSsnIsNumeric = Character.isDigit(docSSN.charAt(i));
+							if (!dSsnIsNumeric) {
+								SsnIsNumeric = false;
 								break;
 							}
 							dSsnIsNumeric = true;
 						}
-						dSsnIsNumeric = Character.isDigit(docSSN.charAt(i));
-						if (!dSsnIsNumeric) {
-							SsnIsNumeric = false;
-							break;
-						}
-						dSsnIsNumeric = true;
 					}
-				}
-					
+
 					System.out.println("\nDoctor Information");
 					System.out.println("------------------------------");
 
-					//Person dPersonInfo = personInput();
-
 					System.out.println("Enter doctor ID: ");
 					String docID = scnr.nextLine();
-					
+
 					while (docID.charAt(0) != 'D' || docID.length() != 9) {
 						System.out.println("Incorrect input, please provide the letter D followed by 8 numbers");
 						System.out.println("Enter doctor ID: ");
@@ -460,7 +437,7 @@ public class ProjectPart2 {
 						if (!isNumeric) {
 							continue;
 						}
-						docID = scnr.nextLine(); 
+						docID = scnr.nextLine();
 					}
 
 					System.out.println("Enter address: ");
@@ -468,7 +445,7 @@ public class ProjectPart2 {
 
 					System.out.println("Enter phone number: ");
 					String docPhone = scnr.nextLine();
-					
+
 					phoneValid = true;
 					for (int i = 0; i < docPhone.length(); i++) {
 						if (docPhone.charAt(i) == 3 || docPhone.charAt(i) == 7) {
@@ -510,8 +487,6 @@ public class ProjectPart2 {
 					System.out.println("Enter contact number: ");
 					String docContact = scnr.nextLine();
 
-					//Doctor doc = new Doctor(dPersonInfo, docID, docAddr, docPhone, docContact);
-
 					break;
 				case 5: // Medications
 					System.out.println("\nPrescription Information");
@@ -538,16 +513,14 @@ public class ProjectPart2 {
 					System.out.println("Enter medication description: ");
 					String rxDesc = scnr.nextLine();
 
-//					Medication medication = new Medication(rxDate, rxName, rxManufacturer, rxDesc);
-
 					break;
 				case 6: // Interaction Records
 					System.out.println("\nInteraction Records");
 					System.out.println("------------------------------");
-					
+
 					System.out.println("Enter patient ID:");
 					String intPatient = scnr.nextLine();
-					
+
 					System.out.println("Enter date of interaction");
 					String intDate = scnr.nextLine();
 
@@ -556,7 +529,6 @@ public class ProjectPart2 {
 
 					System.out.println("Enter description of interaction:");
 					String intDesc = scnr.nextLine();
-					
 
 					break;
 				default:
@@ -606,8 +578,9 @@ public class ProjectPart2 {
 				}
 
 				// Interation Records
-				ResultSet intRs = statementA
-						.executeQuery("select (convert(TIMESTAMP, TIME)), DESCRIPTION from INT_RECORD where PATIENT ID = '" + searchPtId + "'");
+				ResultSet intRs = statementA.executeQuery(
+						"select (convert(TIMESTAMP, TIME)), DESCRIPTION from INT_RECORD where PATIENT ID = '"
+								+ searchPtId + "'");
 
 				System.out.println("\nInteraction Records");
 				while (intRs.next()) {
@@ -616,10 +589,10 @@ public class ProjectPart2 {
 
 					System.out.printf("%s		%s\n", desc, time);
 				}
-				
+
 				// Medications
-				ResultSet medRs = statementA
-						.executeQuery("select NAME, DESCRIPTION, DATE from INT_RECORD where PATIENT ID = '" + searchPtId + "'");
+				ResultSet medRs = statementA.executeQuery(
+						"select NAME, DESCRIPTION, DATE from INT_RECORD where PATIENT ID = '" + searchPtId + "'");
 
 				System.out.println("\nPrescribed Medications:");
 				while (medRs.next()) {
@@ -632,7 +605,7 @@ public class ProjectPart2 {
 
 				break;
 			case 3: // Query procedures offered by department
-				ystem.out.println("Procedures Offered By Department ");
+				System.out.println("Procedures Offered By Department ");
 				System.out.println("------------------------------");
 
 				System.out.println("Doctor Name or ID:");
@@ -643,19 +616,21 @@ public class ProjectPart2 {
 				Statement statementB = connection.createStatement();
 
 				ResultSet procDocRs = null;
-				if (procDocInput.charAt(0) == 'D' && procDocInput.length() == 9) { 	// check if the input starts with a D && length = 9
-					char[] charArr = procDocInput.toCharArray(); 					// convert input to char array
+				if (procDocInput.charAt(0) == 'D' && procDocInput.length() == 9) { 
+																					
+					char[] charArr = procDocInput.toCharArray(); 
 
-					for(int i = 1; i < charArr.length; i++){ 						// loop through char array
-				         if(!Character.isDigit(charArr[i])){ 						// if current char is not a number,
-				        	 isDocId = false; 										// input is not doctor ID
-				        	 break; 												// & stop checking
-				         } else { 													// else input IS doctor ID, 
-				        	 procDocRs = statementB									// execute query using DOCTOR ID
-										.executeQuery("select NAME from PROCEDURE where DOCTOR ID = '" + procDocInput + "'"); 
-				         }
-				      }				
-				} else { 
+					for (int i = 1; i < charArr.length; i++) { 
+						if (!Character.isDigit(charArr[i])) { 
+							isDocId = false; 
+							break; 
+						} else { 
+							procDocRs = statementB 
+									.executeQuery(
+											"select NAME from PROCEDURE where DOCTOR ID = '" + procDocInput + "'");
+						}
+					}
+				} else {
 					procDocRs = statementB.executeQuery(
 							"select PROCEDURE.NAME from PROCEDURE join DOCTOR on DEPARTMENT.DOCTOR ID = PROCEDURE.DOCTOR ID where DOCTOR.NAME = '"
 									+ procDocInput + "'");
@@ -678,13 +653,13 @@ public class ProjectPart2 {
 
 				// Patient Information
 				ResultSet doctorRs = statementC
-						.executeQuery("select NAME from PROCEDURE where DOCTOR ID = '" + searchDocId +"'");
+						.executeQuery("select NAME from PROCEDURE where DOCTOR ID = '" + searchDocId + "'");
 
 				while (doctorRs.next()) {
 					String procName = doctorRs.getString("NAME");
 					System.out.println(procName);
 				}
-				
+
 				break;
 
 			case 0:
