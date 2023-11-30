@@ -474,10 +474,10 @@ public class ProjectPart2 {
 				System.out.println("Patient ID:");
 				String searchPtId = scnr.nextLine();
 
-				Statement statement = connection.createStatement();
+				Statement statementA = connection.createStatement();
 
 				// Patient Information
-				ResultSet patientRs = statement
+				ResultSet patientRs = statementA
 						.executeQuery("select FIRST NAME, MIDDLE INITIAL, LAST NAME, SSN, BIRTH DATE, "
 								+ "PATIENT ID, SEX, CURR PHONE, CURR ADDRESS, PERM PHONE, PERM CITY, PERM STATE, PERM ZIP, CONDITION, PRIM DOCTOR ID, SEC DOCTOR ID, SSN"
 								+ "from PATIENT" + "where PATIENT ID = '" + searchPtId + "'");
@@ -499,7 +499,7 @@ public class ProjectPart2 {
 				}
 
 				// Procedures
-				ResultSet procRs = statement
+				ResultSet procRs = statementA
 						.executeQuery("select NAME from PROCEDURE where PATIENT ID = '" + searchPtId + "'");
 
 				System.out.println("\nProcedures Underwent: ");
@@ -509,7 +509,7 @@ public class ProjectPart2 {
 				}
 
 				// Interation Records
-				ResultSet intRs = statement
+				ResultSet intRs = statementA
 						.executeQuery("select (convert(TIMESTAMP, TIME)), DESCRIPTION from INT_RECORD where PATIENT ID = '" + searchPtId + "'");
 
 				System.out.println("\nInteraction Records");
@@ -521,7 +521,7 @@ public class ProjectPart2 {
 				}
 				
 				// Medications
-				ResultSet medRs = statement
+				ResultSet medRs = statementA
 						.executeQuery("select NAME, DESCRIPTION, DATE from INT_RECORD where PATIENT ID = '" + searchPtId + "'");
 
 				System.out.println("\nPrescribed Medications:");
@@ -538,7 +538,23 @@ public class ProjectPart2 {
 
 				break;
 			case 4: // Query doctor procedure history
+				System.out.println("Doctor Procedure History");
+				System.out.println("------------------------------");
 
+				System.out.println("Doctor ID:");
+				String searchDocId = scnr.nextLine();
+
+				Statement statementC = connection.createStatement();
+
+				// Patient Information
+				ResultSet doctorRs = statementC
+						.executeQuery("select NAME from PROCEDURE where DOCTOR ID = '" + searchDocId +"'");
+
+				while (doctorRs.next()) {
+					String procName = doctorRs.getString("NAME");
+					System.out.println(procName);
+				}
+				
 				break;
 
 			case 0:
