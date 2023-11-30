@@ -320,10 +320,11 @@ public class ProjectPart2 {
 					System.out.println("\nProcedure Information");
 					System.out.println("------------------------------");
 
-					boolean whileContinue;
+					String procName = null;
+					boolean whileContinue = false;
 					while (true) {
 						System.out.println("Enter procedure name: ");
-						String procName = scnr.nextLine();
+						procName = scnr.nextLine();
 						for (int i = 0; i < procName.length(); i++) {
 							if (i >= 0 && i <= 2) {
 								if (Character.isDigit(procName.charAt(i))) {
