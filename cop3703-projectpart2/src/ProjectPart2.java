@@ -515,7 +515,7 @@ public class ProjectPart2 {
 					System.out.println("Enter contact number: ");
 					String doctorContact = scnr.nextLine();
 
-					// SQL insert statement for Procedures
+					// SQL insert statement for Doctor
 					Statement doctorStmt = connection.createStatement();
 					
 					String doctorValues = "VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial + "','" 
@@ -548,6 +548,13 @@ public class ProjectPart2 {
 
 					System.out.println("Enter medication description: ");
 					String rxDesc = scnr.nextLine();
+					
+					// SQL insert statement for Medications
+					Statement rxStmt = connection.createStatement();
+					
+					String rxValues = "VALUES('" + rxName + "','" + rxDate + "','" + rxDesc + "','" + rxManufacturer + "','" + rxDoctor + "','" + rxPatient + "')";
+					
+					rxStmt.executeUpdate("INSERT INTO PATIENT" + rxValues);
 
 					break;
 				case 6: // Interaction Records
