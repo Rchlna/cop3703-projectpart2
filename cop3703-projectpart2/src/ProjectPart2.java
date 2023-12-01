@@ -250,17 +250,18 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient secondary doctor ID (if any):");
 					String patientSecondaryDocID = scnr.nextLine();
 
-					
 					// SQL insert statement for Patient
 					Statement patientStmt = connection.createStatement();
-					
-					String patientValues = "VALUES('" + patientSSN + "','" + patientFirstName + "','" + patientMiddleInitial + "','" + patientLastName + "','" + patientDOB + "','" 
-					+ patientId + "','" + patientSex + "','" + patientCurrPhone + "','" + patientCurrAddr + "','" + patientPermPhone + "','" + patientPermStreetAddr + "','" 
-							+ patientPermCity + "','" + patientPermState + "','" + patientPermZip + "','" + patientCondition + "','" + patientPrimaryDocID + "','" +  patientSecondaryDocID + "')";
-					
+
+					String patientValues = "VALUES('" + patientSSN + "','" + patientFirstName + "','"
+							+ patientMiddleInitial + "','" + patientLastName + "','" + patientDOB + "','" + patientId
+							+ "','" + patientSex + "','" + patientCurrPhone + "','" + patientCurrAddr + "','"
+							+ patientPermPhone + "','" + patientPermStreetAddr + "','" + patientPermCity + "','"
+							+ patientPermState + "','" + patientPermZip + "','" + patientCondition + "','"
+							+ patientPrimaryDocID + "','" + patientSecondaryDocID + "')";
+
 					patientStmt.executeUpdate("INSERT INTO PATIENT" + patientValues);
-					
-					
+
 					break;
 				case 2: // Department
 					System.out.println("\nDepartment Information");
@@ -320,14 +321,14 @@ public class ProjectPart2 {
 					System.out.println("\nEnter department head:");
 					String deptHead = scnr.nextLine();
 
-					
 					// SQL insert statement for Department
 					Statement deptStmt = connection.createStatement();
-					
-					String deptValues = "VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "','" + deptOfficePhone + "','" + deptHead + "')";
-					
+
+					String deptValues = "VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "','"
+							+ deptOfficePhone + "','" + deptHead + "')";
+
 					deptStmt.executeUpdate("INSERT INTO DEPARTMENT" + deptValues);
-					
+
 					break;
 				case 3: // Procedures
 					System.out.println("\nProcedure Information");
@@ -369,29 +370,30 @@ public class ProjectPart2 {
 					System.out.println("Enter procedure duration: ");
 					double procDuration = scnr.nextDouble();
 					scnr.nextLine();
-					
+
 					System.out.println("Enter procedure code: ");
 					String procCode = scnr.nextLine();
 
 					System.out.println("Enter procedure description: ");
 					String procDesc = scnr.nextLine();
-					
+
 					System.out.println("Enter Patient ID: ");
 					String procPatientId = scnr.nextLine();
-					
+
 					System.out.println("Enter Patient ID: ");
 					String procDocId = scnr.nextLine();
-					
+
 					// SQL insert statement for Procedures
 					Statement procStmt = connection.createStatement();
-					
-					String procValues = "VALUES('" + procName + "','" + procNumber + "','" + procDuration + "','" + procDesc + "','" + procPatientId + "','" + procCode + "','" + procDocId + "')";
-					
+
+					String procValues = "VALUES('" + procName + "','" + procNumber + "','" + procDuration + "','"
+							+ procDesc + "','" + procPatientId + "','" + procCode + "','" + procDocId + "')";
+
 					procStmt.executeUpdate("INSERT INTO PROCEDURE" + procValues);
-					
+
 					break;
 				case 4: // Doctors
-					
+
 					System.out.println("\nDoctor Information");
 					System.out.println("------------------------------");
 
@@ -517,12 +519,13 @@ public class ProjectPart2 {
 
 					// SQL insert statement for Doctor
 					Statement doctorStmt = connection.createStatement();
-					
-					String doctorValues = "VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial + "','" 
-					+ doctorLastName + "','" + doctorDOB + "','" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "','" + doctorContact + "')";
-					
+
+					String doctorValues = "VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial
+							+ "','" + doctorLastName + "','" + doctorDOB + "','" + doctorID + "','" + doctorAddr + "','"
+							+ doctorPhone + "','" + doctorContact + "')";
+
 					doctorStmt.executeUpdate("INSERT INTO DOCTOR" + doctorValues);
-					
+
 					break;
 				case 5: // Medications
 					System.out.println("\nPrescription Information");
@@ -548,12 +551,13 @@ public class ProjectPart2 {
 
 					System.out.println("Enter medication description: ");
 					String rxDesc = scnr.nextLine();
-					
+
 					// SQL insert statement for Medications
 					Statement rxStmt = connection.createStatement();
-					
-					String rxValues = "VALUES('" + rxName + "','" + rxDate + "','" + rxDesc + "','" + rxManufacturer + "','" + rxDoctor + "','" + rxPatient + "')";
-					
+
+					String rxValues = "VALUES('" + rxName + "','" + rxDate + "','" + rxDesc + "','" + rxManufacturer
+							+ "','" + rxDoctor + "','" + rxPatient + "')";
+
 					rxStmt.executeUpdate("INSERT INTO MEDICATION" + rxValues);
 
 					break;
@@ -563,7 +567,7 @@ public class ProjectPart2 {
 
 					System.out.println("Enter patient ID:");
 					String interationRecordPatientId = scnr.nextLine();
-					
+
 					String interationRecordId = null; // Figure out how to generate
 
 					System.out.println("Enter date of interaction");
@@ -574,12 +578,14 @@ public class ProjectPart2 {
 
 					System.out.println("Enter description of interaction:");
 					String interationRecordDesc = scnr.nextLine();
-					
+
 					// SQL insert statement for Medications
 					Statement interationRecordStmt = connection.createStatement();
-					
-					String interationRecordValues = "VALUES('" + interationRecordPatientId + "','" + interationRecordId + "','" + interationRecordDate + "','" + interationRecordTime + "','" + interationRecordDesc + "')";
-					
+
+					String interationRecordValues = "VALUES('" + interationRecordPatientId + "','" + interationRecordId
+							+ "','" + interationRecordDate + "','" + interationRecordTime + "','" + interationRecordDesc
+							+ "')";
+
 					interationRecordStmt.executeUpdate("INSERT INTO INT_RECORD" + interationRecordValues);
 
 					break;
@@ -631,8 +637,7 @@ public class ProjectPart2 {
 
 				// Interation Records
 				ResultSet intRs = statementA.executeQuery(
-						"select TIME, DESCRIPTION from INT_RECORD where PATIENT_ID = '"
-								+ searchPtId + "'");
+						"select TIME, DESCRIPTION from INT_RECORD where PATIENT_ID = '" + searchPtId + "'");
 
 				System.out.println("\nInteraction Records");
 				while (intRs.next()) {
