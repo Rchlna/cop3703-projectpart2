@@ -14,6 +14,8 @@ public class ProjectPart2 {
 
 	public static void main(String[] args) throws SQLException {
 		Connection connection = connect(); // Establishing database connection
+		
+		connection.setAutoCommit(false);
 
 		while (true) {
 			System.out.println("Hospital Database");
@@ -193,6 +195,7 @@ public class ProjectPart2 {
 							+ patientPrimaryDocID + "','" + patientSecondaryDocID + "')";
 
 					patientStmt.executeUpdate("INSERT INTO PATIENT" + patientValues);
+					connection.commit();
 
 					break;
 				case 2: // Department
@@ -224,6 +227,7 @@ public class ProjectPart2 {
 							+ deptOfficePhone + "','" + deptHead + "')";
 
 					deptStmt.executeUpdate("INSERT INTO DEPARTMENT" + deptValues);
+					connection.commit();
 
 					break;
 				case 3: // Procedures
@@ -286,6 +290,7 @@ public class ProjectPart2 {
 							+ procDesc + "','" + procPatientId + "','" + procCode + "','" + procDocId + "')";
 
 					procStmt.executeUpdate("INSERT INTO PROCEDURE" + procValues);
+					connection.commit();
 
 					break;
 				case 4: // Doctors
@@ -389,10 +394,11 @@ public class ProjectPart2 {
 					Statement doctorStmt = connection.createStatement();
 
 					String doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial
-							+ "','" + doctorLastName + "','" + doctorDOB + "','" + doctorID + "','" + doctorAddr + "','"
+							+ "','" + doctorLastName + "',TO_DATE('" + doctorDOB + "','MM-DD-YYYY'),'" + doctorID + "','" + doctorAddr + "','"
 							+ doctorPhone + "','" + doctorContact + "')";
 
 					doctorStmt.executeUpdate("INSERT INTO DOCTOR" + doctorValues);
+					connection.commit();
 
 					break;
 				case 5: // Medications
@@ -427,6 +433,7 @@ public class ProjectPart2 {
 							+ "','" + rxDoctor + "','" + rxPatient + "')";
 
 					rxStmt.executeUpdate("INSERT INTO MEDICATION" + rxValues);
+					connection.commit();
 
 					break;
 				case 6: // Interaction Records
@@ -455,6 +462,7 @@ public class ProjectPart2 {
 							+ "')";
 
 					interationRecordStmt.executeUpdate("INSERT INTO INT_RECORD" + interationRecordValues);
+					connection.commit();
 
 					break;
 				default:
@@ -527,6 +535,7 @@ public class ProjectPart2 {
 
 					System.out.printf("%s		%s		%s\n", name, desc, medDate);
 				}
+				connection.commit();
 
 				break;
 			case 3: // Query procedures offered by department
@@ -566,6 +575,7 @@ public class ProjectPart2 {
 					String procName = procDocRs.getString("NAME");
 					System.out.println(procName);
 				}
+				connection.commit();
 
 				break;
 			case 4: // Query doctor procedure history
@@ -584,6 +594,8 @@ public class ProjectPart2 {
 					String procName = doctorRs.getString("NAME");
 					System.out.println(procName);
 				}
+				
+				connection.commit();
 
 				break;
 
@@ -594,12 +606,14 @@ public class ProjectPart2 {
 			default:
 				System.out.println("Invalid choice. Please enter a number between 0 and 4.");
 			}
-			scnr.close();
+//			scnr.close();
 		}
+		
 	} // end of main
 
 	// Creates a connection to Oracle Server
 	public static Connection connect() throws SQLException {
+		
 		return DriverManager.getConnection(url, username, password);
 	}
 	
