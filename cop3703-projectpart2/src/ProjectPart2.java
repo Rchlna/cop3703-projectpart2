@@ -391,33 +391,36 @@ public class ProjectPart2 {
 					
 					break;
 				case 4: // Doctors
+					
+					System.out.println("\nDoctor Information");
+					System.out.println("------------------------------");
 
 					System.out.println("Enter first name: ");
-					String docFirstName = scnr.nextLine();
+					String doctorFirstName = scnr.nextLine();
 
 					System.out.println("Enter middle initial: ");
-					char docMiddleInitial = scnr.next().charAt(0);
+					char doctorMiddleInitial = scnr.next().charAt(0);
 					scnr.nextLine();
 
 					System.out.println("Enter last name: ");
-					String docLastName = scnr.nextLine();
+					String doctorLastName = scnr.nextLine();
 
 					System.out.println("Enter date of birth: ");
-					String docDOB = scnr.nextLine();
+					String doctorDOB = scnr.nextLine();
 
 					System.out.println("Enter SSN: ");
-					String docSSN = scnr.nextLine();
+					String doctorSSN = scnr.nextLine();
 
 					boolean dSsnIsNumeric = true;
-					for (int i = 0; i < docSSN.length(); i++) {
-						if (docSSN.charAt(i) == 3 || docSSN.charAt(i) == 6) {
-							if (docSSN.charAt(i) != '-') {
+					for (int i = 0; i < doctorSSN.length(); i++) {
+						if (doctorSSN.charAt(i) == 3 || doctorSSN.charAt(i) == 6) {
+							if (doctorSSN.charAt(i) != '-') {
 								dSsnIsNumeric = false;
 								break;
 							}
 							dSsnIsNumeric = true;
 						}
-						dSsnIsNumeric = Character.isDigit(docSSN.charAt(i));
+						dSsnIsNumeric = Character.isDigit(doctorSSN.charAt(i));
 						if (!dSsnIsNumeric) {
 							dSsnIsNumeric = false;
 							break;
@@ -427,17 +430,17 @@ public class ProjectPart2 {
 					while (!dSsnIsNumeric) {
 						System.out.println("Please enter SSN with thte following format: AAA-GG-SSSS");
 						System.out.println("Enter Patient SSN: ");
-						docSSN = scnr.nextLine();
+						doctorSSN = scnr.nextLine();
 
-						for (int i = 0; i < docSSN.length(); i++) {
-							if (docSSN.charAt(i) == 3 || docSSN.charAt(i) == 6) {
-								if (docSSN.charAt(i) != '-') {
+						for (int i = 0; i < doctorSSN.length(); i++) {
+							if (doctorSSN.charAt(i) == 3 || doctorSSN.charAt(i) == 6) {
+								if (doctorSSN.charAt(i) != '-') {
 									dSsnIsNumeric = false;
 									break;
 								}
 								dSsnIsNumeric = true;
 							}
-							dSsnIsNumeric = Character.isDigit(docSSN.charAt(i));
+							dSsnIsNumeric = Character.isDigit(doctorSSN.charAt(i));
 							if (!dSsnIsNumeric) {
 								SsnIsNumeric = false;
 								break;
@@ -446,18 +449,15 @@ public class ProjectPart2 {
 						}
 					}
 
-					System.out.println("\nDoctor Information");
-					System.out.println("------------------------------");
-
 					System.out.println("Enter doctor ID: ");
-					String docID = scnr.nextLine();
+					String doctorID = scnr.nextLine();
 
-					while (docID.charAt(0) != 'D' || docID.length() != 9) {
+					while (doctorID.charAt(0) != 'D' || doctorID.length() != 9) {
 						System.out.println("Incorrect input, please provide the letter D followed by 8 numbers");
 						System.out.println("Enter doctor ID: ");
 						boolean isNumeric = true;
-						for (int i = 1; i < docID.length(); i++) {
-							isNumeric = Character.isDigit(docID.charAt(i));
+						for (int i = 1; i < doctorID.length(); i++) {
+							isNumeric = Character.isDigit(doctorID.charAt(i));
 							if (!isNumeric) {
 								break;
 							}
@@ -465,25 +465,25 @@ public class ProjectPart2 {
 						if (!isNumeric) {
 							continue;
 						}
-						docID = scnr.nextLine();
+						doctorID = scnr.nextLine();
 					}
 
 					System.out.println("Enter address: ");
-					String docAddr = scnr.nextLine();
+					String doctorAddr = scnr.nextLine();
 
 					System.out.println("Enter phone number: ");
-					String docPhone = scnr.nextLine();
+					String doctorPhone = scnr.nextLine();
 
 					phoneValid = true;
-					for (int i = 0; i < docPhone.length(); i++) {
-						if (docPhone.charAt(i) == 3 || docPhone.charAt(i) == 7) {
-							if (docPhone.charAt(i) != '-') {
+					for (int i = 0; i < doctorPhone.length(); i++) {
+						if (doctorPhone.charAt(i) == 3 || doctorPhone.charAt(i) == 7) {
+							if (doctorPhone.charAt(i) != '-') {
 								phoneValid = false;
 								break;
 							}
 							phoneValid = true;
 						}
-						phoneValid = Character.isDigit(docPhone.charAt(i));
+						phoneValid = Character.isDigit(doctorPhone.charAt(i));
 						if (!phoneValid) {
 							phoneValid = false;
 							break;
@@ -493,17 +493,17 @@ public class ProjectPart2 {
 					while (!phoneValid) {
 						System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
 						System.out.println("Enter patient current phone:");
-						docPhone = scnr.nextLine();
+						doctorPhone = scnr.nextLine();
 
-						for (int i = 0; i < docPhone.length(); i++) {
-							if (docPhone.charAt(i) == 3 || docPhone.charAt(i) == 6) {
-								if (docPhone.charAt(i) != '-') {
+						for (int i = 0; i < doctorPhone.length(); i++) {
+							if (doctorPhone.charAt(i) == 3 || doctorPhone.charAt(i) == 6) {
+								if (doctorPhone.charAt(i) != '-') {
 									phoneValid = false;
 									break;
 								}
 								phoneValid = true;
 							}
-							phoneValid = Character.isDigit(docPhone.charAt(i));
+							phoneValid = Character.isDigit(doctorPhone.charAt(i));
 							if (!phoneValid) {
 								phoneValid = false;
 								break;
@@ -513,8 +513,16 @@ public class ProjectPart2 {
 					}
 
 					System.out.println("Enter contact number: ");
-					String docContact = scnr.nextLine();
+					String doctorContact = scnr.nextLine();
 
+					// SQL insert statement for Procedures
+					Statement doctorStmt = connection.createStatement();
+					
+					String doctorValues = "VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial + "','" 
+					+ doctorLastName + "','" + doctorDOB + "','" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "','" + doctorContact + "')";
+					
+					doctorStmt.executeUpdate("INSERT INTO PATIENT" + doctorValues);
+					
 					break;
 				case 5: // Medications
 					System.out.println("\nPrescription Information");
