@@ -134,43 +134,7 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient current phone:");
 					String patientCurrPhone = scnr.nextLine();
 
-					boolean phoneValid = true;
-					for (int i = 0; i < patientCurrPhone.length(); i++) {
-						if (patientCurrPhone.charAt(i) == 3 || patientCurrPhone.charAt(i) == 7) {
-							if (patientCurrPhone.charAt(i) != '-') {
-								phoneValid = false;
-								break;
-							}
-							phoneValid = true;
-						}
-						phoneValid = Character.isDigit(patientCurrPhone.charAt(i));
-						if (!phoneValid) {
-							phoneValid = false;
-							break;
-						}
-						phoneValid = true;
-					}
-					while (!phoneValid) {
-						System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
-						System.out.println("Enter patient current phone:");
-						patientCurrPhone = scnr.nextLine();
-
-						for (int i = 0; i < patientCurrPhone.length(); i++) {
-							if (patientCurrPhone.charAt(i) == 3 || patientCurrPhone.charAt(i) == 6) {
-								if (patientCurrPhone.charAt(i) != '-') {
-									phoneValid = false;
-									break;
-								}
-								phoneValid = true;
-							}
-							phoneValid = Character.isDigit(patientCurrPhone.charAt(i));
-							if (!phoneValid) {
-								phoneValid = false;
-								break;
-							}
-							phoneValid = true;
-						}
-					}
+					patientCurrPhone = phoneValid(patientCurrPhone);
 
 					System.out.println("\nEnter patient permanent street address:");
 					String patientPermStreetAddr = scnr.nextLine();
@@ -188,43 +152,7 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient permanent phone:");
 					String patientPermPhone = scnr.nextLine();
 
-					phoneValid = true;
-					for (int i = 0; i < patientPermPhone.length(); i++) {
-						if (patientCurrPhone.charAt(i) == 3 || patientPermPhone.charAt(i) == 7) {
-							if (patientPermPhone.charAt(i) != '-') {
-								phoneValid = false;
-								break;
-							}
-							phoneValid = true;
-						}
-						phoneValid = Character.isDigit(patientPermPhone.charAt(i));
-						if (!phoneValid) {
-							phoneValid = false;
-							break;
-						}
-						phoneValid = true;
-					}
-					while (!phoneValid) {
-						System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
-						System.out.println("Enter patient current phone:");
-						patientPermPhone = scnr.nextLine();
-
-						for (int i = 0; i < patientPermPhone.length(); i++) {
-							if (patientPermPhone.charAt(i) == 3 || patientPermPhone.charAt(i) == 6) {
-								if (patientPermPhone.charAt(i) != '-') {
-									phoneValid = false;
-									break;
-								}
-								phoneValid = true;
-							}
-							phoneValid = Character.isDigit(patientPermPhone.charAt(i));
-							if (!phoneValid) {
-								phoneValid = false;
-								break;
-							}
-							phoneValid = true;
-						}
-					}
+					patientPermPhone = phoneValid(patientPermPhone);
 
 					System.out.println("\nEnter patient condition:");
 					String patientCondition = scnr.nextLine();
@@ -280,43 +208,7 @@ public class ProjectPart2 {
 					System.out.println("Enter department phone number:");
 					String deptOfficePhone = scnr.nextLine();
 
-					phoneValid = true;
-					for (int i = 0; i < deptOfficePhone.length(); i++) {
-						if (deptOfficePhone.charAt(i) == 3 || deptOfficePhone.charAt(i) == 7) {
-							if (deptOfficePhone.charAt(i) != '-') {
-								phoneValid = false;
-								break;
-							}
-							phoneValid = true;
-						}
-						phoneValid = Character.isDigit(deptOfficePhone.charAt(i));
-						if (!phoneValid) {
-							phoneValid = false;
-							break;
-						}
-						phoneValid = true;
-					}
-					while (!phoneValid) {
-						System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
-						System.out.println("Enter department phone number:");
-						deptOfficePhone = scnr.nextLine();
-
-						for (int i = 0; i < deptOfficePhone.length(); i++) {
-							if (deptOfficePhone.charAt(i) == 3 || deptOfficePhone.charAt(i) == 6) {
-								if (deptOfficePhone.charAt(i) != '-') {
-									phoneValid = false;
-									break;
-								}
-								phoneValid = true;
-							}
-							phoneValid = Character.isDigit(deptOfficePhone.charAt(i));
-							if (!phoneValid) {
-								phoneValid = false;
-								break;
-							}
-							phoneValid = true;
-						}
-					}
+					deptOfficePhone = phoneValid(deptOfficePhone);
 
 					System.out.println("\nEnter department head:");
 					String deptHead = scnr.nextLine();
@@ -473,49 +365,15 @@ public class ProjectPart2 {
 					System.out.println("Enter address: ");
 					String doctorAddr = scnr.nextLine();
 
-					System.out.println("Enter phone number: ");
+					System.out.println("Enter doctor phone number: ");
 					String doctorPhone = scnr.nextLine();
 
-					phoneValid = true;
-					for (int i = 0; i < doctorPhone.length(); i++) {
-						if (doctorPhone.charAt(i) == 3 || doctorPhone.charAt(i) == 7) {
-							if (doctorPhone.charAt(i) != '-') {
-								phoneValid = false;
-								break;
-							}
-							phoneValid = true;
-						}
-						phoneValid = Character.isDigit(doctorPhone.charAt(i));
-						if (!phoneValid) {
-							phoneValid = false;
-							break;
-						}
-						phoneValid = true;
-					}
-					while (!phoneValid) {
-						System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
-						System.out.println("Enter patient current phone:");
-						doctorPhone = scnr.nextLine();
-
-						for (int i = 0; i < doctorPhone.length(); i++) {
-							if (doctorPhone.charAt(i) == 3 || doctorPhone.charAt(i) == 6) {
-								if (doctorPhone.charAt(i) != '-') {
-									phoneValid = false;
-									break;
-								}
-								phoneValid = true;
-							}
-							phoneValid = Character.isDigit(doctorPhone.charAt(i));
-							if (!phoneValid) {
-								phoneValid = false;
-								break;
-							}
-							phoneValid = true;
-						}
-					}
+					doctorPhone = phoneValid(doctorPhone);
 
 					System.out.println("Enter contact number: ");
 					String doctorContact = scnr.nextLine();
+					
+					doctorContact = phoneValid(doctorContact);
 
 					// SQL insert statement for Doctor
 					Statement doctorStmt = connection.createStatement();
@@ -733,6 +591,51 @@ public class ProjectPart2 {
 	// Creates a connection to Oracle Server
 	public static Connection connect() throws SQLException {
 		return DriverManager.getConnection(url, username, password);
+	}
+	
+	public static String phoneValid(String phone) {
+		
+		boolean phoneValid = true;
+		for (int i = 0; i < phone.length(); i++) {
+			if (phone.charAt(i) == 3 || phone.charAt(i) == 7) {
+				if (phone.charAt(i) != '-') {
+					phoneValid = false;
+					break;
+				}
+				phoneValid = true;
+			}
+			phoneValid = Character.isDigit(phone.charAt(i));
+			if (!phoneValid) {
+				phoneValid = false;
+				break;
+			}
+			phoneValid = true;
+		}
+		while (!phoneValid) {
+			System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
+			System.out.println("Enter phone number:");
+			phone = scnr.nextLine();
+
+			for (int i = 0; i < phone.length(); i++) {
+				if (phone.charAt(i) == 3 || phone.charAt(i) == 6) {
+					if (phone.charAt(i) != '-') {
+						phoneValid = false;
+						break;
+					}
+					phoneValid = true;
+				}
+				else { 
+					phoneValid = Character.isDigit(phone.charAt(i));
+					if (!phoneValid) {
+					phoneValid = false;
+					break;
+					}
+					phoneValid = true;
+				}
+			}
+		}
+		
+		return phone;
 	}
 
 	// Prompts user for Person information as input
