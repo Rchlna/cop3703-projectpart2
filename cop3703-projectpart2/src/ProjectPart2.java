@@ -369,9 +369,25 @@ public class ProjectPart2 {
 					System.out.println("Enter procedure duration: ");
 					double procDuration = scnr.nextDouble();
 					scnr.nextLine();
+					
+					System.out.println("Enter procedure code: ");
+					String procCode = scnr.nextLine();
 
 					System.out.println("Enter procedure description: ");
 					String procDesc = scnr.nextLine();
+					
+					System.out.println("Enter Patient ID: ");
+					String procPatientId = scnr.nextLine();
+					
+					System.out.println("Enter Patient ID: ");
+					String procDocId = scnr.nextLine();
+					
+					// SQL insert statement for Procedures
+					Statement procStmt = connection.createStatement();
+					
+					String procValues = "VALUES('" + procName + "','" + procNumber + "','" + procDuration + "','" + procDesc + "','" + procPatientId + "','" + procCode + "','" + procDocId + "')";
+					
+					procStmt.executeUpdate("INSERT INTO PATIENT" + procValues);
 					
 					break;
 				case 4: // Doctors
