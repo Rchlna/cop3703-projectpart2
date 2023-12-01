@@ -326,7 +326,7 @@ public class ProjectPart2 {
 					
 					String deptValues = "VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "','" + deptOfficePhone + "','" + deptHead + "')";
 					
-					deptStmt.executeUpdate("INSERT INTO PATIENT" + deptValues);
+					deptStmt.executeUpdate("INSERT INTO DEPARTMENT" + deptValues);
 					
 					break;
 				case 3: // Procedures
@@ -387,7 +387,7 @@ public class ProjectPart2 {
 					
 					String procValues = "VALUES('" + procName + "','" + procNumber + "','" + procDuration + "','" + procDesc + "','" + procPatientId + "','" + procCode + "','" + procDocId + "')";
 					
-					procStmt.executeUpdate("INSERT INTO PATIENT" + procValues);
+					procStmt.executeUpdate("INSERT INTO PROCEDURE" + procValues);
 					
 					break;
 				case 4: // Doctors
@@ -521,7 +521,7 @@ public class ProjectPart2 {
 					String doctorValues = "VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial + "','" 
 					+ doctorLastName + "','" + doctorDOB + "','" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "','" + doctorContact + "')";
 					
-					doctorStmt.executeUpdate("INSERT INTO PATIENT" + doctorValues);
+					doctorStmt.executeUpdate("INSERT INTO DOCTOR" + doctorValues);
 					
 					break;
 				case 5: // Medications
@@ -554,7 +554,7 @@ public class ProjectPart2 {
 					
 					String rxValues = "VALUES('" + rxName + "','" + rxDate + "','" + rxDesc + "','" + rxManufacturer + "','" + rxDoctor + "','" + rxPatient + "')";
 					
-					rxStmt.executeUpdate("INSERT INTO PATIENT" + rxValues);
+					rxStmt.executeUpdate("INSERT INTO MEDICATION" + rxValues);
 
 					break;
 				case 6: // Interaction Records
@@ -580,7 +580,7 @@ public class ProjectPart2 {
 					
 					String interationRecordValues = "VALUES('" + interationRecordPatientId + "','" + interationRecordId + "','" + interationRecordDate + "','" + interationRecordTime + "','" + interationRecordDesc + "')";
 					
-					interationRecordStmt.executeUpdate("INSERT INTO PATIENT" + interationRecordValues);
+					interationRecordStmt.executeUpdate("INSERT INTO INT_RECORD" + interationRecordValues);
 
 					break;
 				default:
@@ -599,18 +599,18 @@ public class ProjectPart2 {
 
 				// Patient Information
 				ResultSet patientRs = statementA
-						.executeQuery("select FIRST NAME, MIDDLE INITIAL, LAST NAME, SSN, BIRTH DATE, "
-								+ "PATIENT ID, SEX, CURR PHONE, CURR ADDRESS, PERM PHONE, PERM CITY, PERM STATE, PERM ZIP, CONDITION, PRIM DOCTOR ID, SEC DOCTOR ID, SSN"
-								+ "from PATIENT" + "where PATIENT ID = '" + searchPtId + "'");
+						.executeQuery("select FIRST_NAME, MIDDLE_INITIAL, LAST_NAME, SSN, BIRTH_DATE, "
+								+ "PATIENT_ID, SEX, CURR_PHONE, CURR_ADDRESS, PERM_PHONE, PERM_CITY, PERM_STATE, PERM_ZIP, CONDITION, PRIM_DOCTOR_ID, SEC_DOCTOR_ID, SSN"
+								+ "from PATIENT" + "where PATIENT_ID = '" + searchPtId + "'");
 
 				while (patientRs.next()) {
-					String patientId = patientRs.getString("PATIENT ID");
-					String firstName = patientRs.getString("FIRST NAME");
-					char midInitial = patientRs.getString("MIDDLE INITIAL").charAt(0);
-					String lastName = patientRs.getString("LAST NAME");
-					String currPhone = patientRs.getString("CURR PHONE");
-					String currAddr = patientRs.getString("CURR ADDRESS");
-					String primDoc = patientRs.getString("PRIM DOCTOR ID");
+					String patientId = patientRs.getString("PATIENT_ID");
+					String firstName = patientRs.getString("FIRST_NAME");
+					char midInitial = patientRs.getString("MIDDLE_INITIAL").charAt(0);
+					String lastName = patientRs.getString("LAST_NAME");
+					String currPhone = patientRs.getString("CURR_PHONE");
+					String currAddr = patientRs.getString("CURR_ADDRESS");
+					String primDoc = patientRs.getString("PRIM_DOCTOR_ID");
 
 					System.out.printf("Patient ID: %s\n", patientId);
 					System.out.printf("Name: %s %s %s\n", firstName, midInitial, lastName);
@@ -621,7 +621,7 @@ public class ProjectPart2 {
 
 				// Procedures
 				ResultSet procRs = statementA
-						.executeQuery("select NAME from PROCEDURE where PATIENT ID = '" + searchPtId + "'");
+						.executeQuery("select NAME from PROCEDURE where PATIENT_ID = '" + searchPtId + "'");
 
 				System.out.println("\nProcedures Underwent: ");
 				while (patientRs.next()) {
@@ -631,7 +631,7 @@ public class ProjectPart2 {
 
 				// Interation Records
 				ResultSet intRs = statementA.executeQuery(
-						"select (convert(TIMESTAMP, TIME)), DESCRIPTION from INT_RECORD where PATIENT ID = '"
+						"select (convert(TIMESTAMP, TIME)), DESCRIPTION from INT_RECORD where PATIENT_ID = '"
 								+ searchPtId + "'");
 
 				System.out.println("\nInteraction Records");
@@ -644,7 +644,7 @@ public class ProjectPart2 {
 
 				// Medications
 				ResultSet medRs = statementA.executeQuery(
-						"select NAME, DESCRIPTION, DATE from INT_RECORD where PATIENT ID = '" + searchPtId + "'");
+						"select NAME, DESCRIPTION, DATE from INT_RECORD where PATIENT_ID = '" + searchPtId + "'");
 
 				System.out.println("\nPrescribed Medications:");
 				while (medRs.next()) {
@@ -682,10 +682,10 @@ public class ProjectPart2 {
 
 				if (!isDocId) {
 					procDocRs = statementB
-							.executeQuery("select NAME from PROCEDURE where DOCTOR ID = '" + procDocInput + "'");
+							.executeQuery("select NAME from PROCEDURE where DOCTOR_ID = '" + procDocInput + "'");
 				} else {
 					procDocRs = statementB.executeQuery(
-							"select PROCEDURE.NAME from PROCEDURE join DOCTOR on DEPARTMENT.DOCTOR ID = PROCEDURE.DOCTOR ID where DOCTOR.NAME = '"
+							"select PROCEDURE.NAME from PROCEDURE join DOCTOR on DEPARTMENT.DOCTOR_ID = PROCEDURE.DOCTOR_ID where DOCTOR.NAME = '"
 									+ procDocInput + "'");
 				}
 
@@ -705,7 +705,7 @@ public class ProjectPart2 {
 				Statement statementC = connection.createStatement();
 
 				ResultSet doctorRs = statementC
-						.executeQuery("select NAME from PROCEDURE where DOCTOR ID = '" + searchDocId + "'");
+						.executeQuery("select NAME from PROCEDURE where DOCTOR_ID = '" + searchDocId + "'");
 
 				while (doctorRs.next()) {
 					String procName = doctorRs.getString("NAME");
