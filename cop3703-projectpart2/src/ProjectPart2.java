@@ -637,29 +637,4 @@ public class ProjectPart2 {
 		
 		return phone;
 	}
-
-	// Prompts user for Person information as input
-	// Returns Person object
-//	public static Person personInput() {
-//		System.out.println("Enter first name: ");
-//		String personFirstName = scnr.nextLine();
-//
-//		System.out.println("Enter middle initial: ");
-//		char personMiddleInitial = scnr.next().charAt(0);
-//		scnr.nextLine();
-//
-//		System.out.println("Enter last name: ");
-//		String personLastName = scnr.nextLine();
-//
-//		System.out.println("Enter date of birth: ");
-//		String personDOB = scnr.nextLine();
-//
-//		System.out.println("Enter SSN: ");
-//		String personSSN = scnr.nextLine();
-//
-//		Person person = new Person(personFirstName, personMiddleInitial, personLastName, personDOB, personSSN);
-//
-//		return person;
-//
-//	}
 } // end of project part 2
