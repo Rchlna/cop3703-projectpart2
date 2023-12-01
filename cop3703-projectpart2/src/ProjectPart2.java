@@ -631,7 +631,7 @@ public class ProjectPart2 {
 
 				// Interation Records
 				ResultSet intRs = statementA.executeQuery(
-						"select (convert(TIMESTAMP, TIME)), DESCRIPTION from INT_RECORD where PATIENT_ID = '"
+						"select TIME, DESCRIPTION from INT_RECORD where PATIENT_ID = '"
 								+ searchPtId + "'");
 
 				System.out.println("\nInteraction Records");
