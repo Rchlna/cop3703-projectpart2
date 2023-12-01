@@ -379,7 +379,7 @@ public class ProjectPart2 {
 					Statement doctorStmt = connection.createStatement();
 
 					String doctorValues = "VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial
-							+ "','" + doctorLastName + "','" + doctorDOB + "','" + doctorID + "','" + doctorAddr + "','"
+							+ "','" + doctorLastName + "', TO_DATE('" + doctorDOB + "', 'MM-DD-YYYY')," + doctorID + "','" + doctorAddr + "','"
 							+ doctorPhone + "','" + doctorContact + "')";
 
 					doctorStmt.executeUpdate("INSERT INTO DOCTOR" + doctorValues);
