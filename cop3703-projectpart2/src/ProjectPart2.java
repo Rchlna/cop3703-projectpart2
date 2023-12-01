@@ -562,16 +562,25 @@ public class ProjectPart2 {
 					System.out.println("------------------------------");
 
 					System.out.println("Enter patient ID:");
-					String intPatient = scnr.nextLine();
+					String interationRecordPatientId = scnr.nextLine();
+					
+					String interationRecordId = null; // Figure out how to generate
 
 					System.out.println("Enter date of interaction");
-					String intDate = scnr.nextLine();
+					String interationRecordDate = scnr.nextLine();
 
 					System.out.println("Enter time of interation: ");
-					String intTime = scnr.nextLine();
+					String interationRecordTime = scnr.nextLine();
 
 					System.out.println("Enter description of interaction:");
-					String intDesc = scnr.nextLine();
+					String interationRecordDesc = scnr.nextLine();
+					
+					// SQL insert statement for Medications
+					Statement interationRecordStmt = connection.createStatement();
+					
+					String interationRecordValues = "VALUES('" + interationRecordPatientId + "','" + interationRecordId + "','" + interationRecordDate + "','" + interationRecordTime + "','" + interationRecordDesc + "')";
+					
+					interationRecordStmt.executeUpdate("INSERT INTO PATIENT" + interationRecordValues);
 
 					break;
 				default:
