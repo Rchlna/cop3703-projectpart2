@@ -1,5 +1,9 @@
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.io.*;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class ProjectPart2 {
@@ -80,12 +84,14 @@ public class ProjectPart2 {
 							}
 							SsnIsNumeric = true;
 						}
-						SsnIsNumeric = Character.isDigit(patientSSN.charAt(i));
-						if (!SsnIsNumeric) {
-							SsnIsNumeric = false;
-							break;
+						else {
+							SsnIsNumeric = Character.isDigit(patientSSN.charAt(i));
+							if (!SsnIsNumeric) {
+								SsnIsNumeric = false;
+								break;
+							}
+							SsnIsNumeric = true;
 						}
-						SsnIsNumeric = true;
 					}
 					while (!SsnIsNumeric) {
 						System.out.println("Please enter SSN with thte following format: AAA-GG-SSSS");
@@ -188,13 +194,32 @@ public class ProjectPart2 {
 					Statement patientStmt = connection.createStatement();
 
 					String patientValues = " VALUES('" + patientSSN + "','" + patientFirstName + "','"
-							+ patientMiddleInitial + "','" + patientLastName + "','" + patientDOB + "','" + patientId
+							+ patientMiddleInitial + "','" + patientLastName +  "',TO_DATE('" + patientDOB + "','MM-DD-YYYY'),'" + patientId
 							+ "','" + patientSex + "','" + patientCurrPhone + "','" + patientCurrAddr + "','"
-							+ patientPermPhone + "','" + patientPermStreetAddr + "','" + patientPermCity + "','"
+							+ patientPermPhone + "','" + patientPermCity + "','"
 							+ patientPermState + "','" + patientPermZip + "','" + patientCondition + "','"
-							+ patientPrimaryDocID + "','" + patientSecondaryDocID + "')";
+							+ patientPrimaryDocID + "'," + patientSecondaryDocID + ")";
 
 					patientStmt.executeUpdate("INSERT INTO PATIENT" + patientValues);
+					
+					
+					Statement genPtInterationRecordStmt = connection.createStatement();
+					
+//					LocalDate genPtInterationRecordDate = java.time.LocalDate.now();
+//					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-YYYY");
+//					
+//					LocalTime genPtInterationRecordTime = java.time.LocalTime.now();
+//					
+//					String stupidDate = formatter.format(genPtInterationRecordDate).toString();
+					
+					
+
+					String genPtInterationRecordValues = " VALUES('" + patientId + "','" + "1"
+							+ "',CURDATE(),'" + "10" + "','" + "New patient information admitted"
+							+ "')";
+
+					genPtInterationRecordStmt.executeUpdate("INSERT INTO INT_RECORD" + genPtInterationRecordValues);
+					
 					connection.commit();
 
 					break;
@@ -271,7 +296,7 @@ public class ProjectPart2 {
 					double procDuration = scnr.nextDouble();
 					scnr.nextLine();
 
-					System.out.println("Enter procedure code: ");
+					System.out.println("Enter offering department code: ");
 					String procCode = scnr.nextLine();
 
 					System.out.println("Enter procedure description: ");
@@ -280,7 +305,7 @@ public class ProjectPart2 {
 					System.out.println("Enter Patient ID: ");
 					String procPatientId = scnr.nextLine();
 
-					System.out.println("Enter Patient ID: ");
+					System.out.println("Enter Doctor ID: ");
 					String procDocId = scnr.nextLine();
 
 					// SQL insert statement for Procedures
@@ -429,7 +454,7 @@ public class ProjectPart2 {
 					// SQL insert statement for Medications
 					Statement rxStmt = connection.createStatement();
 
-					String rxValues = " VALUES('" + rxName + "','" + rxDate + "','" + rxDesc + "','" + rxManufacturer
+					String rxValues = " VALUES('" + rxName + "', TO_DATE('" + rxDate + "','MM-DD-YYYY'),'" + rxDesc + "','" + rxManufacturer
 							+ "','" + rxDoctor + "','" + rxPatient + "')";
 
 					rxStmt.executeUpdate("INSERT INTO MEDICATION" + rxValues);
@@ -443,6 +468,7 @@ public class ProjectPart2 {
 					System.out.println("Enter patient ID:");
 					String interationRecordPatientId = scnr.nextLine();
 
+					
 					String interationRecordId = null; // Figure out how to generate
 
 					System.out.println("Enter date of interaction");
@@ -457,7 +483,7 @@ public class ProjectPart2 {
 					// SQL insert statement for Interaction Records
 					Statement interationRecordStmt = connection.createStatement();
 
-					String interationRecordValues = "VALUES('" + interationRecordPatientId + "','" + interationRecordId
+					String interationRecordValues = " VALUES('" + interationRecordPatientId + "','" + interationRecordId
 							+ "','" + interationRecordDate + "','" + interationRecordTime + "','" + interationRecordDesc
 							+ "')";
 
@@ -517,7 +543,7 @@ public class ProjectPart2 {
 
 				System.out.println("\nInteraction Records");
 				while (intRs.next()) {
-					String time = intRs.getString("TIME");
+					String time = intRs.getString("ITIME");
 					String desc = intRs.getString("DESCRIPTION");
 
 					System.out.printf("%s		%s\n", desc, time);
