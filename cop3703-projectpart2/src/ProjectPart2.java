@@ -106,18 +106,18 @@ public class ProjectPart2 {
 					}
 
 					System.out.println("\nEnter patient sex:");
-					char ptSex = scnr.next().charAt(0);
+					char patientSex = scnr.next().charAt(0);
 					scnr.nextLine();
 
 					System.out.println("Enter patient ID: ");
-					String ptId = scnr.nextLine();
+					String patientId = scnr.nextLine();
 
-					while (ptId.charAt(0) != 'P' || ptId.length() != 9) {
+					while (patientId.charAt(0) != 'P' || patientId.length() != 9) {
 						System.out.println("Incorrect input, please provide the letter P followed by 8 numbers");
 						System.out.println("Enter patient ID: ");
 						boolean isNumeric = true;
-						for (int i = 1; i < ptId.length(); i++) {
-							isNumeric = Character.isDigit(ptId.charAt(i));
+						for (int i = 1; i < patientId.length(); i++) {
+							isNumeric = Character.isDigit(patientId.charAt(i));
 							if (!isNumeric) {
 								break;
 							}
@@ -125,25 +125,25 @@ public class ProjectPart2 {
 						if (!isNumeric) {
 							continue;
 						}
-						ptId = scnr.nextLine();
+						patientId = scnr.nextLine();
 					}
 
 					System.out.println("\nEnter patient current address:");
-					String ptCurrAddr = scnr.nextLine();
+					String patientCurrAddr = scnr.nextLine();
 
 					System.out.println("\nEnter patient current phone:");
-					String ptCurrPhone = scnr.nextLine();
+					String patientCurrPhone = scnr.nextLine();
 
 					boolean phoneValid = true;
-					for (int i = 0; i < ptCurrPhone.length(); i++) {
-						if (ptCurrPhone.charAt(i) == 3 || ptCurrPhone.charAt(i) == 7) {
-							if (ptCurrPhone.charAt(i) != '-') {
+					for (int i = 0; i < patientCurrPhone.length(); i++) {
+						if (patientCurrPhone.charAt(i) == 3 || patientCurrPhone.charAt(i) == 7) {
+							if (patientCurrPhone.charAt(i) != '-') {
 								phoneValid = false;
 								break;
 							}
 							phoneValid = true;
 						}
-						phoneValid = Character.isDigit(ptCurrPhone.charAt(i));
+						phoneValid = Character.isDigit(patientCurrPhone.charAt(i));
 						if (!phoneValid) {
 							phoneValid = false;
 							break;
@@ -153,17 +153,17 @@ public class ProjectPart2 {
 					while (!phoneValid) {
 						System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
 						System.out.println("Enter patient current phone:");
-						ptCurrPhone = scnr.nextLine();
+						patientCurrPhone = scnr.nextLine();
 
-						for (int i = 0; i < ptCurrPhone.length(); i++) {
-							if (ptCurrPhone.charAt(i) == 3 || ptCurrPhone.charAt(i) == 6) {
-								if (ptCurrPhone.charAt(i) != '-') {
+						for (int i = 0; i < patientCurrPhone.length(); i++) {
+							if (patientCurrPhone.charAt(i) == 3 || patientCurrPhone.charAt(i) == 6) {
+								if (patientCurrPhone.charAt(i) != '-') {
 									phoneValid = false;
 									break;
 								}
 								phoneValid = true;
 							}
-							phoneValid = Character.isDigit(ptCurrPhone.charAt(i));
+							phoneValid = Character.isDigit(patientCurrPhone.charAt(i));
 							if (!phoneValid) {
 								phoneValid = false;
 								break;
@@ -173,31 +173,31 @@ public class ProjectPart2 {
 					}
 
 					System.out.println("\nEnter patient permanent street address:");
-					String ptPermStreetAddr = scnr.nextLine();
+					String patientPermStreetAddr = scnr.nextLine();
 
 					System.out.println("\nEnter patient permanent city: ");
-					String ptPermCity = scnr.nextLine();
+					String patientPermCity = scnr.nextLine();
 
 					System.out.println("\nEnter patient permanent state:");
-					String ptPermState = scnr.nextLine();
+					String patientPermState = scnr.nextLine();
 
 					System.out.println("\nEnter patient permanent zipcode:");
-					int ptPermZip = scnr.nextInt();
+					int patientPermZip = scnr.nextInt();
 					scnr.nextLine();
 
 					System.out.println("\nEnter patient permanent phone:");
-					String ptPermPhone = scnr.nextLine();
+					String patientPermPhone = scnr.nextLine();
 
 					phoneValid = true;
-					for (int i = 0; i < ptPermPhone.length(); i++) {
-						if (ptCurrPhone.charAt(i) == 3 || ptPermPhone.charAt(i) == 7) {
-							if (ptPermPhone.charAt(i) != '-') {
+					for (int i = 0; i < patientPermPhone.length(); i++) {
+						if (patientCurrPhone.charAt(i) == 3 || patientPermPhone.charAt(i) == 7) {
+							if (patientPermPhone.charAt(i) != '-') {
 								phoneValid = false;
 								break;
 							}
 							phoneValid = true;
 						}
-						phoneValid = Character.isDigit(ptPermPhone.charAt(i));
+						phoneValid = Character.isDigit(patientPermPhone.charAt(i));
 						if (!phoneValid) {
 							phoneValid = false;
 							break;
@@ -207,17 +207,17 @@ public class ProjectPart2 {
 					while (!phoneValid) {
 						System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
 						System.out.println("Enter patient current phone:");
-						ptPermPhone = scnr.nextLine();
+						patientPermPhone = scnr.nextLine();
 
-						for (int i = 0; i < ptPermPhone.length(); i++) {
-							if (ptPermPhone.charAt(i) == 3 || ptPermPhone.charAt(i) == 6) {
-								if (ptPermPhone.charAt(i) != '-') {
+						for (int i = 0; i < patientPermPhone.length(); i++) {
+							if (patientPermPhone.charAt(i) == 3 || patientPermPhone.charAt(i) == 6) {
+								if (patientPermPhone.charAt(i) != '-') {
 									phoneValid = false;
 									break;
 								}
 								phoneValid = true;
 							}
-							phoneValid = Character.isDigit(ptPermPhone.charAt(i));
+							phoneValid = Character.isDigit(patientPermPhone.charAt(i));
 							if (!phoneValid) {
 								phoneValid = false;
 								break;
@@ -227,18 +227,18 @@ public class ProjectPart2 {
 					}
 
 					System.out.println("\nEnter patient condition:");
-					String ptCondition = scnr.nextLine();
+					String patientCondition = scnr.nextLine();
 					while (true) {
-						if (ptCondition.equalsIgnoreCase("Critical")) {
+						if (patientCondition.equalsIgnoreCase("Critical")) {
 							break;
-						} else if (ptCondition.equalsIgnoreCase("Stable")) {
+						} else if (patientCondition.equalsIgnoreCase("Stable")) {
 							break;
-						} else if (ptCondition.equalsIgnoreCase("Fair")) {
+						} else if (patientCondition.equalsIgnoreCase("Fair")) {
 							break;
 						} else {
 							System.out.println("\nEnter conditon Critical, Stable, or Fair:");
 							System.out.println("\nEnter patient condition:");
-							ptCondition = scnr.nextLine();
+							patientCondition = scnr.nextLine();
 						}
 					}
 
@@ -250,6 +250,17 @@ public class ProjectPart2 {
 					System.out.println("\nEnter patient secondary doctor ID (if any):");
 					String patientSecondaryDocID = scnr.nextLine();
 
+					
+					// SQL insert statement for Patient
+					Statement patientStmt = connection.createStatement();
+					
+					String values = "VALUES('" + patientSSN + "','" + patientFirstName + "','" + patientMiddleInitial + "','" + patientLastName + "','" + patientDOB + "','" 
+					+ patientId + "','" + patientSex + "','" + patientCurrPhone + "','" + patientCurrAddr + "','" + patientPermPhone + "','" + patientPermStreetAddr + "','" 
+							+ patientPermCity + "','" + patientPermState + "','" + patientPermZip + "','" + patientCondition + "','" + patientPrimaryDocID + "','" +  patientSecondaryDocID + "')";
+					
+					patientStmt.executeUpdate("INSERT INTO PATIENT" + values);
+					
+					
 					break;
 				case 2: // Department
 					System.out.println("\nDepartment Information");
