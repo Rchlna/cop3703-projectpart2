@@ -66,11 +66,13 @@ public class ProjectPart2 {
 
 					System.out.println("Enter SSN: ");
 					String patientSSN = scnr.nextLine();
+					
+					char[] ssnArray = patientSSN.toCharArray();
 
 					boolean SsnIsNumeric = true;
-					for (int i = 0; i < patientSSN.length(); i++) {
-						if (patientSSN.charAt(i) == 3 || patientSSN.charAt(i) == 6) {
-							if (patientSSN.charAt(i) != '-') {
+					for (int i = 0; i < ssnArray.length; i++) {
+						if (i == 3 || i == 6) {
+							if (ssnArray[i] != '-') {
 								SsnIsNumeric = false;
 								break;
 							}
@@ -88,20 +90,22 @@ public class ProjectPart2 {
 						System.out.println("Enter Patient SSN: ");
 						patientSSN = scnr.nextLine();
 
-						for (int i = 0; i < patientSSN.length(); i++) {
-							if (patientSSN.charAt(i) == 3 || patientSSN.charAt(i) == 6) {
-								if (patientSSN.charAt(i) != '-') {
+						for (int i = 0; i < ssnArray.length; i++) {
+							if (i == 3 || i == 6) {
+								if (ssnArray[i] != '-') {
 									SsnIsNumeric = false;
 									break;
 								}
 								SsnIsNumeric = true;
 							}
-							SsnIsNumeric = Character.isDigit(patientSSN.charAt(i));
-							if (!SsnIsNumeric) {
-								SsnIsNumeric = false;
-								break;
+							else {
+								SsnIsNumeric = Character.isDigit(patientSSN.charAt(i));
+								if (!SsnIsNumeric) {
+									SsnIsNumeric = false;
+									break;
+								}
+								SsnIsNumeric = true;
 							}
-							SsnIsNumeric = true;
 						}
 					}
 
@@ -181,7 +185,7 @@ public class ProjectPart2 {
 					// SQL insert statement for Patient
 					Statement patientStmt = connection.createStatement();
 
-					String patientValues = "VALUES('" + patientSSN + "','" + patientFirstName + "','"
+					String patientValues = " VALUES('" + patientSSN + "','" + patientFirstName + "','"
 							+ patientMiddleInitial + "','" + patientLastName + "','" + patientDOB + "','" + patientId
 							+ "','" + patientSex + "','" + patientCurrPhone + "','" + patientCurrAddr + "','"
 							+ patientPermPhone + "','" + patientPermStreetAddr + "','" + patientPermCity + "','"
@@ -216,7 +220,7 @@ public class ProjectPart2 {
 					// SQL insert statement for Department
 					Statement deptStmt = connection.createStatement();
 
-					String deptValues = "VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "','"
+					String deptValues = " VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "','"
 							+ deptOfficePhone + "','" + deptHead + "')";
 
 					deptStmt.executeUpdate("INSERT INTO DEPARTMENT" + deptValues);
@@ -278,7 +282,7 @@ public class ProjectPart2 {
 					// SQL insert statement for Procedures
 					Statement procStmt = connection.createStatement();
 
-					String procValues = "VALUES('" + procName + "','" + procNumber + "','" + procDuration + "','"
+					String procValues = " VALUES('" + procName + "','" + procNumber + "','" + procDuration + "','"
 							+ procDesc + "','" + procPatientId + "','" + procCode + "','" + procDocId + "')";
 
 					procStmt.executeUpdate("INSERT INTO PROCEDURE" + procValues);
@@ -305,21 +309,25 @@ public class ProjectPart2 {
 					System.out.println("Enter SSN: ");
 					String doctorSSN = scnr.nextLine();
 
+					char[] dssnArray = doctorSSN.toCharArray();
+					
 					boolean dSsnIsNumeric = true;
-					for (int i = 0; i < doctorSSN.length(); i++) {
-						if (doctorSSN.charAt(i) == 3 || doctorSSN.charAt(i) == 6) {
-							if (doctorSSN.charAt(i) != '-') {
+					for (int i = 0; i < dssnArray.length; i++) {
+						if (i == 3 || i == 6) {
+							if (dssnArray[i] != '-') {
 								dSsnIsNumeric = false;
 								break;
 							}
 							dSsnIsNumeric = true;
 						}
-						dSsnIsNumeric = Character.isDigit(doctorSSN.charAt(i));
-						if (!dSsnIsNumeric) {
-							dSsnIsNumeric = false;
-							break;
+						else {
+							dSsnIsNumeric = Character.isDigit(doctorSSN.charAt(i));
+							if (!dSsnIsNumeric) {
+								dSsnIsNumeric = false;
+								break;
+							}
+							SsnIsNumeric = true;
 						}
-						SsnIsNumeric = true;
 					}
 					while (!dSsnIsNumeric) {
 						System.out.println("Please enter SSN with thte following format: AAA-GG-SSSS");
@@ -327,19 +335,21 @@ public class ProjectPart2 {
 						doctorSSN = scnr.nextLine();
 
 						for (int i = 0; i < doctorSSN.length(); i++) {
-							if (doctorSSN.charAt(i) == 3 || doctorSSN.charAt(i) == 6) {
-								if (doctorSSN.charAt(i) != '-') {
+							if (i == 3 || i == 6) {
+								if (dssnArray[i] != '-') {
 									dSsnIsNumeric = false;
 									break;
 								}
 								dSsnIsNumeric = true;
 							}
-							dSsnIsNumeric = Character.isDigit(doctorSSN.charAt(i));
-							if (!dSsnIsNumeric) {
-								SsnIsNumeric = false;
-								break;
+							else {
+								dSsnIsNumeric = Character.isDigit(doctorSSN.charAt(i));
+								if (!dSsnIsNumeric) {
+									SsnIsNumeric = false;
+									break;
+								}
+								dSsnIsNumeric = true;
 							}
-							dSsnIsNumeric = true;
 						}
 					}
 
@@ -378,7 +388,7 @@ public class ProjectPart2 {
 					// SQL insert statement for Doctor
 					Statement doctorStmt = connection.createStatement();
 
-					String doctorValues = "VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial
+					String doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial
 							+ "','" + doctorLastName + "','" + doctorDOB + "','" + doctorID + "','" + doctorAddr + "','"
 							+ doctorPhone + "','" + doctorContact + "')";
 
@@ -413,7 +423,7 @@ public class ProjectPart2 {
 					// SQL insert statement for Medications
 					Statement rxStmt = connection.createStatement();
 
-					String rxValues = "VALUES('" + rxName + "','" + rxDate + "','" + rxDesc + "','" + rxManufacturer
+					String rxValues = " VALUES('" + rxName + "','" + rxDate + "','" + rxDesc + "','" + rxManufacturer
 							+ "','" + rxDoctor + "','" + rxPatient + "')";
 
 					rxStmt.executeUpdate("INSERT INTO MEDICATION" + rxValues);
@@ -437,7 +447,7 @@ public class ProjectPart2 {
 					System.out.println("Enter description of interaction:");
 					String interationRecordDesc = scnr.nextLine();
 
-					// SQL insert statement for Medications
+					// SQL insert statement for Interaction Records
 					Statement interationRecordStmt = connection.createStatement();
 
 					String interationRecordValues = "VALUES('" + interationRecordPatientId + "','" + interationRecordId
@@ -595,21 +605,25 @@ public class ProjectPart2 {
 	
 	public static String phoneValid(String phone) {
 		
+		char[] phoneArray = phone.toCharArray();
+		
 		boolean phoneValid = true;
-		for (int i = 0; i < phone.length(); i++) {
-			if (phone.charAt(i) == 3 || phone.charAt(i) == 7) {
-				if (phone.charAt(i) != '-') {
+		for (int i = 0; i < phoneArray.length; i++) {
+			if (i == 3 || i == 7) {
+				if (phoneArray[i] != '-') {
 					phoneValid = false;
 					break;
 				}
 				phoneValid = true;
 			}
-			phoneValid = Character.isDigit(phone.charAt(i));
-			if (!phoneValid) {
-				phoneValid = false;
-				break;
+			else {
+				phoneValid = Character.isDigit(phone.charAt(i));
+				if (!phoneValid) {
+					phoneValid = false;
+					break;
+				}
+				phoneValid = true;
 			}
-			phoneValid = true;
 		}
 		while (!phoneValid) {
 			System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
@@ -617,8 +631,8 @@ public class ProjectPart2 {
 			phone = scnr.nextLine();
 
 			for (int i = 0; i < phone.length(); i++) {
-				if (phone.charAt(i) == 3 || phone.charAt(i) == 6) {
-					if (phone.charAt(i) != '-') {
+				if (i == 3 || i == 6) {
+					if (phoneArray[i] != '-') {
 						phoneValid = false;
 						break;
 					}
