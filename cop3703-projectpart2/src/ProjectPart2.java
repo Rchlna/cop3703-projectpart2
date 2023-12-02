@@ -60,7 +60,6 @@ public class ProjectPart2 {
 
 					System.out.println("Enter middle initial: ");
 					String patientMiddleInitial = scnr.nextLine();
-//					scnr.nextLine();
 
 					System.out.println("Enter last name: ");
 					String patientLastName = scnr.nextLine();
@@ -713,9 +712,10 @@ public class ProjectPart2 {
 					break;
 				default:
 					System.out.println("Invalid choice. Please enter a number between 0 and 6.");
-
+					break;
 				} // end of nested switch
-				break;
+				
+				break; // end of case 1 in outer switch case
 			case 2: // Query patient health record
 				System.out.println("Patient Health Record Search");
 				System.out.println("------------------------------");
@@ -901,6 +901,7 @@ public class ProjectPart2 {
 
 			default:
 				System.out.println("Invalid choice. Please enter a number between 0 and 4.");
+				break;
 			}
 //			scnr.close();
 		}
