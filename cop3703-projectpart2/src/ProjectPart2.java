@@ -20,7 +20,7 @@ public class ProjectPart2 {
 		Connection connection = connect(); // Establishing database connection
 		
 		connection.setAutoCommit(false);
-
+		
 		while (true) {
 			System.out.println("Hospital Database");
 			System.out.println("------------------------------");
@@ -203,24 +203,8 @@ public class ProjectPart2 {
 					patientStmt.executeUpdate("INSERT INTO PATIENT" + patientValues);
 					
 					
-					Statement genPtInterationRecordStmt = connection.createStatement();
-					
-//					LocalDate genPtInterationRecordDate = java.time.LocalDate.now();
-//					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-YYYY");
-//					
-//					LocalTime genPtInterationRecordTime = java.time.LocalTime.now();
-//					
-//					String stupidDate = formatter.format(genPtInterationRecordDate).toString();
-					
-					
-
-					String genPtInterationRecordValues = " VALUES('" + patientId + "','" + "1"
-							+ "',CURDATE(),'" + "10" + "','" + "New patient information admitted"
-							+ "')";
-
-					genPtInterationRecordStmt.executeUpdate("INSERT INTO INT_RECORD" + genPtInterationRecordValues);
-					
 					connection.commit();
+					
 
 					break;
 				case 2: // Department
@@ -465,11 +449,11 @@ public class ProjectPart2 {
 					System.out.println("\nInteraction Records");
 					System.out.println("------------------------------");
 
-					System.out.println("Enter patient ID:");
+					System.out.println("Enter patient ID: ");
 					String interationRecordPatientId = scnr.nextLine();
-
 					
-					String interationRecordId = null; // Figure out how to generate
+					System.out.println("Enter interaction ID: ");
+					String interationRecordId = scnr.nextLine();
 
 					System.out.println("Enter date of interaction");
 					String interationRecordDate = scnr.nextLine();
@@ -484,10 +468,10 @@ public class ProjectPart2 {
 					Statement interationRecordStmt = connection.createStatement();
 
 					String interationRecordValues = " VALUES('" + interationRecordPatientId + "','" + interationRecordId
-							+ "','" + interationRecordDate + "','" + interationRecordTime + "','" + interationRecordDesc
+							+ "','" + interationRecordTime + "', TO_DATE('" + interationRecordDate + "','MM-DD-YYYY'),'" + interationRecordDesc
 							+ "')";
 
-					interationRecordStmt.executeUpdate("INSERT INTO INT_RECORD" + interationRecordValues);
+					interationRecordStmt.executeUpdate("INSERT INTO INTERACTION_RECORD" + interationRecordValues);
 					connection.commit();
 
 					break;
@@ -509,7 +493,7 @@ public class ProjectPart2 {
 				ResultSet patientRs = statementA
 						.executeQuery("select FIRST_NAME, MIDDLE_INITIAL, LAST_NAME, SSN, BIRTH_DATE, "
 								+ "PATIENT_ID, SEX, CURR_PHONE, CURR_ADDRESS, PERM_PHONE, PERM_CITY, PERM_STATE, PERM_ZIP, CONDITION, PRIM_DOCTOR_ID, SEC_DOCTOR_ID, SSN"
-								+ "from PATIENT" + "where PATIENT_ID = '" + searchPtId + "'");
+								+ " from PATIENT" + " where PATIENT_ID = '" + searchPtId + "'");
 
 				while (patientRs.next()) {
 					String patientId = patientRs.getString("PATIENT_ID");
@@ -529,17 +513,19 @@ public class ProjectPart2 {
 
 				// Procedures
 				ResultSet procRs = statementA
-						.executeQuery("select NAME from PROCEDURE where PATIENT_ID = '" + searchPtId + "'");
+						.executeQuery("select PROCEDURE.NAME from PROCEDURE where PATIENT_ID = '" + searchPtId + "'");
 
 				System.out.println("\nProcedures Underwent: ");
-				while (patientRs.next()) {
+				
+				while (procRs.next()) {
 					String procName = procRs.getString("NAME");
 					System.out.println(procName);
 				}
 
 				// Interation Records
+				/*
 				ResultSet intRs = statementA.executeQuery(
-						"select TIME, DESCRIPTION from INT_RECORD where PATIENT_ID = '" + searchPtId + "'");
+						"select ITIME, DESCRIPTION from INTERACTION_RECORD where PATIENT_ID = '" + searchPtId + "'");
 
 				System.out.println("\nInteraction Records");
 				while (intRs.next()) {
@@ -548,16 +534,17 @@ public class ProjectPart2 {
 
 					System.out.printf("%s		%s\n", desc, time);
 				}
-
+				*/
 				// Medications
 				ResultSet medRs = statementA.executeQuery(
-						"select NAME, DESCRIPTION, DATE from INT_RECORD where PATIENT_ID = '" + searchPtId + "'");
+						"select MEDICATION.NAME, MEDICATION.DESCRIPTION, MEDICATION.PDATE from MEDICATION where PATIENT_ID = '" + searchPtId + "'");
 
 				System.out.println("\nPrescribed Medications:");
+				
 				while (medRs.next()) {
 					String name = medRs.getString("NAME");
 					String desc = medRs.getString("DESCRIPTION");
-					Date medDate = medRs.getDate("DATE");
+					Date medDate = medRs.getDate("PDATE");
 
 					System.out.printf("%s		%s		%s\n", name, desc, medDate);
 				}
@@ -567,13 +554,58 @@ public class ProjectPart2 {
 			case 3: // Query procedures offered by department
 				System.out.println("Procedures Offered By Department ");
 				System.out.println("------------------------------");
+				System.out.println("1- for department name 2- for department code: ");
+				String codeOrName = scnr.nextLine();
+				boolean deptNameFlag = false;
+				if (codeOrName.equals("1"))
+					deptNameFlag = true;
+				System.out.println("Department Name or Code:");
+				String procDeptInput = scnr.nextLine();
+
+				//boolean procDeptInput = true;
+
+				Statement statementB = connection.createStatement();
+				Statement statementD = connection.createStatement();
+
+				ResultSet procDeptRs = null;
+				ResultSet getDeptCode = null;
+				
+				
+				
+				if (deptNameFlag == true) {
+					getDeptCode = statementD.executeQuery("select DEPARTMENT.CODE from DEPARTMENT where NAME = '" + procDeptInput + "'");
+					
+					
+					String procCode = null;
+					while (getDeptCode.next()) {
+						procCode = getDeptCode.getString("CODE");
+					}
+					
+					procDeptRs = statementB
+							.executeQuery("select PROCEDURE.NAME from PROCEDURE where PROCEDURE.CODE = '" + procCode + "'");
+				}
+				else {
+					procDeptRs = statementB.executeQuery(
+							"select PROCEDURE.NAME from PROCEDURE where PROCEDURE.CODE = '" + procDeptInput + "'");
+				}
+
+				while (procDeptRs.next()) {
+					String procName = procDeptRs.getString("NAME");
+					System.out.println(procName);
+				}
+				connection.commit();
+
+				break;
+			case 4: // Query doctor procedure history
+				System.out.println("Doctor Procedure History");
+				System.out.println("------------------------------");
 
 				System.out.println("Doctor Name or ID:");
 				String procDocInput = scnr.nextLine();
 
 				boolean isDocId = true;
 
-				Statement statementB = connection.createStatement();
+				Statement statementC = connection.createStatement();
 
 				ResultSet procDocRs = null;
 				if (procDocInput.charAt(0) == 'D' && procDocInput.length() == 9) {
@@ -589,11 +621,11 @@ public class ProjectPart2 {
 				}
 
 				if (!isDocId) {
-					procDocRs = statementB
-							.executeQuery("select NAME from PROCEDURE where DOCTOR_ID = '" + procDocInput + "'");
+					procDocRs = statementC
+							.executeQuery("select PROCEDURE.NAME from PROCEDURE where DOCTOR.NAME = '" + procDocInput + "'");
 				} else {
-					procDocRs = statementB.executeQuery(
-							"select PROCEDURE.NAME from PROCEDURE join DOCTOR on DEPARTMENT.DOCTOR_ID = PROCEDURE.DOCTOR_ID where DOCTOR.NAME = '"
+					procDocRs = statementC.executeQuery(
+							"select PROCEDURE.NAME from PROCEDURE join DOCTOR on DOCTOR.DOCTOR_ID = PROCEDURE.DOCTOR_ID where DOCTOR.DOCTOR_ID = '"
 									+ procDocInput + "'");
 				}
 
@@ -601,26 +633,6 @@ public class ProjectPart2 {
 					String procName = procDocRs.getString("NAME");
 					System.out.println(procName);
 				}
-				connection.commit();
-
-				break;
-			case 4: // Query doctor procedure history
-				System.out.println("Doctor Procedure History");
-				System.out.println("------------------------------");
-
-				System.out.println("Doctor ID:");
-				String searchDocId = scnr.nextLine();
-
-				Statement statementC = connection.createStatement();
-
-				ResultSet doctorRs = statementC
-						.executeQuery("select NAME from PROCEDURE where DOCTOR_ID = '" + searchDocId + "'");
-
-				while (doctorRs.next()) {
-					String procName = doctorRs.getString("NAME");
-					System.out.println(procName);
-				}
-				
 				connection.commit();
 
 				break;
