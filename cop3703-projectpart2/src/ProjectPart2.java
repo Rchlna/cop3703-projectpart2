@@ -16,23 +16,24 @@ public class ProjectPart2 {
 
 	public static void main(String[] args) throws SQLException {
 		Connection connection = connect(); // Establishing database connection
-		
+
 		connection.setAutoCommit(false);
-		
+
 		while (true) {
 			System.out.println("\nHospital Database");
 			System.out.println("------------------------------");
 
-			System.out.println("1. Add a new patient, department, procedures, doctors, medication, or interaction records.");
+			System.out.println(
+					"1. Add a new patient, department, procedures, doctors, medication, or interaction records.");
 			System.out.println("2. Given a patient ID, generate their complete health record.");
 			System.out.println("3. Given a department name or code find the procedures offered.");
 			System.out.println("4. Given a doctor's ID list all the procedures they have done.");
 			System.out.println("0. Exit");
 
-			System.out.print("Enter your choice (0-6): ");
+			System.out.print("Enter your choice (0-4): ");
 			int choice = scnr.nextInt();
 			scnr.nextLine();
-
+			
 			switch (choice) {
 			case 1: // Patient
 				System.out.println("\nEnter New Hospital Information");
@@ -69,7 +70,7 @@ public class ProjectPart2 {
 
 					System.out.println("Enter SSN: ");
 					String patientSSN = scnr.nextLine();
-					
+
 					char[] ssnArray = patientSSN.toCharArray();
 
 					boolean SsnIsNumeric = true;
@@ -80,8 +81,7 @@ public class ProjectPart2 {
 								break;
 							}
 							SsnIsNumeric = true;
-						}
-						else {
+						} else {
 							SsnIsNumeric = Character.isDigit(ssnArray[i]);
 							if (!SsnIsNumeric) {
 								SsnIsNumeric = false;
@@ -90,23 +90,23 @@ public class ProjectPart2 {
 							SsnIsNumeric = true;
 						}
 					}
-					
+
 					if (ssnArray.length != 11) {
 						SsnIsNumeric = false;
 					}
-					
+
 					while (!SsnIsNumeric) {
 						System.out.println("Please enter SSN with the following format: AAA-GG-SSSS");
 						System.out.println("Enter Patient SSN: ");
 						patientSSN = scnr.nextLine();
-						
+
 						ssnArray = patientSSN.toCharArray();
-						
+
 						if (ssnArray.length != 11) {
 							SsnIsNumeric = false;
 							continue;
 						}
-						
+
 						for (int i = 0; i < ssnArray.length; i++) {
 							if (i == 3 || i == 6) {
 								if (ssnArray[i] != '-') {
@@ -114,8 +114,7 @@ public class ProjectPart2 {
 									break;
 								}
 								SsnIsNumeric = true;
-							}
-							else {
+							} else {
 								SsnIsNumeric = Character.isDigit(ssnArray[i]);
 								if (!SsnIsNumeric) {
 									SsnIsNumeric = false;
@@ -132,16 +131,16 @@ public class ProjectPart2 {
 
 					System.out.println("Enter patient ID: ");
 					String patientId = scnr.nextLine();
-					
+
 					char[] ptIdArray = patientId.toCharArray();
 
-					while (ptIdArray[0] != 'P' ||ptIdArray.length != 9) {
+					while (ptIdArray[0] != 'P' || ptIdArray.length != 9) {
 						System.out.println("Incorrect input, please provide the letter P followed by 8 numbers");
 						System.out.println("Enter patient ID: ");
-						
+
 						patientId = scnr.nextLine();
 						ptIdArray = patientId.toCharArray();
-						
+
 						boolean isNumeric = true;
 						for (int i = 1; i < ptIdArray.length; i++) {
 							isNumeric = Character.isDigit(ptIdArray[i]);
@@ -152,7 +151,7 @@ public class ProjectPart2 {
 						if (!isNumeric) {
 							continue;
 						}
-						
+
 					}
 
 					System.out.println("\nEnter patient current address:");
@@ -207,7 +206,7 @@ public class ProjectPart2 {
 					Statement patientStmt = connection.createStatement();
 
 					String patientValues = null;
-					
+
 					if (patientMiddleInitial.equals(null) && (!patientSecondaryDocID.equals(null))) {
 						patientValues = " VALUES('" + patientSSN + "','" + patientFirstName + "','" + null + "','"
 								+ patientLastName + "',TO_DATE('" + patientDOB + "','MM-DD-YYYY'),'" + patientId + "','"
@@ -231,9 +230,7 @@ public class ProjectPart2 {
 								+ patientPermPhone + "','" + patientPermCity + "','" + patientPermState + "','"
 								+ patientPermZip + "','" + patientCondition + "','" + patientPrimaryDocID + "'," + null
 								+ ")";
-
 					} else {
-
 						patientValues = " VALUES('" + patientSSN + "','" + patientFirstName + "','"
 								+ patientMiddleInitial + "','" + patientLastName + "',TO_DATE('" + patientDOB
 								+ "','MM-DD-YYYY'),'" + patientId + "','" + patientSex + "','" + patientCurrPhone
@@ -241,30 +238,32 @@ public class ProjectPart2 {
 								+ patientPermState + "','" + patientPermZip + "','" + patientCondition + "','"
 								+ patientPrimaryDocID + "','" + patientSecondaryDocID + "')";
 					}
-					
+
 					// SQL insert statement for Interaction Records
 					Statement interationRecordNewPtStmt = connection.createStatement();
-					
-					LocalTime time = LocalTime.now();  
-					DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm"); 					
-			        String intRecTime = time.format(formatterTime).toString(); 
-			        
-			        LocalDate date = LocalDate.now();
-			        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("MM-dd-YYYY");
-			        String intRecDate = date.format(formatterDate).toString();
 
-					String interationRecordNewPtValues = " VALUES('" + patientId + "','1','" + intRecTime + "', TO_DATE('" + intRecDate + "','MM-DD-YYYY'),'New patient admitted')";
-					
+					LocalTime time = LocalTime.now();
+					DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
+					String intRecTime = time.format(formatterTime).toString();
+
+					LocalDate date = LocalDate.now();
+					DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("MM-dd-YYYY");
+					String intRecDate = date.format(formatterDate).toString();
+
+					String interationRecordNewPtValues = " VALUES('" + patientId + "','1','" + intRecTime
+							+ "', TO_DATE('" + intRecDate + "','MM-DD-YYYY'),'New patient admitted')";
+
 					try {
 						patientStmt.executeUpdate("INSERT INTO PATIENT" + patientValues);
-						interationRecordNewPtStmt.executeUpdate("INSERT INTO INTERACTION_RECORD" + interationRecordNewPtValues);
+						interationRecordNewPtStmt
+								.executeUpdate("INSERT INTO INTERACTION_RECORD" + interationRecordNewPtValues);
 					} catch (SQLException sqlE) {
 						System.out.println(sqlE);
 					} catch (Exception javaE) {
 						System.out.println(javaE);
 					}
-				
-					connection.commit();					
+
+					connection.commit();
 
 					break;
 				case 2: // Department
@@ -277,19 +276,24 @@ public class ProjectPart2 {
 					System.out.println("Enter department code:");
 					String deptCode = scnr.nextLine();
 					
+					while (deptCode.length() < 1 || deptCode.length() > 4) {
+						System.out.println("Department code must be between 1 and 4 characters in length");
+						System.out.println("Enter department code:");
+						deptCode = scnr.nextLine();
+					}
+
 					System.out.println("Enter department office number:");
 					String deptOfficeNumber = scnr.nextLine();
-					
+
 					while (deptOfficeNumber.length() != 4) {
-						System.out.println("Department office number must be 4 characters in length");
-						System.out.println("Enter department code:");
+						System.out.println("Department office number must be exactly 4 digits");
+						System.out.println("Enter department number:");
 						deptOfficeNumber = scnr.nextLine();
 					}
 
 					System.out.println("Enter department phone number:");
-					String deptOfficePhone = scnr.nextLine();
-
-					deptOfficePhone = phoneValid(deptOfficePhone);
+					String deptOfficePhone = phoneValid(scnr.nextLine());
+//					phoneValid(deptOfficePhone);
 
 					System.out.println("\nEnter department head (Doctor ID):");
 					String deptHead = scnr.nextLine();
@@ -297,8 +301,15 @@ public class ProjectPart2 {
 					// SQL insert statement for Department
 					Statement deptStmt = connection.createStatement();
 
-					String deptValues = " VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "','"
-							+ deptOfficePhone + "','" + deptHead + "')";
+					String deptValues = null;
+
+					if (!deptOfficePhone.equals(null)) {
+						deptValues = " VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "','"
+								+ deptOfficePhone + "','" + deptHead + "')";
+					} else if (deptOfficePhone.equals(null)) {
+						deptValues = " VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "',"
+								+ null + ",'" + deptHead + "')";
+					}
 
 					try {
 						deptStmt.executeUpdate("INSERT INTO DEPARTMENT" + deptValues);
@@ -307,7 +318,7 @@ public class ProjectPart2 {
 					} catch (Exception javaE) {
 						System.out.println(javaE);
 					}
-					
+
 					connection.commit();
 
 					break;
@@ -317,23 +328,21 @@ public class ProjectPart2 {
 
 					System.out.println("Enter procedure name: ");
 					String procName = scnr.nextLine();
-					
-		
+
 					String procNumber = null;
 					char[] procNumArray = null;
 					boolean whileContinue = false;
 					while (true) {
 						System.out.println("Enter procedure number: ");
 						procNumber = scnr.nextLine();
-						
+
 						procNumArray = procNumber.toCharArray();
 
 						if (procNumArray.length != 7) {
-							System.out.println(
-									"Enter procedure number with three letters followed by four digits");
+							System.out.println("Enter procedure number with three letters followed by four digits");
 							continue;
 						}
-						
+
 						for (int i = 0; i < procNumArray.length; i++) {
 							if (i >= 0 && i <= 2) {
 								if (!Character.isAlphabetic(procNumArray[i])) {
@@ -358,7 +367,6 @@ public class ProjectPart2 {
 							break;
 						}
 					}
-					
 
 					System.out.println("Enter procedure duration: ");
 					double procDuration = scnr.nextDouble();
@@ -381,45 +389,45 @@ public class ProjectPart2 {
 
 					String procValues = " VALUES('" + procName + "','" + procNumber + "','" + procDuration + "','"
 							+ procDesc + "','" + procPatientId + "','" + procCode + "','" + procDocId + "')";
-					
-					
+
 					Statement statementProc = connection.createStatement();
 
 					// Patient Information
-					ResultSet procPtIdRs = statementProc
-							.executeQuery("select MAX(INTERACTION_RECORD.ID) from INTERACTION_RECORD WHERE INTERACTION_RECORD.PATIENT_ID = '"
+					ResultSet procPtIdRs = statementProc.executeQuery(
+							"select MAX(INTERACTION_RECORD.ID) from INTERACTION_RECORD WHERE INTERACTION_RECORD.PATIENT_ID = '"
 									+ procPatientId + "'");
 					int procPtId = 0;
-					
+
 					while (procPtIdRs.next()) {
 						procPtId = procPtIdRs.getInt("MAX(INTERACTION_RECORD.ID)");
 					}
-					
-					procPtId++;
-					
-					Statement interationRecordNewProcStmt = connection.createStatement();
-					
-					LocalTime timeProc = LocalTime.now();  
-					DateTimeFormatter formatterTimeProc = DateTimeFormatter.ofPattern("HH:mm"); 					
-			        String procTime = timeProc.format(formatterTimeProc).toString(); 
-			        
-			        LocalDate dateProc = LocalDate.now();
-			        DateTimeFormatter formatterDateProc = DateTimeFormatter.ofPattern("MM-dd-YYYY");
-			        String procDate = dateProc.format(formatterDateProc).toString();
 
-					String interationRecordNewProcValues = " VALUES('" + procPatientId + "','"+ procPtId + " ','" + procTime + "', TO_DATE('" + procDate + "','MM-DD-YYYY'),'New procedure added')";
-					
-					
+					procPtId++;
+
+					Statement interationRecordNewProcStmt = connection.createStatement();
+
+					LocalTime timeProc = LocalTime.now();
+					DateTimeFormatter formatterTimeProc = DateTimeFormatter.ofPattern("HH:mm");
+					String procTime = timeProc.format(formatterTimeProc).toString();
+
+					LocalDate dateProc = LocalDate.now();
+					DateTimeFormatter formatterDateProc = DateTimeFormatter.ofPattern("MM-dd-YYYY");
+					String procDate = dateProc.format(formatterDateProc).toString();
+
+					String interationRecordNewProcValues = " VALUES('" + procPatientId + "','" + procPtId + " ','"
+							+ procTime + "', TO_DATE('" + procDate + "','MM-DD-YYYY'),'New procedure added')";
+
 					try {
-					procStmt.executeUpdate("INSERT INTO PROCEDURE" + procValues);
-					interationRecordNewProcStmt.executeUpdate("INSERT INTO INTERACTION_RECORD" + interationRecordNewProcValues);
+						procStmt.executeUpdate("INSERT INTO PROCEDURE" + procValues);
+						interationRecordNewProcStmt
+								.executeUpdate("INSERT INTO INTERACTION_RECORD" + interationRecordNewProcValues);
 
 					} catch (SQLException sqlE) {
 						System.out.println(sqlE);
 					} catch (Exception javaE) {
 						System.out.println(javaE);
 					}
-					
+
 					connection.commit();
 
 					break;
@@ -432,8 +440,7 @@ public class ProjectPart2 {
 					String doctorFirstName = scnr.nextLine();
 
 					System.out.println("Enter middle initial: ");
-					char doctorMiddleInitial = scnr.next().charAt(0);
-					scnr.nextLine();
+					String doctorMiddleInitial = scnr.nextLine();
 
 					System.out.println("Enter last name: ");
 					String doctorLastName = scnr.nextLine();
@@ -445,7 +452,7 @@ public class ProjectPart2 {
 					String doctorSSN = scnr.nextLine();
 
 					char[] dssnArray = doctorSSN.toCharArray();
-					
+
 					boolean dSsnIsNumeric = true;
 					for (int i = 0; i < dssnArray.length; i++) {
 						if (i == 3 || i == 6) {
@@ -454,8 +461,7 @@ public class ProjectPart2 {
 								break;
 							}
 							dSsnIsNumeric = true;
-						}
-						else {
+						} else {
 							dSsnIsNumeric = Character.isDigit(dssnArray[i]);
 							if (!dSsnIsNumeric) {
 								dSsnIsNumeric = false;
@@ -464,16 +470,16 @@ public class ProjectPart2 {
 							SsnIsNumeric = true;
 						}
 					}
-					
+
 					if (dssnArray.length != 11) {
 						SsnIsNumeric = false;
 					}
-					
+
 					while (!dSsnIsNumeric) {
 						System.out.println("Please enter SSN with the following format: AAA-GG-SSSS");
 						System.out.println("Enter Patient SSN: ");
 						doctorSSN = scnr.nextLine();
-						
+
 						dssnArray = doctorSSN.toCharArray();
 
 						for (int i = 0; i < dssnArray.length; i++) {
@@ -483,8 +489,7 @@ public class ProjectPart2 {
 									break;
 								}
 								dSsnIsNumeric = true;
-							}
-							else {
+							} else {
 								dSsnIsNumeric = Character.isDigit(dssnArray[i]);
 								if (!dSsnIsNumeric) {
 									SsnIsNumeric = false;
@@ -493,7 +498,7 @@ public class ProjectPart2 {
 								dSsnIsNumeric = true;
 							}
 						}
-						
+
 						if (dssnArray.length != 11) {
 							SsnIsNumeric = false;
 						}
@@ -501,16 +506,16 @@ public class ProjectPart2 {
 
 					System.out.println("Enter doctor ID: ");
 					String doctorID = scnr.nextLine();
-					
+
 					char[] docIdArray = doctorID.toCharArray();
 
 					while (docIdArray[0] != 'D' || docIdArray.length != 9) {
 						System.out.println("Incorrect input, please provide the letter D followed by 8 numbers");
 						System.out.println("Enter doctor ID: ");
-						
+
 						doctorID = scnr.nextLine();
 						docIdArray = doctorID.toCharArray();
-						
+
 						boolean isNumeric = true;
 						for (int i = 1; i < docIdArray.length; i++) {
 							isNumeric = Character.isDigit(docIdArray[i]);
@@ -521,7 +526,7 @@ public class ProjectPart2 {
 						if (!isNumeric) {
 							continue;
 						}
-						
+
 					}
 
 					System.out.println("Enter address: ");
@@ -532,34 +537,56 @@ public class ProjectPart2 {
 
 					doctorPhone = phoneValid(doctorPhone);
 
-					System.out.println("Enter contact number: ");
+					System.out.println("Enter contact number:");
 					String doctorContact = scnr.nextLine();
 					
-					doctorContact = phoneValid(doctorContact);
+					if (doctorContact == null) {
+						doctorContact = phoneValid(doctorContact);
+					}
 					
-					System.out.println("Enter the associated department code: ");
+					System.out.println("Enter associated department code: ");
 					String assocDeptCode = scnr.nextLine();
-					
+
 					Statement assocWithStmt = connection.createStatement();
 					String assoWithValues = " VALUES('" + doctorID + "','" + assocDeptCode + "')";
 
 					// SQL insert statement for Doctor
 					Statement doctorStmt = connection.createStatement();
 
-					String doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial
-							+ "','" + doctorLastName + "',TO_DATE('" + doctorDOB + "','MM-DD-YYYY'),'" + doctorID + "','" + doctorAddr + "','"
-							+ doctorPhone + "','" + doctorContact + "')";
+					String doctorValues = null;
 					
+					if (doctorMiddleInitial.equals(null) && !doctorContact.equals(null)) {
+						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "',"
+								+ null + ",'" + doctorLastName + "',TO_DATE('" + doctorDOB
+								+ "','MM-DD-YYYY'),'" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "','"
+								+ doctorContact + "')";
+					} else if (!doctorMiddleInitial.equals(null) && doctorContact.equals(null)) {
+						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','"
+								+ doctorMiddleInitial + "','" + doctorLastName + "',TO_DATE('" + doctorDOB
+								+ "','MM-DD-YYYY'),'" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "',"
+								+ null + ")";
+					} else if (doctorMiddleInitial.equals(null) && doctorContact.equals(null)){
+						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "',"
+								+ null + ",'" + doctorLastName + "',TO_DATE('" + doctorDOB
+								+ "','MM-DD-YYYY'),'" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "',"
+								+ null + ")";
+					} else {
+						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','"
+								+ doctorMiddleInitial + "','" + doctorLastName + "',TO_DATE('" + doctorDOB
+								+ "','MM-DD-YYYY'),'" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "','"
+								+ doctorContact + "')";
+					}
+
 					try {
-					doctorStmt.executeUpdate("INSERT INTO DOCTOR" + doctorValues);
-					assocWithStmt.executeUpdate("INSERT INTO ASSOCIATES_WITH" + assoWithValues);
+						doctorStmt.executeUpdate("INSERT INTO DOCTOR" + doctorValues);
+						assocWithStmt.executeUpdate("INSERT INTO ASSOCIATES_WITH" + assoWithValues);
 
 					} catch (SQLException sqlE) {
 						System.out.println(sqlE);
 					} catch (Exception javaE) {
 						System.out.println(javaE);
 					}
-					
+
 					connection.commit();
 
 					break;
@@ -591,47 +618,47 @@ public class ProjectPart2 {
 					// SQL insert statement for Medications
 					Statement rxStmt = connection.createStatement();
 
-					String rxValues = " VALUES('" + rxName + "', TO_DATE('" + rxDate + "','MM-DD-YYYY'),'" + rxDesc + "','" + rxManufacturer
-							+ "','" + rxDoctor + "','" + rxPatient + "')";
-					
-					
+					String rxValues = " VALUES('" + rxName + "', TO_DATE('" + rxDate + "','MM-DD-YYYY'),'" + rxDesc
+							+ "','" + rxManufacturer + "','" + rxDoctor + "','" + rxPatient + "')";
+
 					Statement statementMed = connection.createStatement();
 
 					// Patient Information
-					ResultSet medPtIdRs = statementMed
-							.executeQuery("select MAX(INTERACTION_RECORD.ID) from INTERACTION_RECORD WHERE INTERACTION_RECORD.PATIENT_ID = '"
+					ResultSet medPtIdRs = statementMed.executeQuery(
+							"select MAX(INTERACTION_RECORD.ID) from INTERACTION_RECORD WHERE INTERACTION_RECORD.PATIENT_ID = '"
 									+ rxPatient + "'");
 					int medPtId = 0;
-					
+
 					while (medPtIdRs.next()) {
 						medPtId = medPtIdRs.getInt("MAX(INTERACTION_RECORD.ID)");
 					}
-					
-					medPtId++;
-					
-					Statement interationRecordNewMedStmt = connection.createStatement();
-					
-					LocalTime timeMed = LocalTime.now();  
-					DateTimeFormatter formatterTimeMed = DateTimeFormatter.ofPattern("HH:mm"); 					
-			        String medTime = timeMed.format(formatterTimeMed).toString(); 
-			        
-			        LocalDate dateMed = LocalDate.now();
-			        DateTimeFormatter formatterDateMed = DateTimeFormatter.ofPattern("MM-dd-YYYY");
-			        String medDate = dateMed.format(formatterDateMed).toString();
 
-					String interationRecordNewMedValues = " VALUES('" + rxPatient + "','"+ medPtId + " ','" + medTime + "', TO_DATE('" + medDate + "','MM-DD-YYYY'),'New medication prescribed')";
-					
+					medPtId++;
+
+					Statement interationRecordNewMedStmt = connection.createStatement();
+
+					LocalTime timeMed = LocalTime.now();
+					DateTimeFormatter formatterTimeMed = DateTimeFormatter.ofPattern("HH:mm");
+					String medTime = timeMed.format(formatterTimeMed).toString();
+
+					LocalDate dateMed = LocalDate.now();
+					DateTimeFormatter formatterDateMed = DateTimeFormatter.ofPattern("MM-dd-YYYY");
+					String medDate = dateMed.format(formatterDateMed).toString();
+
+					String interationRecordNewMedValues = " VALUES('" + rxPatient + "','" + medPtId + " ','" + medTime
+							+ "', TO_DATE('" + medDate + "','MM-DD-YYYY'),'New medication prescribed')";
+
 					try {
-					rxStmt.executeUpdate("INSERT INTO MEDICATION" + rxValues);
-					interationRecordNewMedStmt.executeUpdate("INSERT INTO INTERACTION_RECORD" + interationRecordNewMedValues);
+						rxStmt.executeUpdate("INSERT INTO MEDICATION" + rxValues);
+						interationRecordNewMedStmt
+								.executeUpdate("INSERT INTO INTERACTION_RECORD" + interationRecordNewMedValues);
 
 					} catch (SQLException sqlE) {
 						System.out.println(sqlE);
 					} catch (Exception javaE) {
 						System.out.println(javaE);
 					}
-				
-					
+
 					connection.commit();
 
 					break;
@@ -641,46 +668,46 @@ public class ProjectPart2 {
 
 					System.out.println("Enter patient ID: ");
 					String interationRecordPatientId = scnr.nextLine();
-					
 
 					System.out.println("Enter description of interaction:");
 					String interationRecordDesc = scnr.nextLine();
 
 					// SQL insert statement for Interaction Records
 					Statement interationRecordManualStmt = connection.createStatement();
-					
+
 					// Patient Information
-					ResultSet interationRecordManualRs = interationRecordManualStmt
-							.executeQuery("select MAX(INTERACTION_RECORD.ID) from INTERACTION_RECORD WHERE INTERACTION_RECORD.PATIENT_ID = '"
+					ResultSet interationRecordManualRs = interationRecordManualStmt.executeQuery(
+							"select MAX(INTERACTION_RECORD.ID) from INTERACTION_RECORD WHERE INTERACTION_RECORD.PATIENT_ID = '"
 									+ interationRecordPatientId + "'");
 					int genPtId = 0;
-					
+
 					while (interationRecordManualRs.next()) {
 						genPtId = interationRecordManualRs.getInt("MAX(INTERACTION_RECORD.ID)");
 					}
-					
-					genPtId++;
-					
-					
-					LocalTime genMed = LocalTime.now();  
-					DateTimeFormatter formatterTimeGen = DateTimeFormatter.ofPattern("HH:mm"); 					
-			        String genTime = genMed.format(formatterTimeGen).toString(); 
-			        
-			        LocalDate dateGen = LocalDate.now();
-			        DateTimeFormatter formatterDateGen = DateTimeFormatter.ofPattern("MM-dd-YYYY");
-			        String genDate = dateGen.format(formatterDateGen).toString();
 
-					String interationRecordGenValues = " VALUES('" + interationRecordPatientId + "','"+ genPtId + " ','" + genTime + "', TO_DATE('" + genDate + "','MM-DD-YYYY'),'"+ interationRecordDesc+"')";
-					
+					genPtId++;
+
+					LocalTime genMed = LocalTime.now();
+					DateTimeFormatter formatterTimeGen = DateTimeFormatter.ofPattern("HH:mm");
+					String genTime = genMed.format(formatterTimeGen).toString();
+
+					LocalDate dateGen = LocalDate.now();
+					DateTimeFormatter formatterDateGen = DateTimeFormatter.ofPattern("MM-dd-YYYY");
+					String genDate = dateGen.format(formatterDateGen).toString();
+
+					String interationRecordGenValues = " VALUES('" + interationRecordPatientId + "','" + genPtId
+							+ " ','" + genTime + "', TO_DATE('" + genDate + "','MM-DD-YYYY'),'" + interationRecordDesc
+							+ "')";
 
 					try {
-						interationRecordManualStmt.executeUpdate("INSERT INTO INTERACTION_RECORD" + interationRecordGenValues);
+						interationRecordManualStmt
+								.executeUpdate("INSERT INTO INTERACTION_RECORD" + interationRecordGenValues);
 					} catch (SQLException sqlE) {
 						System.out.println(sqlE);
 					} catch (Exception javaE) {
 						System.out.println(javaE);
 					}
-					
+
 					connection.commit();
 
 					break;
@@ -704,26 +731,25 @@ public class ProjectPart2 {
 								+ "PATIENT_ID, SEX, CURR_PHONE, CURR_ADDRESS, PERM_PHONE, PERM_CITY, PERM_STATE, PERM_ZIP, CONDITION, PRIM_DOCTOR_ID, SEC_DOCTOR_ID, SSN"
 								+ " from PATIENT" + " where PATIENT_ID = '" + searchPtId + "'");
 
-				
 				if (patientRs.next() == false) {
 					System.out.println("Patient not found");
 					break;
-					
-				} else {
-				while (patientRs.next()) {						
-					String patientId = patientRs.getString("PATIENT_ID");
-					String firstName = patientRs.getString("FIRST_NAME");
-					char midInitial = patientRs.getString("MIDDLE_INITIAL").charAt(0);
-					String lastName = patientRs.getString("LAST_NAME");
-					String currPhone = patientRs.getString("CURR_PHONE");
-					String currAddr = patientRs.getString("CURR_ADDRESS");
-					String primDoc = patientRs.getString("PRIM_DOCTOR_ID");
 
-					System.out.printf("Patient ID: %s\n", patientId);
-					System.out.printf("Name: %s %s %s\n", firstName, midInitial, lastName);
-					System.out.printf("Current Phone: %s\n", currPhone);
-					System.out.printf("Current Address: %s\n", currAddr);
-					System.out.printf("Primary Doctor: %s\n", primDoc);
+				} else {
+					while (patientRs.next()) {
+						String patientId = patientRs.getString("PATIENT_ID");
+						String firstName = patientRs.getString("FIRST_NAME");
+						char midInitial = patientRs.getString("MIDDLE_INITIAL").charAt(0);
+						String lastName = patientRs.getString("LAST_NAME");
+						String currPhone = patientRs.getString("CURR_PHONE");
+						String currAddr = patientRs.getString("CURR_ADDRESS");
+						String primDoc = patientRs.getString("PRIM_DOCTOR_ID");
+
+						System.out.printf("Patient ID: %s\n", patientId);
+						System.out.printf("Name: %s %s %s\n", firstName, midInitial, lastName);
+						System.out.printf("Current Phone: %s\n", currPhone);
+						System.out.printf("Current Address: %s\n", currAddr);
+						System.out.printf("Primary Doctor: %s\n", primDoc);
 					}
 				}
 
@@ -732,14 +758,14 @@ public class ProjectPart2 {
 						.executeQuery("select PROCEDURE.NAME from PROCEDURE where PATIENT_ID = '" + searchPtId + "'");
 
 				System.out.println("\nProcedures Underwent: ");
-				
+
 				while (procRs.next()) {
 					String procName = procRs.getString("NAME");
 					System.out.println(procName);
 				}
 
 				// Interation Records
-				
+
 				ResultSet intRs = statementA.executeQuery(
 						"select ITIME, DESCRIPTION from INTERACTION_RECORD where PATIENT_ID = '" + searchPtId + "'");
 
@@ -750,13 +776,14 @@ public class ProjectPart2 {
 
 					System.out.printf("%s, %s\n", desc, time);
 				}
-				
+
 				// Medications
 				ResultSet medRs = statementA.executeQuery(
-						"select MEDICATION.NAME, MEDICATION.DESCRIPTION, MEDICATION.PDATE from MEDICATION where PATIENT_ID = '" + searchPtId + "'");
+						"select MEDICATION.NAME, MEDICATION.DESCRIPTION, MEDICATION.PDATE from MEDICATION where PATIENT_ID = '"
+								+ searchPtId + "'");
 
 				System.out.println("\nPrescribed Medications:");
-				
+
 				while (medRs.next()) {
 					String name = medRs.getString("NAME");
 					String desc = medRs.getString("DESCRIPTION");
@@ -778,14 +805,14 @@ public class ProjectPart2 {
 				System.out.println("Department Name or Code:");
 				String procDeptInput = scnr.nextLine();
 
-				//boolean procDeptInput = true;
+				// boolean procDeptInput = true;
 
 				Statement statementB = connection.createStatement();
 				Statement statementD = connection.createStatement();
 
 				ResultSet procDeptRs = null;
-				ResultSet getDeptCode = null;				
-				
+				ResultSet getDeptCode = null;
+
 				if (deptNameFlag == true) {
 					getDeptCode = statementD.executeQuery(
 							"select DEPARTMENT.CODE from DEPARTMENT where NAME = '" + procDeptInput + "'");
@@ -845,8 +872,8 @@ public class ProjectPart2 {
 				}
 
 				if (!isDocId) {
-					procDocRs = statementC
-							.executeQuery("select PROCEDURE.NAME from PROCEDURE where DOCTOR.NAME = '" + procDocInput + "'");
+					procDocRs = statementC.executeQuery(
+							"select PROCEDURE.NAME from PROCEDURE where DOCTOR.NAME = '" + procDocInput + "'");
 				} else {
 					procDocRs = statementC.executeQuery(
 							"select PROCEDURE.NAME from PROCEDURE join DOCTOR on DOCTOR.DOCTOR_ID = PROCEDURE.DOCTOR_ID where DOCTOR.DOCTOR_ID = '"
@@ -857,13 +884,13 @@ public class ProjectPart2 {
 					System.out.println("Doctor not Found");
 					break;
 				} else {
-				
-				while (procDocRs.next()) {
-					String procName = procDocRs.getString("NAME");
-					System.out.println(procName);
-				}
-				
-				connection.commit();
+
+					while (procDocRs.next()) {
+						String procName = procDocRs.getString("NAME");
+						System.out.println(procName);
+					}
+
+					connection.commit();
 				}
 
 				break;
@@ -875,21 +902,21 @@ public class ProjectPart2 {
 			default:
 				System.out.println("Invalid choice. Please enter a number between 0 and 4.");
 			}
-			scnr.close();
+//			scnr.close();
 		}
-		
+
 	} // end of main
 
 	// Creates a connection to Oracle Server
 	public static Connection connect() throws SQLException {
-		
+
 		return DriverManager.getConnection(url, username, password);
 	}
-	
+
 	public static String phoneValid(String phone) {
-		
+
 		char[] phoneArray = phone.toCharArray();
-		
+
 		boolean phoneValid = true;
 		for (int i = 0; i < phoneArray.length; i++) {
 			if (i == 3 || i == 7) {
@@ -898,8 +925,7 @@ public class ProjectPart2 {
 					break;
 				}
 				phoneValid = true;
-			}
-			else {
+			} else {
 				phoneValid = Character.isDigit(phoneArray[i]);
 				if (!phoneValid) {
 					phoneValid = false;
@@ -908,16 +934,16 @@ public class ProjectPart2 {
 				phoneValid = true;
 			}
 		}
-		
+
 		if (phoneArray.length != 12) {
 			phoneValid = false;
 		}
-		
+
 		while (!phoneValid) {
 			System.out.println("Please enter phone number with the following format: XXX-XXX-XXXX");
 			System.out.println("Enter phone number:");
 			phone = scnr.nextLine();
-			
+
 			phoneArray = phone.toCharArray();
 
 			for (int i = 0; i < phoneArray.length; i++) {
@@ -927,22 +953,21 @@ public class ProjectPart2 {
 						break;
 					}
 					phoneValid = true;
-				}
-				else { 
+				} else {
 					phoneValid = Character.isDigit(phoneArray[i]);
 					if (!phoneValid) {
-					phoneValid = false;
-					break;
+						phoneValid = false;
+						break;
 					}
 					phoneValid = true;
 				}
 			}
-			
+
 			if (phoneArray.length != 12) {
 				phoneValid = false;
 			}
 		}
-		
+
 		return phone;
 	}
 } // end of project part 2
