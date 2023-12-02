@@ -3,6 +3,8 @@ import java.sql.Date;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.regex.*;
+
 
 public class ProjectPart2 {
 
@@ -33,7 +35,7 @@ public class ProjectPart2 {
 			System.out.print("Enter your choice (0-4): ");
 			int choice = scnr.nextInt();
 			scnr.nextLine();
-			
+
 			switch (choice) {
 			case 1: // Patient
 				System.out.println("\nEnter New Hospital Information");
@@ -55,19 +57,19 @@ public class ProjectPart2 {
 					System.out.println("\nPatient Information");
 					System.out.println("------------------------------");
 
-					System.out.println("Enter first name: ");
+					System.out.println("Enter first name:");
 					String patientFirstName = scnr.nextLine();
 
-					System.out.println("Enter middle initial: ");
+					System.out.println("Enter middle initial:");
 					String patientMiddleInitial = scnr.nextLine();
 
-					System.out.println("Enter last name: ");
+					System.out.println("Enter last name:");
 					String patientLastName = scnr.nextLine();
 
-					System.out.println("Enter date of birth: ");
+					System.out.println("Enter date of birth (MM-DD-YYYY):");
 					String patientDOB = scnr.nextLine();
 
-					System.out.println("Enter SSN: ");
+					System.out.println("Enter SSN (AAA-GG-SSSS): ");
 					String patientSSN = scnr.nextLine();
 
 					char[] ssnArray = patientSSN.toCharArray();
@@ -128,17 +130,19 @@ public class ProjectPart2 {
 					char patientSex = scnr.next().charAt(0);
 					scnr.nextLine();
 
-					System.out.println("Enter patient ID: ");
+					System.out.println("Enter patient ID. Please provide the letter P followed by 8 numbers: ");
 					String patientId = scnr.nextLine();
+					
+					boolean ptIdCheck = IDCheck(patientId);
 
 					char[] ptIdArray = patientId.toCharArray();
 
-					while (ptIdArray[0] != 'P' || ptIdArray.length != 9) {
-						System.out.println("Incorrect input, please provide the letter P followed by 8 numbers");
-						System.out.println("Enter patient ID: ");
-
+					while (ptIdCheck == false || ptIdArray[0] != 'P' || ptIdArray.length != 9) {
+						System.out.println("Incorrect input, please try again. Please provide the letter P followed by 8 numbers:");
 						patientId = scnr.nextLine();
 						ptIdArray = patientId.toCharArray();
+						
+						ptIdCheck = IDCheck(patientId);
 
 						boolean isNumeric = true;
 						for (int i = 1; i < ptIdArray.length; i++) {
@@ -174,12 +178,12 @@ public class ProjectPart2 {
 					int patientPermZip = scnr.nextInt();
 					scnr.nextLine();
 
-					System.out.println("\nEnter patient permanent phone:");
+					System.out.println("\nEnter patient permanent phone (XXX-XXX-XXXX)");
 					String patientPermPhone = scnr.nextLine();
 
 					patientPermPhone = phoneValid(patientPermPhone);
 
-					System.out.println("\nEnter patient condition (Critical, Stable, or Fair):");
+					System.out.println("\nEnter one of the following patient conditions (Critical, Stable, or Fair):");
 					String patientCondition = scnr.nextLine();
 					while (true) {
 						if (patientCondition.equalsIgnoreCase("Critical")) {
@@ -189,16 +193,16 @@ public class ProjectPart2 {
 						} else if (patientCondition.equalsIgnoreCase("Fair")) {
 							break;
 						} else {
-							System.out.println("\nEnter conditon Critical, Stable, or Fair:");
-							System.out.println("\nEnter patient condition:");
+							System.out.println("\nPatient condition must be on of the following: Critical, Stable, or Fair.");
+							System.out.println("\nPlease try again:");
 							patientCondition = scnr.nextLine();
 						}
 					}
 
-					System.out.println("\nEnter patient primary doctor ID:");
+					System.out.println("\nEnter patient primary doctor ID. Please provide the letter D followed by 8 numbers:");
 					String patientPrimaryDocID = scnr.nextLine();
 
-					System.out.println("\nEnter patient secondary doctor ID (if any):");
+					System.out.println("\nEnter patient secondary doctor ID (if any). Please provide the letter D followed by 8 numbers:");
 					String patientSecondaryDocID = scnr.nextLine();
 
 					// SQL insert statement for Patient
@@ -272,29 +276,28 @@ public class ProjectPart2 {
 					System.out.println("Enter department name: ");
 					String deptName = scnr.nextLine();
 
-					System.out.println("Enter department code:");
+					System.out.println("Enter department code (between 1 and 4 characters in length):");
 					String deptCode = scnr.nextLine();
-					
+
 					while (deptCode.length() < 1 || deptCode.length() > 4) {
-						System.out.println("Department code must be between 1 and 4 characters in length");
+						System.out.println("Department code must be between 1 and 4 characters in length.");
 						System.out.println("Enter department code:");
 						deptCode = scnr.nextLine();
 					}
 
-					System.out.println("Enter department office number:");
+					System.out.println("Enter department office number (must be exactly 4 digits):");
 					String deptOfficeNumber = scnr.nextLine();
 
 					while (deptOfficeNumber.length() != 4) {
-						System.out.println("Department office number must be exactly 4 digits");
+						System.out.println("Department office number must be exactly 4 digits.");
 						System.out.println("Enter department number:");
 						deptOfficeNumber = scnr.nextLine();
 					}
 
-					System.out.println("Enter department phone number:");
+					System.out.println("Enter department phone number (XXX-XXX-XXXX):");
 					String deptOfficePhone = phoneValid(scnr.nextLine());
-//					phoneValid(deptOfficePhone);
 
-					System.out.println("\nEnter department head (Doctor ID):");
+					System.out.println("\nEnter department head (Doctor ID must be the letter D followed by 8 digits):");
 					String deptHead = scnr.nextLine();
 
 					// SQL insert statement for Department
@@ -306,8 +309,8 @@ public class ProjectPart2 {
 						deptValues = " VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "','"
 								+ deptOfficePhone + "','" + deptHead + "')";
 					} else if (deptOfficePhone.equals(null)) {
-						deptValues = " VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "',"
-								+ null + ",'" + deptHead + "')";
+						deptValues = " VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "'," + null
+								+ ",'" + deptHead + "')";
 					}
 
 					try {
@@ -332,13 +335,13 @@ public class ProjectPart2 {
 					char[] procNumArray = null;
 					boolean whileContinue = false;
 					while (true) {
-						System.out.println("Enter procedure number: ");
+						System.out.println("Enter procedure number (must be 3 letters followed by 4 digits): ");
 						procNumber = scnr.nextLine();
 
 						procNumArray = procNumber.toCharArray();
 
 						if (procNumArray.length != 7) {
-							System.out.println("Enter procedure number with three letters followed by four digits");
+							System.out.println("Enter procedure number with 3 letters followed by 4 digits");
 							continue;
 						}
 
@@ -346,14 +349,14 @@ public class ProjectPart2 {
 							if (i >= 0 && i <= 2) {
 								if (!Character.isAlphabetic(procNumArray[i])) {
 									System.out.println(
-											"Enter procedure number with three letters followed by four digits");
+											"Enter procedure number with 3 letters followed by 4 digits:");
 									whileContinue = true;
 									break;
 								}
 							} else {
 								if (!Character.isDigit(procNumArray[i])) {
 									System.out.println(
-											"Enter procedure number with three letters followed by four digits");
+											"Enter procedure number with 3 letters followed by 4 digits:");
 									whileContinue = true;
 									break;
 								}
@@ -371,16 +374,16 @@ public class ProjectPart2 {
 					double procDuration = scnr.nextDouble();
 					scnr.nextLine();
 
-					System.out.println("Enter offering department code: ");
+					System.out.println("Enter offering department code (must be between 1 and 4 characters): ");
 					String procCode = scnr.nextLine();
 
 					System.out.println("Enter procedure description: ");
 					String procDesc = scnr.nextLine();
 
-					System.out.println("Enter Patient ID: ");
+					System.out.println("Enter Patient ID (the letter P followed by 8 digits):");
 					String procPatientId = scnr.nextLine();
 
-					System.out.println("Enter Doctor ID: ");
+					System.out.println("Enter Doctor ID (the letter D followed by 8 digits):");
 					String procDocId = scnr.nextLine();
 
 					// SQL insert statement for Procedures
@@ -444,10 +447,10 @@ public class ProjectPart2 {
 					System.out.println("Enter last name: ");
 					String doctorLastName = scnr.nextLine();
 
-					System.out.println("Enter date of birth: ");
+					System.out.println("Enter date of birth (MM-DD-YYYY): ");
 					String doctorDOB = scnr.nextLine();
 
-					System.out.println("Enter SSN: ");
+					System.out.println("Enter SSN (AAA-GG-SSSS): ");
 					String doctorSSN = scnr.nextLine();
 
 					char[] dssnArray = doctorSSN.toCharArray();
@@ -503,16 +506,21 @@ public class ProjectPart2 {
 						}
 					}
 
-					System.out.println("Enter doctor ID: ");
+					System.out.println("Enter doctor ID (the letter D followed by 8 numbers): ");
 					String doctorID = scnr.nextLine();
 
+					boolean docIdCheck = IDCheck(doctorID);
+					
 					char[] docIdArray = doctorID.toCharArray();
 
-					while (docIdArray[0] != 'D' || docIdArray.length != 9) {
+					while (docIdCheck == false || docIdArray[0] != 'D' || docIdArray.length != 9) {
 						System.out.println("Incorrect input, please provide the letter D followed by 8 numbers");
 						System.out.println("Enter doctor ID: ");
 
 						doctorID = scnr.nextLine();
+						
+						docIdCheck = IDCheck(doctorID);
+						
 						docIdArray = doctorID.toCharArray();
 
 						boolean isNumeric = true;
@@ -528,22 +536,22 @@ public class ProjectPart2 {
 
 					}
 
-					System.out.println("Enter address: ");
+					System.out.println("Enter doctor address: ");
 					String doctorAddr = scnr.nextLine();
 
-					System.out.println("Enter doctor phone number: ");
+					System.out.println("Enter doctor phone number (XXX-XXX-XXXX): ");
 					String doctorPhone = scnr.nextLine();
 
 					doctorPhone = phoneValid(doctorPhone);
 
-					System.out.println("Enter contact number:");
+					System.out.println("Enter contact number (XXX-XXX-XXXX):");
 					String doctorContact = scnr.nextLine();
-					
+
 					if (doctorContact == null) {
 						doctorContact = phoneValid(doctorContact);
 					}
-					
-					System.out.println("Enter associated department code: ");
+
+					System.out.println("Enter associated department code (must be between 1 and 4 characters in length): ");
 					String assocDeptCode = scnr.nextLine();
 
 					Statement assocWithStmt = connection.createStatement();
@@ -553,27 +561,23 @@ public class ProjectPart2 {
 					Statement doctorStmt = connection.createStatement();
 
 					String doctorValues = null;
-					
+
 					if (doctorMiddleInitial.equals(null) && !doctorContact.equals(null)) {
-						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "',"
-								+ null + ",'" + doctorLastName + "',TO_DATE('" + doctorDOB
-								+ "','MM-DD-YYYY'),'" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "','"
-								+ doctorContact + "')";
+						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "'," + null + ",'"
+								+ doctorLastName + "',TO_DATE('" + doctorDOB + "','MM-DD-YYYY'),'" + doctorID + "','"
+								+ doctorAddr + "','" + doctorPhone + "','" + doctorContact + "')";
 					} else if (!doctorMiddleInitial.equals(null) && doctorContact.equals(null)) {
-						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','"
-								+ doctorMiddleInitial + "','" + doctorLastName + "',TO_DATE('" + doctorDOB
-								+ "','MM-DD-YYYY'),'" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "',"
-								+ null + ")";
-					} else if (doctorMiddleInitial.equals(null) && doctorContact.equals(null)){
-						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "',"
-								+ null + ",'" + doctorLastName + "',TO_DATE('" + doctorDOB
-								+ "','MM-DD-YYYY'),'" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "',"
-								+ null + ")";
+						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial
+								+ "','" + doctorLastName + "',TO_DATE('" + doctorDOB + "','MM-DD-YYYY'),'" + doctorID
+								+ "','" + doctorAddr + "','" + doctorPhone + "'," + null + ")";
+					} else if (doctorMiddleInitial.equals(null) && doctorContact.equals(null)) {
+						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "'," + null + ",'"
+								+ doctorLastName + "',TO_DATE('" + doctorDOB + "','MM-DD-YYYY'),'" + doctorID + "','"
+								+ doctorAddr + "','" + doctorPhone + "'," + null + ")";
 					} else {
-						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','"
-								+ doctorMiddleInitial + "','" + doctorLastName + "',TO_DATE('" + doctorDOB
-								+ "','MM-DD-YYYY'),'" + doctorID + "','" + doctorAddr + "','" + doctorPhone + "','"
-								+ doctorContact + "')";
+						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial
+								+ "','" + doctorLastName + "',TO_DATE('" + doctorDOB + "','MM-DD-YYYY'),'" + doctorID
+								+ "','" + doctorAddr + "','" + doctorPhone + "','" + doctorContact + "')";
 					}
 
 					try {
@@ -714,7 +718,7 @@ public class ProjectPart2 {
 					System.out.println("Invalid choice. Please enter a number between 0 and 6.");
 					break;
 				} // end of nested switch
-				
+
 				break; // end of case 1 in outer switch case
 			case 2: // Query patient health record
 				System.out.println("Patient Health Record Search");
@@ -971,4 +975,21 @@ public class ProjectPart2 {
 
 		return phone;
 	}
+	
+	public static boolean IDCheck(String ID) {
+		for (int i = 1; i < 9; i++) {
+			if (!Character.isDigit(ID.charAt(i)))
+				return false;
+		}
+
+		Pattern S = Pattern.compile("[[!@#$%&*,.()_+=|/<>?{}\\\\[\\\\]~-]]");
+		Matcher ma = S.matcher(ID);
+		boolean ba = ma.find();
+
+		if (ba == false)
+			return true;
+		else
+			return false;
+	}
+	
 } // end of project part 2
