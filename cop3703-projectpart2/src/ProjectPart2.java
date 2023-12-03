@@ -299,9 +299,6 @@ public class ProjectPart2 {
 					System.out.println("Enter department phone number (XXX-XXX-XXXX):");
 					String deptOfficePhone = phoneValid(scnr.nextLine());
 
-					System.out
-							.println("\nEnter department head (Doctor ID must be the letter D followed by 8 digits):");
-					String deptHead = scnr.nextLine();
 
 					// SQL insert statement for Department
 					Statement deptStmt = connection.createStatement();
@@ -310,10 +307,10 @@ public class ProjectPart2 {
 
 					if (!deptOfficePhone.equals(null)) {
 						deptValues = " VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "','"
-								+ deptOfficePhone + "','" + deptHead + "')";
+								+ deptOfficePhone + "')";
 					} else if (deptOfficePhone.equals(null)) {
 						deptValues = " VALUES('" + deptName + "','" + deptCode + "','" + deptOfficeNumber + "'," + null
-								+ ",'" + deptHead + "')";
+								+ "')";
 					}
 
 					try {
@@ -555,6 +552,14 @@ public class ProjectPart2 {
 					System.out.println(
 							"Enter associated department code (must be between 1 and 4 characters in length): ");
 					String assocDeptCode = scnr.nextLine();
+					
+					System.out.println("Is this doctor the department head? (Y or N)");
+					String isDeptHead = scnr.nextLine();
+					
+					String deptHead = null;
+					if (isDeptHead.equals("Y")) {
+						deptHead = assocDeptCode;
+					} 
 
 					Statement assocWithStmt = connection.createStatement();
 					String assoWithValues = " VALUES('" + doctorID + "','" + assocDeptCode + "')";
@@ -567,19 +572,25 @@ public class ProjectPart2 {
 					if (doctorMiddleInitial.equals(null) && !doctorContact.equals(null)) {
 						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "'," + null + ",'"
 								+ doctorLastName + "',TO_DATE('" + doctorDOB + "','MM-DD-YYYY'),'" + doctorID + "','"
-								+ doctorAddr + "','" + doctorPhone + "','" + doctorContact + "')";
+								+ doctorAddr + "','" + doctorPhone + "','" + doctorContact + "','" + deptHead + "')";
+						
+						
 					} else if (!doctorMiddleInitial.equals(null) && doctorContact.equals(null)) {
 						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial
 								+ "','" + doctorLastName + "',TO_DATE('" + doctorDOB + "','MM-DD-YYYY'),'" + doctorID
-								+ "','" + doctorAddr + "','" + doctorPhone + "'," + null + ")";
+								+ "','" + doctorAddr + "','" + doctorPhone + "'," + null + "','" + deptHead + ")";
+						
+						
 					} else if (doctorMiddleInitial.equals(null) && doctorContact.equals(null)) {
 						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "'," + null + ",'"
 								+ doctorLastName + "',TO_DATE('" + doctorDOB + "','MM-DD-YYYY'),'" + doctorID + "','"
-								+ doctorAddr + "','" + doctorPhone + "'," + null + ")";
+								+ doctorAddr + "','" + doctorPhone + "'," + null + "','" + deptHead + ")";
+						
+						
 					} else {
 						doctorValues = " VALUES('" + doctorSSN + "','" + doctorFirstName + "','" + doctorMiddleInitial
 								+ "','" + doctorLastName + "',TO_DATE('" + doctorDOB + "','MM-DD-YYYY'),'" + doctorID
-								+ "','" + doctorAddr + "','" + doctorPhone + "','" + doctorContact + "')";
+								+ "','" + doctorAddr + "','" + doctorPhone + "','" + doctorContact + "','" + deptHead + "')";
 					}
 
 					try {
