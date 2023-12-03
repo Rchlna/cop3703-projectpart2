@@ -814,6 +814,11 @@ public class ProjectPart2 {
 				System.out.println("------------------------------");
 				System.out.println("Enter (1) for department name or (2) for department code: ");
 				String codeOrName = scnr.nextLine();
+				
+				while (Integer.parseInt(codeOrName) < 1 || Integer.parseInt(codeOrName) > 2) {
+					System.out.println("Enter (1) for department name or (2) for department code: ");
+					codeOrName = scnr.nextLine();
+				}
 
 				System.out.println("Department Name or Code (must be between 1 and 4 characters in length):");
 				String case3Input = scnr.nextLine();
@@ -855,6 +860,10 @@ public class ProjectPart2 {
 						}
 
 					}
+					
+					
+					
+					
 				} catch (SQLException sqle) {
 					System.out.println(sqle);
 				} catch (Exception javae) {
