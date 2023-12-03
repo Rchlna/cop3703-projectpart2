@@ -859,10 +859,7 @@ public class ProjectPart2 {
 							System.out.println(proc);
 						}
 
-					}
-					
-					
-					
+					}		
 					
 				} catch (SQLException sqle) {
 					System.out.println(sqle);
