@@ -732,6 +732,7 @@ public class ProjectPart2 {
 
 				Statement statementA = connection.createStatement();
 
+				try {
 				// Patient Information
 				ResultSet patientRs = statementA
 						.executeQuery("select FIRST_NAME, MIDDLE_INITIAL, LAST_NAME, SSN, BIRTH_DATE, "
@@ -798,7 +799,12 @@ public class ProjectPart2 {
 
 					System.out.printf("%s\n%s\n%s\n", name, desc, medDate);
 					System.out.println("----------------------");
+				} } catch (SQLException sqle) {
+					System.out.println(sqle);
+				} catch (Exception e) {
+					System.out.println(e);
 				}
+						
 				connection.commit();
 
 				break;
