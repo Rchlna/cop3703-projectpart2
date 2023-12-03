@@ -32,8 +32,7 @@ public class ProjectPart2 {
 			System.out.println("0. Exit");
 
 			System.out.print("Enter your choice (0-4): ");
-			int choice = scnr.nextInt();
-			scnr.nextLine();
+			int choice = getNum();
 
 			switch (choice) {
 			case 1: // Patient
@@ -48,8 +47,7 @@ public class ProjectPart2 {
 				System.out.println("Enter any other number to return to Hospital Database");
 
 				System.out.print("Enter your choice (1-6): ");
-				int option1Choice = scnr.nextInt();
-				scnr.nextLine();
+				int option1Choice = getNum();
 
 				switch (option1Choice) {
 				case 1:
@@ -720,7 +718,7 @@ public class ProjectPart2 {
 					break;
 
 				default:
-					System.out.println("Invalid choice. Please enter a number between 0 and 6.");
+					System.out.println("\nReturning to Hospital Database...");
 					break;
 				} // end of nested switch
 
@@ -798,7 +796,8 @@ public class ProjectPart2 {
 					String desc = medRs.getString("DESCRIPTION");
 					Date medDate = medRs.getDate("PDATE");
 
-					System.out.printf("%s, %s, %s\n", name, desc, medDate);
+					System.out.printf("%s\n%s\n%s\n", name, desc, medDate);
+					System.out.println("----------------------");
 				}
 				connection.commit();
 
@@ -892,7 +891,7 @@ public class ProjectPart2 {
 				System.exit(0);
 
 			default:
-				System.out.println("Invalid choice. Please enter a number between 0 and 4.");
+				System.out.println("\nInvalid choice. Please enter a number between 0 and 4.");
 				break;
 			}
 //			scnr.close();
@@ -979,5 +978,24 @@ public class ProjectPart2 {
 		else
 			return false;
 	}
+	
+	public static int getNum() {
+
+        String choice;
+        int num;
+        while (true) {
+            try {
+            choice = scnr.nextLine();
+            num = Integer.parseInt(choice);
+            break;
+            } 
+            catch (Exception e) {
+                System.out.println("Please provide a digit:");
+                continue;
+            }
+        }
+
+        return num;
+    }
 
 } // end of project part 2
