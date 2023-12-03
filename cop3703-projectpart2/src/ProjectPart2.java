@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.*;
 
-
 public class ProjectPart2 {
 
 	public static Scanner scnr = new Scanner(System.in);
@@ -46,8 +45,9 @@ public class ProjectPart2 {
 				System.out.println("4. Add doctor");
 				System.out.println("5. Add medication");
 				System.out.println("6. Add interaction records");
+				System.out.println("Enter any other number to return to Hospital Database");
 
-				System.out.print("Enter your choice (0-6): ");
+				System.out.print("Enter your choice (1-6): ");
 				int option1Choice = scnr.nextInt();
 				scnr.nextLine();
 
@@ -132,16 +132,17 @@ public class ProjectPart2 {
 
 					System.out.println("Enter patient ID. Please provide the letter P followed by 8 numbers: ");
 					String patientId = scnr.nextLine();
-					
+
 					boolean ptIdCheck = IDCheck(patientId);
 
 					char[] ptIdArray = patientId.toCharArray();
 
 					while (ptIdCheck == false || ptIdArray[0] != 'P' || ptIdArray.length != 9) {
-						System.out.println("Incorrect input, please try again. Please provide the letter P followed by 8 numbers:");
+						System.out.println(
+								"Incorrect input, please try again. Please provide the letter P followed by 8 numbers:");
 						patientId = scnr.nextLine();
 						ptIdArray = patientId.toCharArray();
-						
+
 						ptIdCheck = IDCheck(patientId);
 
 						boolean isNumeric = true;
@@ -193,16 +194,19 @@ public class ProjectPart2 {
 						} else if (patientCondition.equalsIgnoreCase("Fair")) {
 							break;
 						} else {
-							System.out.println("\nPatient condition must be on of the following: Critical, Stable, or Fair.");
+							System.out.println(
+									"\nPatient condition must be on of the following: Critical, Stable, or Fair.");
 							System.out.println("\nPlease try again:");
 							patientCondition = scnr.nextLine();
 						}
 					}
 
-					System.out.println("\nEnter patient primary doctor ID. Please provide the letter D followed by 8 numbers:");
+					System.out.println(
+							"\nEnter patient primary doctor ID. Please provide the letter D followed by 8 numbers:");
 					String patientPrimaryDocID = scnr.nextLine();
 
-					System.out.println("\nEnter patient secondary doctor ID (if any). Please provide the letter D followed by 8 numbers:");
+					System.out.println(
+							"\nEnter patient secondary doctor ID (if any). Please provide the letter D followed by 8 numbers:");
 					String patientSecondaryDocID = scnr.nextLine();
 
 					// SQL insert statement for Patient
@@ -297,7 +301,8 @@ public class ProjectPart2 {
 					System.out.println("Enter department phone number (XXX-XXX-XXXX):");
 					String deptOfficePhone = phoneValid(scnr.nextLine());
 
-					System.out.println("\nEnter department head (Doctor ID must be the letter D followed by 8 digits):");
+					System.out
+							.println("\nEnter department head (Doctor ID must be the letter D followed by 8 digits):");
 					String deptHead = scnr.nextLine();
 
 					// SQL insert statement for Department
@@ -348,15 +353,13 @@ public class ProjectPart2 {
 						for (int i = 0; i < procNumArray.length; i++) {
 							if (i >= 0 && i <= 2) {
 								if (!Character.isAlphabetic(procNumArray[i])) {
-									System.out.println(
-											"Enter procedure number with 3 letters followed by 4 digits:");
+									System.out.println("Enter procedure number with 3 letters followed by 4 digits:");
 									whileContinue = true;
 									break;
 								}
 							} else {
 								if (!Character.isDigit(procNumArray[i])) {
-									System.out.println(
-											"Enter procedure number with 3 letters followed by 4 digits:");
+									System.out.println("Enter procedure number with 3 letters followed by 4 digits:");
 									whileContinue = true;
 									break;
 								}
@@ -478,7 +481,7 @@ public class ProjectPart2 {
 					}
 
 					while (!dSsnIsNumeric) {
-						System.out.println("Please enter SSN with the following format: AAA-GG-SSSS");
+						System.out.println("Please enter SSN with the following format, AAA-GG-SSSS.");
 						System.out.println("Enter Patient SSN: ");
 						doctorSSN = scnr.nextLine();
 
@@ -510,7 +513,7 @@ public class ProjectPart2 {
 					String doctorID = scnr.nextLine();
 
 					boolean docIdCheck = IDCheck(doctorID);
-					
+
 					char[] docIdArray = doctorID.toCharArray();
 
 					while (docIdCheck == false || docIdArray[0] != 'D' || docIdArray.length != 9) {
@@ -518,9 +521,9 @@ public class ProjectPart2 {
 						System.out.println("Enter doctor ID: ");
 
 						doctorID = scnr.nextLine();
-						
+
 						docIdCheck = IDCheck(doctorID);
-						
+
 						docIdArray = doctorID.toCharArray();
 
 						boolean isNumeric = true;
@@ -551,7 +554,8 @@ public class ProjectPart2 {
 						doctorContact = phoneValid(doctorContact);
 					}
 
-					System.out.println("Enter associated department code (must be between 1 and 4 characters in length): ");
+					System.out.println(
+							"Enter associated department code (must be between 1 and 4 characters in length): ");
 					String assocDeptCode = scnr.nextLine();
 
 					Statement assocWithStmt = connection.createStatement();
@@ -597,25 +601,25 @@ public class ProjectPart2 {
 					System.out.println("\nPrescription Information");
 					System.out.println("------------------------------");
 
-					System.out.println("Enter patient ID:");
+					System.out.println("Enter patient ID (the P letter followed by 8 digits):");
 					String rxPatient = scnr.nextLine();
 
-					System.out.println("Enter prescribing doctor: ");
+					System.out.println("Enter prescribing doctor (the D letter followed by 8 digits): ");
 					String rxDoctor = scnr.nextLine();
 
-					System.out.println("Enter prescription date: ");
+					System.out.println("Enter prescription date (MM/DD/YYYY): ");
 					String rxDate = scnr.nextLine();
 
 					System.out.println("\nMedication Information");
 					System.out.println("------------------------------");
 
-					System.out.println("Enter medication name: ");
+					System.out.println("Enter medication name:");
 					String rxName = scnr.nextLine();
 
-					System.out.println("Enter medication manufacturer: ");
+					System.out.println("Enter medication manufacturer:");
 					String rxManufacturer = scnr.nextLine();
 
-					System.out.println("Enter medication description: ");
+					System.out.println("Enter medication description:");
 					String rxDesc = scnr.nextLine();
 
 					// SQL insert statement for Medications
@@ -669,7 +673,7 @@ public class ProjectPart2 {
 					System.out.println("\nInteraction Records");
 					System.out.println("------------------------------");
 
-					System.out.println("Enter patient ID: ");
+					System.out.println("Enter patient ID (the P letter followed by 8 digits): ");
 					String interationRecordPatientId = scnr.nextLine();
 
 					System.out.println("Enter description of interaction:");
@@ -714,6 +718,7 @@ public class ProjectPart2 {
 					connection.commit();
 
 					break;
+
 				default:
 					System.out.println("Invalid choice. Please enter a number between 0 and 6.");
 					break;
@@ -724,7 +729,7 @@ public class ProjectPart2 {
 				System.out.println("Patient Health Record Search");
 				System.out.println("------------------------------");
 
-				System.out.println("Patient ID:");
+				System.out.println("Patient ID (the letter P followed by 8 digits):");
 				String searchPtId = scnr.nextLine();
 
 				Statement statementA = connection.createStatement();
@@ -801,53 +806,55 @@ public class ProjectPart2 {
 			case 3: // Query procedures offered by department
 				System.out.println("Procedures Offered By Department ");
 				System.out.println("------------------------------");
-				System.out.println("1- for department name 2- for department code: ");
+				System.out.println("Enter (1) for department name or (2) for department code: ");
 				String codeOrName = scnr.nextLine();
-				boolean deptNameFlag = false;
-				if (codeOrName.equals("1"))
-					deptNameFlag = true;
-				System.out.println("Department Name or Code:");
-				String procDeptInput = scnr.nextLine();
 
-				// boolean procDeptInput = true;
+				System.out.println("Department Name or Code (must be between 1 and 4 characters in length):");
+				String case3Input = scnr.nextLine();
 
-				Statement statementB = connection.createStatement();
-				Statement statementD = connection.createStatement();
+				Statement statementBa = connection.createStatement();
+				Statement statementBb = connection.createStatement();
 
-				ResultSet procDeptRs = null;
-				ResultSet getDeptCode = null;
+				ResultSet deptCodeRs = null;
+				ResultSet procNameRs = null;
 
-				if (deptNameFlag == true) {
-					getDeptCode = statementD.executeQuery(
-							"select DEPARTMENT.CODE from DEPARTMENT where NAME = '" + procDeptInput + "'");
+				try {
+					if (codeOrName.equals("1")) {
+						deptCodeRs = statementBa.executeQuery(
+								"select DEPARTMENT.CODE from DEPARTMENT where DEPARTMENT.NAME ='" + case3Input + "'");
 
-					String procCode = null;
-
-					if (getDeptCode.next() == false) {
-						System.out.println("Department not Found");
-						break;
-					} else {
-						while (getDeptCode.next()) {
-							procCode = getDeptCode.getString("CODE");
+						String deptCode = null;
+						while (deptCodeRs.next()) {
+							deptCode = deptCodeRs.getString("CODE");
 						}
 
-						procDeptRs = statementB.executeQuery(
-								"select PROCEDURE.NAME from PROCEDURE where PROCEDURE.CODE = '" + procCode + "'");
+						procNameRs = statementBb.executeQuery(
+								"select PROCEDURE.NAME from PROCEDURE WHERE PROCEDURE.CODE ='" + deptCode + "'");
+
+						System.out.println("\nProcedures Offered");
+						while (procNameRs.next()) {
+							String proc = procNameRs.getString("NAME");
+							System.out.println(proc);
+						}
+
+					} else if (codeOrName.equals("2")) {
+
+						procNameRs = statementBb.executeQuery(
+								"select PROCEDURE.NAME from PROCEDURE WHERE PROCEDURE.CODE ='" + case3Input + "'");
+
+						System.out.println("\nProcedures Offered");
+						while (procNameRs.next()) {
+							String proc = procNameRs.getString("NAME");
+							System.out.println(proc);
+						}
+
 					}
-				} else {
-					procDeptRs = statementB.executeQuery(
-							"select PROCEDURE.NAME from PROCEDURE where PROCEDURE.CODE = '" + procDeptInput + "'");
+				} catch (SQLException sqle) {
+					System.out.println(sqle);
+				} catch (Exception javae) {
+					System.out.println(javae);
 				}
 
-				if (procDeptRs.next() == false) {
-					System.out.println("Department not Found");
-					break;
-				} else {
-					while (procDeptRs.next()) {
-						String procName = procDeptRs.getString("NAME");
-						System.out.println(procName);
-					}
-				}
 				connection.commit();
 
 				break;
@@ -855,47 +862,28 @@ public class ProjectPart2 {
 				System.out.println("Doctor Procedure History");
 				System.out.println("------------------------------");
 
-				System.out.println("Doctor Name or ID:");
+				System.out.println("Doctor ID (the D letter followed by 8 digits)");
 				String procDocInput = scnr.nextLine();
-
-				boolean isDocId = true;
 
 				Statement statementC = connection.createStatement();
 
-				ResultSet procDocRs = null;
-				if (procDocInput.charAt(0) == 'D' && procDocInput.length() == 9) {
-
-					char[] charArr = procDocInput.toCharArray();
-
-					for (int i = 1; i < charArr.length; i++) {
-						if (!Character.isDigit(charArr[i])) {
-							isDocId = false;
-							break;
-						}
-					}
-				}
-
-				if (!isDocId) {
-					procDocRs = statementC.executeQuery(
-							"select PROCEDURE.NAME from PROCEDURE where DOCTOR.NAME = '" + procDocInput + "'");
-				} else {
-					procDocRs = statementC.executeQuery(
+				try {
+					ResultSet procDocRs = statementC.executeQuery(
 							"select PROCEDURE.NAME from PROCEDURE join DOCTOR on DOCTOR.DOCTOR_ID = PROCEDURE.DOCTOR_ID where DOCTOR.DOCTOR_ID = '"
 									+ procDocInput + "'");
-				}
 
-				if (procDocRs.next() == false) {
-					System.out.println("Doctor not Found");
-					break;
-				} else {
-
+					System.out.println("Procedure History");
 					while (procDocRs.next()) {
 						String procName = procDocRs.getString("NAME");
 						System.out.println(procName);
 					}
-
-					connection.commit();
+				} catch (SQLException sqle) {
+					System.out.println(sqle);
+				} catch (Exception e) {
+					System.out.println(e);
 				}
+
+				connection.commit();
 
 				break;
 
@@ -975,7 +963,7 @@ public class ProjectPart2 {
 
 		return phone;
 	}
-	
+
 	public static boolean IDCheck(String ID) {
 		for (int i = 1; i < 9; i++) {
 			if (!Character.isDigit(ID.charAt(i)))
@@ -991,5 +979,5 @@ public class ProjectPart2 {
 		else
 			return false;
 	}
-	
+
 } // end of project part 2
